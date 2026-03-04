@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Player Transfer Value Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* Football pitch style background */
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: /* center circle */
+            radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 0, rgba(255, 255, 255, 0.6) 70px, transparent 72px), /* mid line */
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 0, rgba(255, 255, 255, 0.7) 3px, transparent 3px), /* pitch stripes */
+            repeating-linear-gradient( to right, #0c7a2c 0, #0c7a2c 80px, #0b6c27 80px, #0b6c27 160px);
+            background-size: 100% 100%, /* center circle */
+            100% 2px, /* mid line */
+            100% 100%;
+            /* stripes */
+            background-position: center center, center center, center center;
+            background-repeat: no-repeat;
+        }
+        
+        .overlay {
+            min-height: 100vh;
+            background: rgba(0, 0, 0, 0.25);
+            /* dark overlay for readability */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            padding: 20px 25px;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #555;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+        }
+        
+        select {
+            padding: 4px 8px;
+            margin-left: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        
+        .card {
+            margin-top: 20px;
+            padding: 15px 18px;
+            border-radius: 8px;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            display: none;
+        }
+        
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay">
+        <div class="container">
+            <h2>Dynamic Player Transfer Value Prediction</h2>
+            <p class="subtitle">Select a player to view current and predicted transfer value.</p>
+
+            <label for="playerSelect">Choose Player:</label>
+            <select id="playerSelect">
+      <option value="">-- Select Player --</option>
+      <option value="Lionel Messi">Lionel Messi</option>
+      <option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+      <option value="Kylian Mbappé">Kylian Mbappé</option>
+      <option value="Erling Haaland">Erling Haaland</option>
+      <option value="Kevin De Bruyne">Kevin De Bruyne</option>
+      <option value="Mohamed Salah">Mohamed Salah</option>
+      <option value="Harry Kane">Harry Kane</option>
+      <option value="Neymar Jr">Neymar Jr</option>
+      <option value="Robert Lewandowski">Robert Lewandowski</option>
+      <option value="Vinícius Júnior">Vinícius Júnior</option>
+    </select>
+
+            <div id="playerCard" class="card">
+                <h3 id="cardName"></h3>
+                <p><b>Actual Market Value:</b> <span id="cardActual"></span> million €</p>
+                <p><b>Predicted Market Value:</b> <span id="cardPredicted"></span> million €</p>
+                <p><b>Error (Predicted - Actual):</b> <span id="cardError"></span> million €</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data from your final model output
+        const data = [{
+            player: "Lionel Messi",
+            actual_market_value: 35,
+            predicted_market_value_final: 35.000586,
+            error: 0.000586
+        }, {
+            player: "Cristiano Ronaldo",
+            actual_market_value: 20,
+            predicted_market_value_final: 19.999847,
+            error: -0.000153
+        }, {
+            player: "Kylian Mbappé",
+            actual_market_value: 180,
+            predicted_market_value_final: 179.999482,
+            error: -0.000518
+        }, {
+            player: "Erling Haaland",
+            actual_market_value: 170,
+            predicted_market_value_final: 170.000590,
+            error: 0.000590
+        }, {
+            player: "Kevin De Bruyne",
+            actual_market_value: 80,
+            predicted_market_value_final: 79.999497,
+            error: -0.000503
+        }, {
+            player: "Mohamed Salah",
+            actual_market_value: 70,
+            predicted_market_value_final: 69.999923,
+            error: -0.000077
+        }, {
+            player: "Harry Kane",
+            actual_market_value: 90,
+            predicted_market_value_final: 90.000173,
+            error: 0.000173
+        }, {
+            player: "Neymar Jr",
+            actual_market_value: 60,
+            predicted_market_value_final: 60.000239,
+            error: 0.000239
+        }, {
+            player: "Robert Lewandowski",
+            actual_market_value: 25,
+            predicted_market_value_final: 25.000400,
+            error: 0.000400
+        }, {
+            player: "Vinícius Júnior",
+            actual_market_value: 120,
+            predicted_market_value_final: 119.999807,
+            error: -0.000193
+        }];
+
+        const select = document.getElementById('playerSelect');
+        const card = document.getElementById('playerCard');
+        const nameEl = document.getElementById('cardName');
+        const actualEl = document.getElementById('cardActual');
+        const predictedEl = document.getElementById('cardPredicted');
+        const errorEl = document.getElementById('cardError');
+
+        select.addEventListener('change', function() {
+            const playerName = this.value;
+            if (!playerName) {
+                card.style.display = 'none';
+                return;
+            }
+            const player = data.find(p => p.player === playerName);
+            if (player) {
+                nameEl.textContent = player.player;
+                actualEl.textContent = player.actual_market_value.toFixed(2);
+                predictedEl.textContent = player.predicted_market_value_final.toFixed(2);
+                errorEl.textContent = player.error.toFixed(6);
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
