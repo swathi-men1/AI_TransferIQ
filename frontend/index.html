@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Transfer IQ | Predict the Future of Football Transfers</title>
+    <meta name="description" content="AI Transfer IQ uses advanced XGBoost models to predict football player market values with cinematic precision.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    <div class="glow-bg"></div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <span class="iq-icon">IQ</span>
+            <span class="logo-text">AI TRANSFER <span class="accent">IQ</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#dashboard" class="nav-item">Dashboard</a>
+            <a href="#how-it-works" class="nav-item">Technology</a>
+            <a href="#about" class="nav-item">About</a>
+        </div>
+        <button class="btn-primary-sm">Get Started</button>
+    </nav>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1 class="reveal-text">PREDICTING THE <br><span class="gradient-text">NEXT MARKET SURGE</span></h1>
+                <p class="hero-subtitle">Elevate your scouting with cinema-grade AI analytics. Our hybrid XGBoost engine analyzes performance, sentiment, and market trends to deliver institutional-grade value predictions.</p>
+                <div class="hero-actions">
+                    <a href="#dashboard" class="btn-primary">Launch Dashboard</a>
+                    <button class="btn-secondary">View Case Studies</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="card-glass hero-card">
+                    <div class="card-header">
+                        <span>LIVE ENGINE STATUS</span>
+                        <span class="status-dot"></span>
+                    </div>
+                    <div class="visual-placeholder">
+                        <div class="abstract-viz"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-section" id="dashboard">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Market Value Engine</h2>
+                    <p class="section-desc">Input player metrics to trigger the IQ valuation sequence.</p>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="input-panel card-glass">
+                        <form id="prediction-form">
+                            <div class="form-group">
+                                <label for="player-name">Player Identity</label>
+                                <input type="text" id="player-name" placeholder="E.g. Erling Haaland" required>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="market-value">Current Value (€M)</label>
+                                    <input type="number" id="market-value" step="0.1" value="50.0" required>
+                                </div>
+                                <div class="form-group half">
+                                    <label for="performance-rating">Perf. Rating (1-10)</label>
+                                    <input type="range" id="performance-rating" min="1" max="100" value="75" class="slider">
+                                    <span class="slider-value" id="perf-val">7.5</span>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="goals-assists">Goals + Assists</label>
+                                    <input type="number" id="goals-assists" value="15" required>
+                                </div>
+                                <div class="form-group half">
+                                    <label for="minutes-played">Minutes Played</label>
+                                    <input type="number" id="minutes-played" value="2100" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="position">Field Position</label>
+                                    <select id="position">
+                                        <option value="FW">Forward</option>
+                                        <option value="MF">Midfielder</option>
+                                        <option value="DF">Defender</option>
+                                        <option value="GK">Goalkeeper</option>
+                                    </select>
+                                </div>
+                                <div class="form-group half">
+                                    <label for="contract">Contract (Months)</label>
+                                    <input type="number" id="contract" value="36">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sentiment">Social Sentiment Score</label>
+                                <input type="range" id="sentiment" min="0" max="100" value="68" class="slider cyan">
+                                <span class="slider-value" id="sent-val">68%</span>
+                            </div>
+
+                            <button type="submit" class="btn-predict" id="predict-btn">
+                                <span class="btn-text">INITIALIZE IQ SEQUENCE</span>
+                                <div class="loader-ring"></div>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="result-panel card-glass" id="result-display">
+                        <div class="result-placeholder">
+                            <div class="iq-pulse"></div>
+                            <p>Awaiting Valuation Sequence...</p>
+                        </div>
+                        
+                        <div class="result-content hidden" id="iq-result">
+                            <div class="result-header">
+                                <h3 id="res-player-name">Player Name</h3>
+                                <span class="tag">XGBOOST PREDICTION</span>
+                            </div>
+                            <div class="value-display">
+                                <span class="currency">€</span>
+                                <span class="amount" id="predicted-value">00.0</span>
+                                <span class="million">M</span>
+                            </div>
+                            <div class="market-trend" id="market-trend-indicator">
+                                <span class="trend-icon">↑</span>
+                                <span class="trend-percent" id="trend-val">+0.0%</span>
+                                <span class="trend-label">Market Change</span>
+                            </div>
+                            <div class="metrics-grid">
+                                <div class="metric">
+                                    <span class="m-label">Confidence</span>
+                                    <span class="m-value">94.2%</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="m-label">Risk Index</span>
+                                    <span class="m-value" id="risk-val">Low</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="how-it-works">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="f-icon">⚡</div>
+                        <h3>Hybrid Metrics</h3>
+                        <p>Combining traditional performance data with real-time social sentiment and market volatility scores.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="f-icon">⚛️</div>
+                        <h3>DART Booster</h3>
+                        <p>Leveraging Dropout Additive Regression Trees for superior generalization and prediction robustness.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="f-icon">📊</div>
+                        <h3>Trend Analysis</h3>
+                        <p>3-month rolling averages and volatility clusters identify undervalued gems before the market reacts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">AI TRANSFER <span class="accent">IQ</span></span>
+                </div>
+                <div class="footer-copy">
+                    &copy; 2026 AI Transfer IQ. Engineered for Excellence.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

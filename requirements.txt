@@ -1,7 +1,12 @@
+flask
+flask-cors
+xgboost
+pandas
+numpy
+joblib
+scikit-learn
 statsbombpy
 seaborn
-numpy
-panda
 textblob
 transformers
 vaderSentiment
