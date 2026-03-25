@@ -1,8 +1,0 @@
-statsbombpy
-seaborn
-numpy
-panda
-textblob
-transformers
-vaderSentiment
-nltk
