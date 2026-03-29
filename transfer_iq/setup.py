@@ -20,21 +20,21 @@ def create_directories():
     
     for directory in directories:
         os.makedirs(directory, exist_ok=True)
-        print(f"✅ Created directory: {directory}")
+        print(f" Created directory: {directory}")
 
 def install_dependencies():
     """Install required dependencies"""
-    print("📦 Installing dependencies...")
+    print(" Installing dependencies...")
     
     try:
         subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
-        print("✅ Dependencies installed successfully!")
+        print("Dependencies installed successfully!")
     except subprocess.CalledProcessError as e:
-        print(f"❌ Error installing dependencies: {e}")
+        print(f" Error installing dependencies: {e}")
 
 def verify_setup():
     """Verify that all required files are in place"""
-    print("🔍 Verifying setup...")
+    print(" Verifying setup...")
     
     required_files = [
         'config.yaml',
@@ -56,10 +56,10 @@ def verify_setup():
             missing_files.append(file_path)
     
     if missing_files:
-        print(f"❌ Missing files: {missing_files}")
+        print(f" Missing files: {missing_files}")
         return False
     else:
-        print("✅ All required files are present!")
+        print(" All required files are present!")
         return True
 
 def main():
@@ -69,23 +69,23 @@ def main():
     print("=" * 60)
     
     # Create directories
-    print("\n📁 Creating directories...")
+    print("\n Creating directories...")
     create_directories()
     
     # Install dependencies
-    print("\n📦 Installing dependencies...")
+    print("\n Installing dependencies...")
     install_dependencies()
     
     # Verify setup
-    print("\n🔍 Verifying setup...")
+    print("\n Verifying setup...")
     if verify_setup():
-        print("\n✅ Setup completed successfully!")
-        print("\n🚀 Next steps:")
+        print("\n Setup completed successfully!")
+        print("\n Next steps:")
         print("   1. Place your data in data/raw/")
         print("   2. Run: python train_models.py")
         print("   3. Run: streamlit run app/app.py")
     else:
-        print("\n❌ Setup incomplete. Please check missing files.")
+        print("\n Setup incomplete. Please check missing files.")
 
 if __name__ == "__main__":
     main()
