@@ -1,0 +1,31 @@
+# Core ML Libraries
+pandas==2.2.2
+numpy==2.2.6
+scikit-learn==1.7.2
+xgboost==3.2.0
+
+# Deep Learning (for future LSTM implementation)
+tensorflow==2.21.0
+
+# Data Visualization
+matplotlib==3.10.8
+seaborn==0.13.2
+plotly==6.6.0
+
+# Web Application
+streamlit==1.55.0
+
+# Utilities
+python-dateutil==2.9.0
+joblib==1.5.3
+requests==2.32.5
+beautifulsoup4==4.14.3
+PyYAML==6.0.3
+
+# Optional NLP sentiment backends
+vaderSentiment==3.3.2
+textblob==0.19.0
+
+# Development and Testing
+jupyter==1.1.1
+ipykernel==6.29.5

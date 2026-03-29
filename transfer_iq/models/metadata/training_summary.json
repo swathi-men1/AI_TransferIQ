@@ -1,0 +1,110 @@
+{
+  "target_column": "value_at_transfer",
+  "dataset_rows": 961,
+  "dataset_columns": 104,
+  "full_engineered_rows": 1989,
+  "xgb_metrics": {
+    "rmse": 2601882.7525722827,
+    "mae": 860455.6196971828,
+    "r2": 0.35302132491542393,
+    "smape": 83.32079691751228,
+    "non_zero_rmse": 2610776.884371278
+  },
+  "lstm_metrics": {
+    "rmse": 3435310.6437669527,
+    "mae": 1173395.9097521552,
+    "r2": -0.12783755485381953,
+    "smape": 109.86727693447259,
+    "non_zero_rmse": 3447209.176380474
+  },
+  "univariate_lstm_metrics": {
+    "rmse": 3466873.5961617064,
+    "mae": 1247201.7392102997,
+    "r2": -0.14865792794240384,
+    "smape": 199.98348585502242,
+    "non_zero_rmse": 3478890.5250748866
+  },
+  "encoder_decoder_metrics": {
+    "rmse": 3490902.7833538577,
+    "mae": 1261500.8429058457,
+    "r2": -0.15020121636212092,
+    "smape": 199.99100499164086,
+    "non_zero_rmse": 3503173.129739959,
+    "first_step_rmse": 3490818.187163705,
+    "first_step_mae": 1260103.7844572926
+  },
+  "ensemble_metrics": {
+    "rmse": 2620356.668016044,
+    "mae": 820423.9794315733,
+    "r2": 0.343801339120015,
+    "smape": 75.94579082528668,
+    "non_zero_rmse": 2629332.220048542
+  },
+  "ensemble_weight_xgb": 0.9,
+  "ensemble_weight_lstm": 0.09999999999999998,
+  "sequence_length": 8,
+  "forecast_horizon": 3,
+  "feature_count": 109,
+  "top_features": [
+    {
+      "feature": "cat__career_stage_Prospect",
+      "importance": 0.12910157442092896
+    },
+    {
+      "feature": "num__market_value_log",
+      "importance": 0.09411344677209854
+    },
+    {
+      "feature": "cat__contract_status_Long",
+      "importance": 0.05364297702908516
+    },
+    {
+      "feature": "num__num_clubs",
+      "importance": 0.04013270139694214
+    },
+    {
+      "feature": "cat__contract_status_Expired",
+      "importance": 0.03616470843553543
+    },
+    {
+      "feature": "num__current_market_value",
+      "importance": 0.03577710688114166
+    },
+    {
+      "feature": "num__assists_log",
+      "importance": 0.02959182858467102
+    },
+    {
+      "feature": "num__market_value_per_season",
+      "importance": 0.029151322320103645
+    },
+    {
+      "feature": "num__num_seasons",
+      "importance": 0.02557258866727352
+    },
+    {
+      "feature": "num__injury_burden_index",
+      "importance": 0.025080708786845207
+    },
+    {
+      "feature": "num__market_value_per_contribution",
+      "importance": 0.020158668980002403
+    },
+    {
+      "feature": "num__total_assists",
+      "importance": 0.018634403124451637
+    },
+    {
+      "feature": "num__assists_per_season",
+      "importance": 0.017893413081765175
+    },
+    {
+      "feature": "num__goal_contributions",
+      "importance": 0.017343023791909218
+    },
+    {
+      "feature": "num__engagement_per_mention",
+      "importance": 0.01648336462676525
+    }
+  ]
+}

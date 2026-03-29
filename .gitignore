@@ -1,0 +1,13 @@
+transfer_iq_env/
+transfer_iq/venv/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+Thumbs.db
+.ipynb_checkpoints/
+transfer_iq/logs/
+transfer_iq/*.log
+transfer_iq/bg.stdout.log
+transfer_iq/bg.stderr.log

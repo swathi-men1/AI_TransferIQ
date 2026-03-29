@@ -1,0 +1,201 @@
+# Transfer IQ Configuration
+
+# Data Configuration
+data:
+  raw_data_path: "data/raw/"
+  processed_data_path: "data/processed/"
+  raw_filename: "transfer_prediction_with_sentiment_cleaned.csv"
+  processed_filename: "enhanced_transfer_dataset.csv"
+  external_source_path: "data/raw/external_sources/"
+  
+  # Data splits
+  train_test_split: 0.8
+  validation_split: 0.1
+  
+  # Sequence configuration for LSTM
+  sequence_window: 5
+  sequence_windows: [3, 5, 10]
+
+# Model Configuration
+models:
+  # XGBoost parameters
+  xgboost:
+    n_estimators: 300
+    learning_rate: 0.05
+    max_depth: 6
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+    n_jobs: -1
+  
+  # LSTM parameters
+  lstm:
+    sequence_length: 5
+    lstm_units: [64, 32]
+    dropout_rate: 0.2
+    dense_units: 16
+    epochs: 50
+    batch_size: 32
+    early_stopping_patience: 10
+  
+  # LSTM-style (Random Forest) parameters
+  lstm_style:
+    n_estimators: 200
+    max_depth: 15
+    min_samples_split: 5
+    min_samples_leaf: 2
+    random_state: 42
+    n_jobs: -1
+  
+  # Ensemble configuration
+  ensemble:
+    strategies: ["simple_avg", "weighted_avg_60_40", "weighted_avg_70_30", "xgb_dominant", "lstm_dominant"]
+    default_strategy: "simple_avg"
+
+# Feature Engineering
+features:
+  # Performance features
+  performance:
+    - total_goal_contributions
+    - goal_to_assist_ratio
+    - goals_per_season
+    - assists_per_season
+    - contributions_per_season
+    - performance_consistency
+    - is_high_scorer
+    - is_playmaker
+    - is_goal_contributor
+  
+  # Injury features
+  injury:
+    - injury_severity
+    - days_missed_per_season
+    - injuries_per_season
+    - injury_risk_category
+    - has_recent_injury
+    - injury_impact_score
+  
+  # Contract features
+  contract:
+    - contract_days_remaining
+    - contract_status
+    - value_change
+    - value_change_pct
+    - value_per_contribution
+    - fee_to_value_ratio
+    - was_overpaid
+    - was_bargain
+  
+  # Sentiment features
+  sentiment:
+    - sentiment_composite
+    - sentiment_momentum
+    - engagement_quality
+    - sentiment_stability
+    - sentiment_category
+    - popularity_score
+  
+  # Career features
+  career:
+    - career_stage
+    - clubs_per_season
+    - is_frequent_mover
+    - competition_score
+    - competition_score_per_season
+    - num_countries
+  
+  # Temporal features
+  temporal:
+    - transfer_window
+    - estimated_age
+    - age_category
+    - days_since_transfer
+
+# Preprocessing
+preprocessing:
+  # Missing value strategy
+  missing_values:
+    numeric: "median"
+    categorical: "Unknown"
+  
+  # Scaling
+  scaling:
+    method: "MinMaxScaler"
+    feature_range: [0, 1]
+  
+  # Encoding
+  encoding:
+    categorical: "LabelEncoder"
+    handle_unknown: "Unknown"
+
+# Evaluation
+evaluation:
+  metrics:
+    - "rmse"
+    - "mae"
+    - "r2"
+  
+  # Cross-validation
+  cv_folds: 5
+  
+  # Time series validation
+  time_series_split: true
+
+# Application Configuration
+app:
+  title: "Transfer IQ - Player Value Prediction"
+  layout: "wide"
+  theme: "light"
+  
+  # File upload
+  upload:
+    max_file_size: 200  # MB
+    supported_formats: ["csv"]
+  
+  # Display options
+  display:
+    max_rows: 10
+    show_feature_importance: true
+    show_predictions_chart: true
+
+# Model Paths
+model_paths:
+  xgb_model: "models/xgb_model.pkl"
+  lstm_model: "models/lstm_model.h5"
+  lstm_style_model: "models/lstm_style_model.pkl"
+  ensemble_model: "models/ensemble_model.pkl"
+  scaler: "models/scaler.pkl"
+  label_encoders: "models/label_encoders.pkl"
+  feature_columns: "models/feature_columns.json"
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/transfer_iq.log"
+
+# External data ingestion
+external_sources:
+  statsbomb:
+    enabled: true
+    base_url: "https://raw.githubusercontent.com/statsbomb/open-data/master/data/"
+  transfermarkt:
+    enabled: true
+    user_agent: "TransferIQ/1.0"
+  twitter:
+    enabled: true
+    api_url: "https://api.twitter.com/2/tweets/search/recent"
+    bearer_env_var: "TWITTER_BEARER_TOKEN"
+  injury_data:
+    enabled: true
+    local_csv: "data/raw/external_sources/injury_records.csv"
+
+sentiment_pipeline:
+  preferred_backends: ["vader", "textblob", "fallback"]
+  text_columns:
+    - "sentiment_text"
+    - "sentiment_source_text"
+    - "social_posts"
+    - "social_media_posts"
+    - "media_excerpt"
+    - "news_excerpt"
