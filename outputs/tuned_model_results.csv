@@ -1,5 +1,0 @@
-model,RMSE,MAE,R2
-Random Forest,1.0238,0.7535,0.4581
-Gradient Boosting,1.0344,0.7614,0.4468
-Ridge Regression,1.1146,0.8413,0.3577
-Weighted Ensemble,1.0205,0.7568,0.4615
