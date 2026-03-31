@@ -1,0 +1,1070 @@
+Name,Sentiment_Score,Sentiment_Label
+Thiago,0.361,positive
+Thiago,0.42,positive
+Thiago,0.433,positive
+Thiago,0,neutral
+Thiago,0.55,positive
+Alisson,-0.2,negative
+Alisson,-0.796,negative
+Ederson,0,neutral
+Ederson,0.44,positive
+Ederson,0.619,positive
+Everton,0.421,positive
+Everton,-0.226,negative
+Everton,0,neutral
+Everton,0.67,positive
+Show,0.34,positive
+Show,0.296,positive
+David Silva,0,neutral
+Jorginho,0.735,positive
+Jorginho,-0.494,negative
+Jorginho,0,neutral
+Jorginho,0.586,positive
+Toni Villa,0.501,positive
+Toni Villa,0.421,positive
+Alan,0,neutral
+Alan,-0.649,negative
+Alan,0.318,positive
+Willian,0.178,positive
+Willian,0.44,positive
+Willian,0.858,positive
+Willian,0,neutral
+Ronaldinho,0,neutral
+Emerson,0,neutral
+Emerson,0.128,positive
+Emerson,0.077,positive
+Son,0.612,positive
+Son,0,neutral
+Son,-0.539,negative
+Son,-0.572,negative
+Bruno,0.697,positive
+Bruno,0.765,positive
+Bruno,0.691,positive
+Bruno,0,neutral
+Bruno,-0.66,negative
+Bruno Fernandes,0.697,positive
+Bruno Fernandes,0,neutral
+Bruno Fernandes,-0.66,negative
+Nathan,0,neutral
+Nathan,0.84,positive
+Nathan,-0.625,negative
+Nathan,0.557,positive
+Kenedy,-0.649,negative
+Kenedy,0.796,positive
+Kenedy,0,neutral
+Kenedy,0.241,positive
+David Luiz,0.833,positive
+David Luiz,0.637,positive
+Fred,-0.66,negative
+Alex,0.25,positive
+Alex,0,neutral
+Alex,0.904,positive
+Cristiano Ronaldo,0.511,positive
+Cristiano Ronaldo,0.586,positive
+Cristiano Ronaldo,0,neutral
+Ronaldo,0.511,positive
+Ronaldo,0.421,positive
+Ronaldo,0.238,positive
+Ronaldo,0.026,neutral
+Cristiano,0.511,positive
+Cristiano,0.586,positive
+Cristiano,0,neutral
+Pepe,0,neutral
+Pepe,-0.477,negative
+Marcos Alonso,0.402,positive
+Marcos Alonso,0.758,positive
+Marcos Alonso,0,neutral
+Lucas,0.494,positive
+Lucas,0,neutral
+Richarlison,0.494,positive
+Richarlison,0,neutral
+Richarlison,0.318,positive
+Roberto,0.103,positive
+Roberto,0.727,positive
+Roberto,0.527,positive
+Roberto,0.296,positive
+Oriol Romeu,0.572,positive
+Oriol Romeu,-0.477,negative
+Oriol Romeu,0,neutral
+Gabriel,0.459,positive
+Gabriel,0.494,positive
+William,0.166,positive
+William,0.784,positive
+William,-0.077,negative
+William,-0.402,negative
+William Carvalho,0.166,positive
+William Carvalho,-0.077,negative
+Mikel Arteta,-0.318,negative
+Mikel Arteta,0.859,positive
+Mikel Arteta,0.318,positive
+Mikel Arteta,0.178,positive
+Mikel Arteta,0,neutral
+Dani Ceballos,0.077,positive
+Dani Ceballos,0.542,positive
+Fabinho,0.285,positive
+Fabinho,0.938,positive
+Fabinho,0.681,positive
+Fran Sol,0.372,positive
+Fran Sol,0.863,positive
+Fran Sol,0.904,positive
+Fran Sol,0.468,positive
+Fran Sol,0.421,positive
+André,-0.727,negative
+André,0.34,positive
+André André,-0.727,negative
+André André,0.34,positive
+André Gomes,-0.727,negative
+André Gomes,0.813,positive
+André Gomes,0.599,positive
+André Gomes,0.494,positive
+Ferran Torres,-0.151,negative
+Ferran Torres,0,neutral
+Ferran Torres,0.511,positive
+Lucas Moura,0,neutral
+Lucas Moura,-0.572,negative
+Thiago Silva,0.754,positive
+Thiago Silva,0.148,positive
+Thiago Silva,0,neutral
+Thiago Silva,0.494,positive
+Thiago Silva,0.273,positive
+Pedro,0,neutral
+Pedro,0.858,positive
+Pedro,0.66,positive
+Bernard,-0.402,negative
+Bernard,0,neutral
+Kevin,0,neutral
+Kevin,0.226,positive
+Kevin,0.026,neutral
+Lincoln,0.844,positive
+Lincoln,0.494,positive
+Lincoln,0,neutral
+Lincoln,-0.357,negative
+Wesley,0.318,positive
+Wesley,0,neutral
+Wesley,-0.511,negative
+Ricardo Pereira,0.502,positive
+Ricardo Pereira,-0.057,negative
+Ricardo Pereira,0,neutral
+Ricardo Pereira,-0.178,negative
+Ricardo Pereira,-0.681,negative
+Adrien Silva,0,neutral
+Adrien Silva,0.494,positive
+Adrien Silva,0.649,positive
+Adrien Silva,0.938,positive
+Adrien Silva,-0.421,negative
+Wallace,0,neutral
+Xavi,0.831,positive
+Xavi,0,neutral
+Xavi,-0.273,negative
+Xavi,0.25,positive
+Xavi,0.764,positive
+Vinicius,0.477,positive
+Vinicius,0,neutral
+Vinicius,0.226,positive
+Nicolas,0.402,positive
+Nicolas,0,neutral
+Javi Mier,0.402,positive
+Erik,0.511,positive
+Bernardo Silva,0,neutral
+Bernardo Silva,0.852,positive
+Bernardo Silva,-0.572,negative
+Bernardo Silva,0.431,positive
+Fali,0.599,positive
+Fali,0.103,positive
+Fali,0.778,positive
+Fali,0.511,positive
+Diego,0,neutral
+Diego Costa,0,neutral
+Sergio,0.25,positive
+Sergio,0.273,positive
+Sergio,-0.44,negative
+Sergio,0.935,positive
+Sergio,0.746,positive
+Pol Lozano,0.534,positive
+Pol Lozano,0.421,positive
+Pol Lozano,0,neutral
+Isi Ros,0,neutral
+Isi Ros,0.47,positive
+Isi Ros,0.359,positive
+Rodri,0,neutral
+Rodri,0.823,positive
+Rodri,-0.587,negative
+Rodri,0.296,positive
+Bernardo,0.852,positive
+Bernardo,0,neutral
+Bernardo,-0.572,negative
+Bernardo,0.937,positive
+Bernardo,0.66,positive
+Charles,0,neutral
+Charles,0.743,positive
+Charles,-0.557,negative
+Charles,-0.791,negative
+Jota,0,neutral
+Jota,-0.421,negative
+Jota,-0.382,negative
+Sandro,0.34,positive
+Sandro,0.66,positive
+Sandro,0,neutral
+Unai Bilbao,0.477,positive
+Unai Bilbao,-0.452,negative
+Allan,0,neutral
+Anderson,0.273,positive
+Anderson,-0.481,negative
+Anderson,0.285,positive
+Anderson,0,neutral
+Wellington,0,neutral
+Wellington,-0.477,negative
+Lucas Leiva,0.846,positive
+Lucas Leiva,0.076,positive
+Lucas Leiva,0.691,positive
+Lucas Leiva,0.421,positive
+Gabi,0.572,positive
+Gabi,0.421,positive
+Xabi Alonso,0,neutral
+Xabi Alonso,0.978,positive
+Xabi Alonso,0.863,positive
+Xabi Alonso,-0.44,negative
+Xabi Alonso,0.494,positive
+Roberto Firmino,0.296,positive
+Roberto Firmino,0.202,positive
+Roberto Firmino,0.178,positive
+Roberto Firmino,0.764,positive
+Roberto Firmino,-0.099,negative
+Diogo Dalot,-0.459,negative
+Diogo Dalot,0,neutral
+Jorge,0,neutral
+Oscar,0,neutral
+Oscar,0.777,positive
+Jonathan,0,neutral
+Jonathan,0.902,positive
+Gerson,0,neutral
+Patric,-0.557,negative
+Patric,0,neutral
+Gabriel Martinelli,0.637,positive
+Gabriel Martinelli,-0.494,negative
+Gabriel Martinelli,0.128,positive
+Gabriel Martinelli,0.333,positive
+Arthur,0,neutral
+Arthur,0.844,positive
+Arthur,-0.202,negative
+Nacho,-0.477,negative
+Douglas,0.421,positive
+Douglas,0.652,positive
+Douglas,0,neutral
+Douglas,0.44,positive
+Douglas,0.625,positive
+Douglas Costa,0.421,positive
+Douglas Costa,0.652,positive
+Douglas Costa,0.296,positive
+Douglas Costa,0.44,positive
+Douglas Costa,0.625,positive
+Johnathan,0.827,positive
+Santi Cazorla,-0.34,negative
+Marcelo,-0.7,negative
+Marcelo,0.746,positive
+Marcelo,0.421,positive
+Marcelo,0.735,positive
+Marcelo,0,neutral
+Kelvin,-0.201,negative
+Kelvin,-0.745,negative
+Kelvin,0,neutral
+Kelvin,-0.746,negative
+Antony,0.599,positive
+Antony,-0.359,negative
+Leonardo,0,neutral
+Leonardo,0.772,positive
+Patrick,0,neutral
+Patrick,0.318,positive
+Pablo,-0.296,negative
+Pablo,0.333,positive
+Pablo Marí,-0.296,negative
+Marc Roca,-0.077,negative
+Marc Roca,0.67,positive
+Sergio Ramos,0.896,positive
+Sergio Ramos,0.296,positive
+Sergio Ramos,0,neutral
+Sergio Ramos,0.361,positive
+Rafael,-0.459,negative
+Rafael,-0.423,negative
+Alex Sandro,0.66,positive
+Alex Sandro,0.361,positive
+Alex Sandro,0,neutral
+Alex Sandro,0.402,positive
+Tiago,-0.121,negative
+Tiago,0.214,positive
+Tiago,0.44,positive
+Tiago,0,neutral
+Tiago,0.586,positive
+Gabriel Silva,0,neutral
+Gabriel Silva,-0.511,negative
+Gabriel Silva,0.431,positive
+Gabriel Silva,-0.302,negative
+Gabriel Jesus,0,neutral
+Gabriel Jesus,0.612,positive
+Gabriel Jesus,-0.296,negative
+Gabriel Jesus,0.757,positive
+Deco,0.502,positive
+Deco,0,neutral
+Deco,0.807,positive
+Deco,0.296,positive
+Deco,-0.625,negative
+Felipe,0,neutral
+Felipe,0.727,positive
+Felipe,0.856,positive
+Luiz Felipe,0,neutral
+Luiz Felipe,0.856,positive
+Miguel,0,neutral
+Miguel,0.648,positive
+Nolito,0,neutral
+Nolito,0.91,positive
+Nolito,0.571,positive
+Nolito,-0.525,negative
+Nolito,0.637,positive
+Juan,0.748,positive
+Juan,0,neutral
+Juan,0.34,positive
+Juan,-0.296,negative
+Juan Mata,0.748,positive
+Juan Mata,0,neutral
+Juan Mata,0.883,positive
+Juan Mata,-0.262,negative
+Gustavo,0,neutral
+David Braz,0.772,positive
+David Braz,0.617,positive
+David Braz,0.44,positive
+David Braz,0.477,positive
+Rui Silva,-0.077,negative
+Rui Silva,0.681,positive
+Rui Silva,0,neutral
+Rui Silva,-0.946,negative
+Rui Silva,0.103,positive
+Ramires,0,neutral
+Ramires,0.607,positive
+Ramires,-0.735,negative
+Jefferson,0,neutral
+Jefferson,0.421,positive
+Tiago Silva,0.214,positive
+Tiago Silva,0.44,positive
+Tiago Silva,0,neutral
+Tiago Silva,0.941,positive
+Nico Melamed,0.402,positive
+Rodrigo,0,neutral
+Bruno Wilson,0.128,positive
+Bruno Wilson,0.439,positive
+Bruno Wilson,0,neutral
+Bruno Wilson,0.941,positive
+Suso,0,neutral
+Suso,0.373,positive
+Suso,-0.189,negative
+Suso,-0.859,negative
+Sergio Rico,0,neutral
+Andreas Pereira,0,neutral
+Andreas Pereira,0.153,positive
+Florentino,0,neutral
+Florentino,0.402,positive
+Arthur Cabral,0,neutral
+Arthur Cabral,-0.077,negative
+Arthur Cabral,0.511,positive
+Igor,0,neutral
+Igor,0.791,positive
+Igor,-0.363,negative
+Igor,-0.421,negative
+Igor,0.67,positive
+Caio,0.361,positive
+Caio,0.25,positive
+Caio,-0.206,negative
+Caio,0,neutral
+Henrique,0.361,positive
+Henrique,0.691,positive
+Henrique,-0.052,negative
+Henrique,0,neutral
+Henrique,-0.47,negative
+Caio Henrique,0.361,positive
+Diego Carlos,0.625,positive
+Diego Bri,0.625,positive
+Ronaldo Vieira,0.67,positive
+Ronaldo Vieira,0.459,positive
+Ronaldo Vieira,-0.296,negative
+Neto,0.294,positive
+Neto,0,neutral
+Neto,0.273,positive
+Quaresma,0,neutral
+Quaresma,0.649,positive
+Quaresma,0.923,positive
+Douglas Luiz,0,neutral
+Douglas Luiz,-0.153,negative
+Douglas Luiz,-0.318,negative
+Douglas Luiz,-0.421,negative
+Douglas Luiz,-0.296,negative
+Fernandinho,0.296,positive
+Fernandinho,0.71,positive
+Fernandinho,0,neutral
+Joelson Fernandes,-0.382,negative
+Joelson Fernandes,-0.34,negative
+Joelson Fernandes,0,neutral
+Joelson Fernandes,-0.511,negative
+Pedro Porro,0,neutral
+David Villa,0,neutral
+David Villa,-0.586,negative
+Dani Pacheco,0,neutral
+Pacheco,0,neutral
+Fernando Torres,0,neutral
+Fernando Torres,0.791,positive
+Fernando Torres,0.79,positive
+Fernando Torres,-0.153,negative
+Fernando,0,neutral
+Fernando,0.691,positive
+Fernando,0.791,positive
+Fernando,0.79,positive
+Fernando,-0.153,negative
+Angeliño,0.7,positive
+Angeliño,0.077,positive
+Angeliño,0.527,positive
+Angeliño,0.495,positive
+Angeliño,-0.44,negative
+Portu,0,neutral
+Isco,0,neutral
+Isco,-0.318,negative
+Judson,0.572,positive
+Ricardo Carvalho,0.576,positive
+Ricardo Carvalho,0,neutral
+Jurado,0.178,positive
+Jurado,0.572,positive
+Jurado,0.421,positive
+Jurado,0.751,positive
+Eduardo,0.202,positive
+Eduardo,0,neutral
+Eduardo,0.44,positive
+Eduardo,0.632,positive
+Eduardo,0.881,positive
+Renan Lodi,0.44,positive
+Renan Lodi,0,neutral
+Renan Lodi,-0.784,negative
+Alex Telles,0,neutral
+Alex Telles,0.784,positive
+Alex Telles,0.153,positive
+Hugo Seco,0.026,neutral
+Danilo,-0.459,negative
+Danilo,0.285,positive
+Danilo,0,neutral
+Danilo,0.421,positive
+Gilberto,0.128,positive
+Gilberto,0.494,positive
+Gilberto,0.843,positive
+Gilberto,0.735,positive
+Gilberto,0.586,positive
+Pau Torres,0,neutral
+Pau Torres,0.784,positive
+Pau Torres,0.527,positive
+Pau Torres,0.477,positive
+Hulk,0,neutral
+Hulk,0.923,positive
+Hulk,0.743,positive
+Hulk,-0.477,negative
+David Neres,0.796,positive
+David Neres,0.71,positive
+David Neres,0.934,positive
+David Neres,0.848,positive
+David Neres,0,neutral
+Joelinton,-0.44,negative
+Joelinton,0.459,positive
+Joelinton,0.38,positive
+Joelinton,0.202,positive
+Joelinton,0.361,positive
+Douglas Santos,0.784,positive
+Momo,0.978,positive
+Momo,0,neutral
+Momo,-0.44,negative
+Momo,0.586,positive
+Sylvinho,0,neutral
+Sylvinho,0.511,positive
+Ander Herrera,0.649,positive
+Ander Herrera,0.969,positive
+Ander Herrera,-0.052,negative
+Ander Herrera,0.855,positive
+Ander Herrera,0.315,positive
+Moreno,0,neutral
+Moreno,0.898,positive
+Moreno,0.557,positive
+Moreno,0.92,positive
+Pablo Moreno,0,neutral
+Yan Couto,0,neutral
+Yan Couto,0.402,positive
+Yan Couto,-0.115,negative
+Adama Traoré,0.421,positive
+Adama Traoré,0.34,positive
+Adama Traoré,0.285,positive
+Adama Traoré,0.44,positive
+Monchu,0,neutral
+Diego Llorente,0,neutral
+Sergi Roberto,0,neutral
+Sergi Roberto,0.746,positive
+Sergi Roberto,-0.052,negative
+Sergi Roberto,0.625,positive
+Sergi Roberto,0.649,positive
+Marquinhos,0,neutral
+Marquinhos,0.421,positive
+Marquinhos,-0.103,negative
+Edgar,0.511,positive
+Edgar,0.881,positive
+Richardson,-0.178,negative
+Richardson,0.273,positive
+Richardson,0.68,positive
+Richardson,0.881,positive
+Pelé,0,neutral
+David Raya,0.153,positive
+David Raya,0,neutral
+David Raya,0.823,positive
+David Raya,0.97,positive
+David Raya,0.625,positive
+Marlon,0.782,positive
+Marlon,0.421,positive
+Marlon,0.709,positive
+Marlon,-0.7,negative
+Marlon,0.202,positive
+Manu Sánchez,0.649,positive
+Manu Sánchez,0,neutral
+Manu Sánchez,0.557,positive
+Santos,0.501,positive
+Santos,0.477,positive
+Santos,0.718,positive
+Santos,-0.25,negative
+Santos,0,neutral
+Gabriel Barbosa,0.44,positive
+Gabriel Barbosa,0.727,positive
+Gabriel Barbosa,0,neutral
+Gabriel Barbosa,0.617,positive
+Gabriel Barbosa,0.55,positive
+Roberto Carlos,0,neutral
+Roberto Carlos,-0.822,negative
+Roberto Carlos,0.202,positive
+Roberto Carlos,-0.155,negative
+Roberto Carlos,-0.528,negative
+Mariano,0.771,positive
+Mariano,0.815,positive
+Mariano,0.557,positive
+Mariano,0.751,positive
+Reinier,0,neutral
+Reinier,0.906,positive
+Artur,0,neutral
+Artur,-0.026,neutral
+Davidson,-0.402,negative
+Davidson,-0.361,negative
+Davidson,0.459,positive
+Maxwell,-0.611,negative
+Maxwell,0.44,positive
+Maxwell,0,neutral
+Diego Rico,0.402,positive
+Diego Rico,0,neutral
+Juninho,0,neutral
+Juninho,-0.103,negative
+Juninho,0.226,positive
+Juninho,0.649,positive
+Paulinho,0,neutral
+Paulinho,0.421,positive
+Luiz Henrique,0.691,positive
+Evanilson,0.691,positive
+Evanilson,0.572,positive
+Evanilson,0.42,positive
+Evanilson,-0.421,negative
+Evanilson,0.128,positive
+Taison,0.765,positive
+Taison,0.273,positive
+Alberto Moreno,0.898,positive
+Alberto Moreno,0,neutral
+Alberto Moreno,-0.318,negative
+Alberto Moreno,0.561,positive
+Marlos,-0.572,negative
+Marlos,0.273,positive
+Marlos,-0.258,negative
+Marlos,0.361,positive
+Marlos,-0.447,negative
+Bruno Fuchs,0.273,positive
+Bruno Fuchs,0.026,neutral
+Bruno Fuchs,0.459,positive
+Gaspar,-0.361,negative
+Gaspar,0.178,positive
+Gaspar,0.318,positive
+Gaspar,0,neutral
+Robinho,0.402,positive
+Robinho,0.593,positive
+Robinho,0,neutral
+Robinho,0.758,positive
+Castro,0,neutral
+Castro,0.421,positive
+Castro,-0.026,neutral
+Castro,0.891,positive
+Nuno Mendes,0.44,positive
+Nuno Mendes,0.778,positive
+Nuno Mendes,0.812,positive
+Bruno Mendes,0.44,positive
+Bruno Mendes,0.19,positive
+Bruno Mendes,0.7,positive
+Cris,0,neutral
+Dalbert,-0.052,negative
+Dalbert,0,neutral
+Lyanco,0,neutral
+Lyanco,0.077,positive
+Ansu Fati,0.178,positive
+Ansu Fati,0.421,positive
+Dida,0.863,positive
+Dida,0.911,positive
+Dida,0.402,positive
+Javi Martínez,0.599,positive
+Juan Jesus,0.103,positive
+Juan Jesus,-0.361,negative
+Ronny,0.377,positive
+Ronny,0.38,positive
+Ronny,0.902,positive
+Ronny,0,neutral
+Ronny,0.713,positive
+Nuno Tavares,0.494,positive
+Sidnei,0.942,positive
+Sidnei,0.886,positive
+Sidnei,0.598,positive
+Sidnei,0.421,positive
+Sidnei,0.925,positive
+José Amo,0.735,positive
+José Amo,-0.296,negative
+José Amo,0.939,positive
+José Amo,-0.572,negative
+José Amo,0.938,positive
+Joel Pereira,0.9,positive
+Joel Pereira,0.509,positive
+Joel Pereira,0.421,positive
+Joel Pereira,0,neutral
+Felipe Anderson,0,neutral
+Felipe Anderson,0.727,positive
+Felipe Anderson,0.238,positive
+Nani,0.19,positive
+Rafinha,0,neutral
+Rafael Silva,0.421,positive
+Rafael Silva,0.599,positive
+Dante,0.273,positive
+Dante,0.678,positive
+Dante,0.318,positive
+Dante,0,neutral
+Zeca,0,neutral
+Zeca,0.921,positive
+Zeca,0.44,positive
+Zeca,0.765,positive
+Zeca,0.361,positive
+Dani Olmo,0.67,positive
+Dani Olmo,-0.25,negative
+Dani Olmo,0.475,positive
+Dani Olmo,0.557,positive
+Dani Olmo,-0.126,negative
+Sergio Busquets,0.593,positive
+Sergio Busquets,0.859,positive
+Sergio Busquets,0.612,positive
+Sergio Busquets,0.34,positive
+Sergio Gil,0.735,positive
+Sergio Gil,0.402,positive
+Sergio Gil,0,neutral
+Sergio Gil,0.67,positive
+Danilo Pereira,0,neutral
+Danilo Pereira,0.421,positive
+Malcom,0,neutral
+Malcom,0.273,positive
+Malcom,0.402,positive
+Michu,0.802,positive
+Michu,0.494,positive
+Michu,0.938,positive
+César,0.557,positive
+César,0.932,positive
+César,0.318,positive
+César,0,neutral
+César,0.813,positive
+Bruno Guimarães,0.459,positive
+Bruno Guimarães,-0.192,negative
+Pedro Neto,0,neutral
+Pedro Neto,0.273,positive
+Adrián,0.205,positive
+Adrián,0.829,positive
+Adrián,0.421,positive
+Adrián,-0.735,negative
+Adrián,0.612,positive
+Chico,0.852,positive
+Chico,0.778,positive
+Chico,0.599,positive
+Carlos David,-0.34,negative
+Carlos David,-0.226,negative
+Carlos David,0.796,positive
+Carlos David,0.836,positive
+Carlos David,0,neutral
+Jean Patric,0.416,positive
+Arnau Puigmal,0.475,positive
+Arnau Puigmal,0.625,positive
+Arnau Puigmal,0,neutral
+Clinton Mata,0.339,positive
+Nico Williams,0.611,positive
+Nico Williams,0.637,positive
+Nico Williams,0.93,positive
+Nico Williams,0.774,positive
+Nico Williams,0,neutral
+Pep Biel,0.296,positive
+Cristian Herrera,0.877,positive
+Roberto Torres,0,neutral
+Diogo Jota,0.077,positive
+Diogo Jota,0.361,positive
+Diogo Jota,0,neutral
+Diogo Jota,0.273,positive
+Diogo Jota,-0.296,negative
+João Félix,0.103,positive
+João Félix,0.637,positive
+João Félix,0.423,positive
+Raphinha,0.735,positive
+Raphinha,0,neutral
+Raphinha,0.812,positive
+Rodrygo,0.128,positive
+Rodrygo,-0.859,negative
+Rodrygo,0.637,positive
+Rodrygo,0.765,positive
+Rodrygo,0.347,positive
+Thiago Mendes,0.459,positive
+Thiago Mendes,0.727,positive
+Beto,0.44,positive
+Pedro Chirivella,0.926,positive
+Pedro Chirivella,0.599,positive
+Pedro Chirivella,0.836,positive
+Daniel Ayala,0.34,positive
+Raúl,0.859,positive
+Raúl,0.783,positive
+Raúl,0.421,positive
+Raúl,0,neutral
+Matheus,0.66,positive
+Matheus,0.648,positive
+Matheus,0,neutral
+Matheus,0.637,positive
+Matheus Pereira,0.66,positive
+Matheus Pereira,0.648,positive
+Matheus Pereira,0,neutral
+Matheus Pereira,0.238,positive
+Junior Firpo,0,neutral
+Marcos Llorente,0.44,positive
+Carlos Soler,0.458,positive
+Carlos Soler,0,neutral
+Kiki,0,neutral
+Kiki,0.751,positive
+Kiki,0.586,positive
+Kiki,0.931,positive
+Varela,-0.273,negative
+Varela,0.527,positive
+Varela,0.876,positive
+Varela,0.914,positive
+Varela,-0.34,negative
+Hilton,0,neutral
+Hilton,0.915,positive
+Hilton,0.743,positive
+Hilton,-0.202,negative
+Rodrigo Ely,-0.057,negative
+Rodrigo Ely,-0.631,negative
+Rodrigo Ely,0,neutral
+Paolo Fernandes,0,neutral
+Paolo Fernandes,0.872,positive
+Paolo Fernandes,0.71,positive
+Giovanni,0,neutral
+Giovanni,0.34,positive
+Giovanni,0.946,positive
+Giovanni,0.459,positive
+Giovanni,-0.052,negative
+Daniel Podence,-0.128,negative
+Daniel Podence,0.586,positive
+Dani Alves,0.361,positive
+Dani Alves,0.848,positive
+Dani Alves,-0.586,negative
+Dani Alves,0.875,positive
+Dani Alves,0.883,positive
+Leandro,0,neutral
+Jordi,0.778,positive
+Jordi,0.214,positive
+Jordi,0,neutral
+Jordi,0.421,positive
+Nono,0.511,positive
+Nono,0.899,positive
+Nono,0.82,positive
+Artur Jorge,0.527,positive
+Artur Jorge,0.612,positive
+Ricardo Costa,0.678,positive
+Félix Correia,0,neutral
+Saúl,-0.226,negative
+Alan Patrick,0,neutral
+Alan Patrick,0.599,positive
+Alan Patrick,-0.919,negative
+Marco Asensio,0.784,positive
+Marco Asensio,0,neutral
+Marco Asensio,0.069,positive
+Marco Asensio,0.743,positive
+Luis Henrique,0,neutral
+Luis Henrique,0.557,positive
+Nino,-0.597,negative
+Nino,0.786,positive
+Nino,0.806,positive
+Nino,0.972,positive
+José Carlos,0.361,positive
+José Carlos,0,neutral
+José Carlos,0.586,positive
+David Rodríguez,0,neutral
+Dani Giménez,0,neutral
+Dani Giménez,0.938,positive
+Dani Giménez,-0.141,negative
+Iago,0.402,positive
+Iago,0.612,positive
+Iago,0,neutral
+Iago,-0.129,negative
+Luiz Gustavo,0,neutral
+Wellington Silva,0.586,positive
+Vinícius,0.586,positive
+Vinícius,0.361,positive
+Vinícius,-0.115,negative
+Vinícius,-0.296,negative
+Samuel Portugal,0.052,positive
+Nacho Gil,0.96,positive
+Nacho Gil,0,neutral
+Casemiro,-0.421,negative
+Casemiro,0.525,positive
+Casemiro,0.937,positive
+Casemiro,0.532,positive
+Casemiro,-0.34,negative
+Juanma,0,neutral
+Felipe Melo,0.402,positive
+Luis Felipe,0.402,positive
+Pau Resta,-0.646,negative
+Pau Resta,0.421,positive
+Pau Resta,-0.558,negative
+Pau Resta,-0.899,negative
+Pizzi,-0.273,negative
+Pizzi,0,neutral
+Pizzi,0.44,positive
+Pizzi,-0.226,negative
+Luis García,0.493,positive
+Luis García,0.625,positive
+Luis García,0,neutral
+Luis García,-0.665,negative
+Cristian,0.421,positive
+Cristian,0,neutral
+Cristian,-0.041,neutral
+Cristian,-0.318,negative
+Pablo Fornals,0.103,positive
+Pablo Fornals,0.572,positive
+Nélson Semedo,0,neutral
+Nélson Semedo,-0.341,negative
+Nélson Semedo,0.727,positive
+Coke,0,neutral
+Coke,-0.402,negative
+Coke,0.077,positive
+Jovane Cabral,0.026,neutral
+Jovane Cabral,-0.572,negative
+Jovane Cabral,0.25,positive
+Jovane Cabral,0,neutral
+José Sá,0.727,positive
+Juan Carlos,0.764,positive
+Riquelme,0.727,positive
+Riquelme,0,neutral
+Gervinho,0.318,positive
+Gervinho,0,neutral
+Gervinho,0.421,positive
+Gervinho,0.612,positive
+Gervinho,-0.751,negative
+Pedrinho,0.421,positive
+Pol Lirola,0.861,positive
+Titi,0,neutral
+Titi,0.933,positive
+Titi,0.971,positive
+Titi,0.802,positive
+Titi,-0.199,negative
+Carlos Miguel,0,neutral
+Carlos Miguel,0.421,positive
+Lucas Soares,0.547,positive
+Lucas Soares,0.44,positive
+Santi Mina,0.802,positive
+Pol García,0,neutral
+Xande Silva,0,neutral
+Xande Silva,-0.226,negative
+Douglas Coutinho,-0.296,negative
+Willian José,0.823,positive
+Willian José,-0.226,negative
+Willian José,-0.818,negative
+Willian José,0.66,positive
+Willian José,0,neutral
+Ramiro,0.103,positive
+Joel Robles,0,neutral
+Joel Robles,0.637,positive
+Borja Mayoral,0,neutral
+Gabriel Paulista,0.761,positive
+Gabriel Paulista,0.637,positive
+Gabriel Paulista,0.421,positive
+Fer Niño,0,neutral
+Patrick William,0.685,positive
+Patrick William,0.44,positive
+Patrick William,0.954,positive
+Patrick William,-0.421,negative
+Patrick William,0,neutral
+Maicon,-0.17,negative
+Maicon,0,neutral
+Maicon,0.84,positive
+Maicon,-0.128,negative
+Maicon,0.681,positive
+Rúben Dias,0,neutral
+Rúben Dias,0.44,positive
+Rúben Dias,0.153,positive
+Pepê,0.077,positive
+Pepê,0,neutral
+Gil,0.737,positive
+Rúben Neves,0.318,positive
+Dani Raba,0.421,positive
+Dani Raba,0.743,positive
+Dani Raba,-0.019,neutral
+Juan Villar,0.477,positive
+Juan Villar,0.103,positive
+Juan Villar,-0.128,negative
+Juan Villar,-0.202,negative
+Tete,0,neutral
+Tete,0.527,positive
+Tete,0.303,positive
+Tete,0.487,positive
+Cristian López,0.421,positive
+Jordi Alba,0,neutral
+Jordi Alba,0.875,positive
+Jordi Alba,0.394,positive
+Jordi Alba,0.361,positive
+Ari,0.25,positive
+Gedson Fernandes,0,neutral
+Gedson Fernandes,0.8,positive
+Gedson Fernandes,0.938,positive
+Eduardo Quaresma,0.649,positive
+Fidel,-0.477,negative
+Fidel,0.34,positive
+Fidel,0,neutral
+Pere Milla,0.819,positive
+Mario Hermoso,0,neutral
+Jonas,0.374,positive
+Jonas,0,neutral
+Jonas,0.572,positive
+Camacho,0,neutral
+Camacho,0.477,positive
+Juan Soriano,0.361,positive
+Fran García,-0.273,negative
+Fran García,0.44,positive
+Dani García,-0.273,negative
+Dani García,0.44,positive
+Bruno Andrade,-0.052,negative
+José Fonte,0.612,positive
+Pere Pons,0.612,positive
+Alex Teixeira,0.7,positive
+Pablo Hernández,0.296,positive
+Bruno Gaspar,0,neutral
+João Teixeira,0,neutral
+Miguel Luís,0.796,positive
+Miranda,0.347,positive
+Guilherme,0.347,positive
+Vitolo,0.226,positive
+Vitolo,0,neutral
+Bremer,0.477,positive
+Bremer,0.103,positive
+Bremer,0,neutral
+Bremer,0.875,positive
+Dani Vivian,0.296,positive
+Dani Vivian,0,neutral
+Riqui Puig,-0.556,negative
+Riqui Puig,0.852,positive
+Riqui Puig,-0.048,neutral
+Pedri,-0.556,negative
+Pedri,0.076,positive
+Wellington Nem,0.893,positive
+Wellington Nem,0.942,positive
+Luis Alberto,0,neutral
+Luis Alberto,-0.129,negative
+Luis Alberto,0.402,positive
+Luis Alberto,0.818,positive
+Thierry Correia,0,neutral
+Thierry Correia,0.735,positive
+Thierry Correia,0.527,positive
+Thierry Correia,0.459,positive
+Kiko Casilla,0,neutral
+Kiko Casilla,0.421,positive
+José Kanté,0.836,positive
+José Kanté,0.549,positive
+Vagner,0.637,positive
+Ahmed Hassan,0.318,positive
+Giuliano,0,neutral
+Iago Aspas,-0.129,negative
+Souza,0.34,positive
+Rui Patrício,0.71,positive
+Gonzalo Villar,0.511,positive
+Anderson Silva,0.557,positive
+Anderson Silva,0,neutral
+Felipe Silva,0.557,positive
+Felipe Silva,0,neutral
+Carlos Fernández,-0.104,negative
+Chris Ramos,-0.765,negative
+Chris Ramos,-0.226,negative
+Chris Ramos,-0.459,negative
+Chris Ramos,0,neutral
+Jorge Mier,0.318,positive
+Jorge Mier,-0.296,negative
+Jorge Mier,-0.077,negative
+Jorge Mier,0.827,positive
+Bebeto,0.856,positive
+Gonçalo Guedes,0.361,positive
+Pepe Mena,0.907,positive
+Sergio Lozano,0.772,positive
+Sergio Lozano,0,neutral
+Sergio Lozano,0.637,positive
+Jô,0.646,positive
+Ezequiel,0,neutral
+Gonçalo Paciência,0,neutral
+Leandro Damião,0.226,positive
+Leandro Damião,0.555,positive
+Leandro Damião,0,neutral
+João Cancelo,-0.341,negative
+João Cancelo,0,neutral
+João Cancelo,-0.103,negative
+João Cancelo,0.91,positive
+Brandon Thomas,-0.567,negative
+Matheus Cunha,0.637,positive
+Matheus Cunha,0.748,positive
+Diogo Costa,0.459,positive
+Rafa Mir,0.361,positive
+Toni Lato,0,neutral
+Camilo,0.917,positive
+Tuta,0.578,positive
+Matheus Fernandes,0.361,positive
+Sergio Santos,0.296,positive
+João Virgínia,0.273,positive
+Bruno Henrique,0,neutral
+Lucas Paquetá,0.823,positive
+Manu Vallejo,0,neutral
+Moha,0,neutral
+Serginho,0.402,positive
+Serginho,0.7,positive
+Nuno Santos,0.858,positive
+Nuno Santos,0.421,positive
+Nuno Santos,0.848,positive
+Marc Mateu,-0.542,negative
+Cesc Fàbregas,0.726,positive
+Cesc Fàbregas,0.864,positive
+Mikel Rico,0.525,positive
+Cafú,0.166,positive
+Tiago Ilori,0,neutral
+Tiago Ilori,0.103,positive
+Borja Valero,0.273,positive
+Marcos Paulo,0.66,positive
+Marcos Paulo,0.296,positive
+Marcos Paulo,0.402,positive
+Mika,0,neutral
+Nacho Fernández,0.612,positive
+José Mari,0,neutral
+Josué,0.55,positive
+Renato Sanches,-0.153,negative
+Lolo,0.077,positive
+Juan Bernat,0,neutral
+Álvaro Jiménez,0.681,positive
+Alexandre Pato,0.896,positive
+Alexandre Pato,0.572,positive
+Alexandre Pato,0.92,positive
+Bebé,0.718,positive
+Ricardo Ferreira,0.572,positive
+Lucas Fernandes,0.202,positive
+Ribamar,0,neutral
+Rafael Leão,0.882,positive
