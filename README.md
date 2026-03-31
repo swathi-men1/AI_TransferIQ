@@ -24,18 +24,18 @@ python app.py
 TransferIQ/
 ├── data/
 │   ├── raw/                        # Original 4 CSV datasets
-│   │   ├── player.csv              # 1,034 players, FIFA stats
-│   │   ├── market_value.csv        # 6,043 records, 2009-2021
-│   │   ├── injury.csv              # 9,553 injury records
-│   │   └── sentiment.csv          # NLP sentiment scores
-│   └── processed/                  # Cleaned & feature-engineered
+│   │   ├── player.csv              
+│   │   ├── market_value.csv        
+│   │   ├── injury.csv             
+│   │   └── sentiment.csv          
+│   └── processed/                  
 │       ├── cleaned_dataset_final.csv
 │       ├── featured_dataset_final.csv
 │       └── lstm_timeseries_dataset.csv
 │
 ├── models/                         # Saved pkl model files
-│   ├── best_model_v2.pkl           ← BEST MODEL (R²=0.761)
-│   ├── weighted_ensemble.pkl       # v1 ensemble (R²=0.495)
+│   ├── best_model_v2.pkl           
+│   ├── weighted_ensemble.pkl       
 │   ├── gradient_boosting.pkl
 │   ├── random_forest.pkl
 │   ├── ridge_regression.pkl
@@ -43,15 +43,15 @@ TransferIQ/
 │
 ├── src/                            # Source code
 │   ├── main.py                     # Full pipeline runner
-│   ├── data_cleaning.py            # Week 2: cleaning & merging
-│   ├── feature_engineering.py     # Week 3-4: 69 features
-│   ├── lstm_model.py               # Week 5: LSTM from scratch (NumPy)
-│   ├── ensemble_model.py           # Week 6-7: ensemble + tuning
-│   ├── best_model.py               # Best model v2 (R²=0.761)
-│   └── predict.py                  # Inference script
+│   ├── data_cleaning.py            
+│   ├── feature_engineering.py     
+│   ├── lstm_model.py              
+│   ├── ensemble_model.py          
+│   ├── best_model.py              
+│   └── predict.py                  
 │
 ├── webapp/                         # Flask web application
-│   ├── app.py                      # Flask backend (uses best_model_v2.pkl)
+│   ├── app.py                      
 │   ├── requirements.txt
 │   ├── models/
 │   │   └── best_model_v2.pkl
