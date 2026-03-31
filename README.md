@@ -81,27 +81,8 @@ TransferIQ/
 | Weighted Ensemble v1 | 0.495 | 9.2% | 22.7% |
 | **Stacking Ensemble v2** | **0.761** | **60.9%** | **77.8%** |
 
-## Best Model v2 Details
 
-- Architecture: Stacking Ensemble (GB + ExtraTrees + RandomForest + Ridge)
-- Meta-learner: Ridge Regression (5-fold cross-validation)
-- Features: 59 features (44 base + 11 interaction + 4 historical market)
-- Scaler: RobustScaler (handles outliers better)
-- Training: 5-fold KFold stacking + full refit
 
-Key new features in v2:
-- `ova_x_potential` — OVA × potential score
-- `youth_flag` — young players with high OVA
-- `perf_x_pot` — performance × potential
-- `log_hist_max/mean` — historical peak market values
-- `hist_growth` — past value growth trend
-
-## Why not 90%+?
-
-Transfer value is ~50% determined by factors not in any public dataset:
-club financial situation, agent fees, private negotiations, buyer urgency.
-Professional analytics firms achieve 65–70% with private data.
-Our 76.1% from public data is state-of-the-art.
 
 ## Tech Stack
 
