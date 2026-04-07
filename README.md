@@ -1,7 +1,7 @@
 <div align="center">
-  
-# ⚽ TransferIQ Pro
-**AI-Powered Football Valuation & Future Trend Forecasting Ecosystem**
+
+# ⚽ TransferIQ Pro  
+### AI-Powered Football Valuation & Future Trend Forecasting System
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python)
 ![Flask](https://img.shields.io/badge/Flask-Backend-black?style=for-the-badge&logo=flask)
@@ -14,57 +14,133 @@
 
 ## 📖 About The Project
 
-**TransferIQ Pro** is an advanced, data-driven football analytics platform. In the real-world football market, player values are often manipulated by hype. This project cuts through the noise by integrating real-time performance metrics, injury risk indexes, and Natural Language Processing (NLP) sentiment to predict a player's exact current market value. 
+**TransferIQ Pro** is an AI-powered football analytics platform designed to predict player transfer values using data-driven techniques.
 
-Going a step further, it utilizes a Deep Learning **LSTM** neural network to forecast the player's financial trajectory for the next 3 years.
+In real-world football markets, player valuations are often influenced by hype, media narratives, and agent negotiations. This system eliminates subjectivity by combining:
 
-### 📸 Dashboard Sneak Peek
-> *(Add your dashboard screenshot here)*
-> <img width="1355" height="641" alt="image" src="https://github.com/user-attachments/assets/ed6cc667-39d9-4f6e-bbee-416317662802" />
+- 📊 Performance Metrics  
+- 🩹 Injury Risk Analysis  
+- 🌍 Public Sentiment (NLP)
 
-> ![TransferIQ Dashboard Placeholder](https://via.placeholder.com/800x400?text=Dashboard+Screenshot+Here)
-
----
-
-## ✨ Premium Features
-
-- ⚡ **Real-Time Base Valuation:** Calculates the exact current transfer value using an optimized **XGBoost Regressor**.
-- 📈 **Time-Series Forecasting:** Predicts the next 3 years of market value trends using **Deep Learning (LSTM)** on reverse-engineered sequences.
-- 🧠 **NLP Sentiment Integration:** Analyzes public hype and media rumors (via VADER & TextBlob) to adjust player valuations.
-- 📊 **Interactive Analytics Dashboard:** A sleek, dark-themed UI built with **Chart.js** that dynamically updates line and radar charts.
-- 🛡️ **Explainable AI (XAI):** Generates live confidence scores, investment risk levels, and career stage categorization to justify the AI's output.
+The system not only predicts a player’s **current market value** but also forecasts their **future valuation trend for the next 3 years** using deep learning.
 
 ---
 
-## 🛠️ Tech Stack
+## 📸 Dashboard Preview
+<img width="1355" height="641" alt="image" src="https://github.com/user-attachments/assets/3c4926c9-cfb9-48a1-acb6-88bd6c6c1060" />
 
-| Category | Technologies Used |
-| :--- | :--- |
-| **Machine Learning** | `XGBoost`, `scikit-learn`, `Pandas`, `NumPy` |
-| **Deep Learning** | `TensorFlow`, `Keras (LSTM)` |
-| **Backend API** | `Python`, `Flask`, `Flask-CORS` |
-| **Frontend / UI** | `HTML5`, `CSS3`, `Vanilla JavaScript`, `Chart.js` |
-| **NLP** | `NLTK (VADER)`, `TextBlob` |
+![Dashboard](./assets/dashboard.png)
 
 ---
 
-## 📁 Repository Structure
+## 🚀 Key Features
+
+- ⚡ **Real-Time Valuation**  
+  Predicts current transfer value using **XGBoost Regressor**
+
+- 📈 **Future Trend Forecasting**  
+  Uses **LSTM (Deep Learning)** to predict 3-year value trajectory
+
+- 🧠 **Explainable AI (XAI)**  
+  Provides:
+  - Confidence Score  
+  - Risk Level  
+  - Market Tier  
+  - Career Stage  
+  - AI-based Explanation  
+
+- 📊 **Interactive Dashboard**  
+  Built using **Chart.js**, includes:
+  - Line Chart (Trend)
+  - Radar Chart (Player Profile)
+  - Real-time updates
+
+- ⚔️ **Player Comparison Mode**  
+  Compare two players side-by-side
+
+- 📦 **Scenario Simulation**  
+  - Best Case  
+  - Worst Case  
+
+- 📥 **Export Reports**  
+  Download prediction results as JSON
+
+---
+
+## 🧠 System Architecture
 
 ```text
+User Input (UI)
+      ↓
+XGBoost Model → Current Value Prediction
+      ↓
+LSTM Model → Future Trend Forecast
+      ↓
+Domain Logic Layer (Position, Contract, Age)
+      ↓
+Explainable AI Module
+      ↓
+Dashboard Visualization (Chart.js)
+⚙️ How It Works
+User inputs player attributes (age, performance, injury, sentiment)
+XGBoost predicts current transfer value
+LSTM analyzes temporal patterns for future forecasting
+Business logic adjusts realism (position, contract, age)
+Backend generates insights and explanations
+Frontend displays results interactively
+📊 Example Output
+💰 Current Value: €20.2M
+📉 Trend: Declining
+⚠️ Risk: Medium
+🏆 Tier: High
+🧬 Career Stage: Peak Player
+🤖 Insight: Balanced profile with moderate growth potential
+🛠️ Tech Stack
+Category	Technologies
+Machine Learning	XGBoost, scikit-learn
+Deep Learning	TensorFlow, Keras (LSTM)
+Backend	Python, Flask
+Frontend	HTML, CSS, JavaScript, Chart.js
+Data Processing	Pandas, NumPy
+NLP	NLTK (VADER), TextBlob
+📁 Project Structure
 TransferIQ/
-├── Dataset/                        # Raw, cleaned, and processed data files
-│   ├── Processed_Dataset.csv
-│   ├── only_sentiment_data.csv
-│   └── ...
-├── Model/                          # Model training scripts and generated sequences
-│   ├── train_lstm_py.py
-│   ├── train_xgboost_py.py
-│   └── ... 
-├── src/                            # Data collection and NLP scripts
-│   └── sentiment_analysis.py       
-├── templates/                      # Flask HTML Templates
-│   └── index.html                  # TransferIQ Dashboard UI
-├── app.py                          # Main Flask API Server
-├── transferiq_lstm.keras           # Final Trained LSTM Model
-├── transferiq_model.json           # Final Trained XGBoost Model
-└── requirements.txt                # Python Dependencies
+├── Dataset/
+├── Model/
+├── src/
+├── templates/
+│   └── index.html
+├── app.py
+├── transferiq_lstm.keras
+├── transferiq_model.json
+└── requirements.txt
+🧪 Installation & Setup
+git clone https://github.com/your-username/TransferIQ-Pro.git
+cd TransferIQ-Pro
+
+pip install -r requirements.txt
+
+python app.py
+
+👉 Open browser:
+
+http://127.0.0.1:5000
+🚀 Future Improvements
+Real-time API integration (Transfermarkt / FIFA datasets)
+Match-level time-series data for accurate LSTM training
+Advanced deep learning architectures
+Cloud deployment (AWS / GCP)
+Mobile responsive UI
+🤝 Contribution
+
+Contributions are welcome! Feel free to fork and improve the system.
+
+📜 License
+
+This project is for educational and research purposes.
+
+<div align="center">
+
+🔥 TransferIQ Pro – Where Data Meets Football Intelligence
+
+</div> ```
