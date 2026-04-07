@@ -85,12 +85,12 @@ Dashboard Visualization (Chart.js)
 ----
 ⚙️ How It Works
 ```
-User inputs player attributes (age, performance, injury, sentiment)
-XGBoost predicts current transfer value
-LSTM analyzes temporal patterns for future forecasting
-Business logic adjusts realism (position, contract, age)
-Backend generates insights and explanations
-Frontend displays results interactively
+1. User inputs player attributes (age, performance, injury, sentiment)
+2. XGBoost predicts current transfer value
+3. LSTM analyzes temporal patterns for future forecasting
+4. Business logic adjusts realism (position, contract, age)
+5. Backend generates insights and explanations
+6. Frontend displays results interactively
 ```
 ----
 📊 Example Output
@@ -140,11 +140,13 @@ python app.py
 http://127.0.0.1:5000
 
 🚀 Future Improvements
+```
 Real-time API integration (Transfermarkt / FIFA datasets)
 Match-level time-series data for accurate LSTM training
 Advanced deep learning architectures
 Cloud deployment (AWS / GCP)
 Mobile responsive UI
+```
 
 🤝 Contribution
 
