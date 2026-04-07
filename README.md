@@ -93,7 +93,7 @@ Dashboard Visualization (Chart.js)
 6. Frontend displays results interactively
 ```
 ----
-* 📊 Example Output
+📊 Example Output:
 * 💰 Current Value: €20.2M
 * 📉 Trend: Declining
 * ⚠️ Risk: Medium
@@ -129,7 +129,7 @@ TransferIQ/
 ````
 ----
 🧪 Installation & Setup
-git clone https://github.com//TransferIQ-Pro.git
+git clone https://github.com/swathi-men1/AI_TransferIQ.git
 cd TransferIQ-Pro
 
 pip install -r requirements.txt
