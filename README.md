@@ -81,6 +81,7 @@ Domain Logic Layer (Position, Contract, Age)
 Explainable AI Module
       ↓
 Dashboard Visualization (Chart.js)
+```
 ⚙️ How It Works
 User inputs player attributes (age, performance, injury, sentiment)
 XGBoost predicts current transfer value
@@ -95,14 +96,19 @@ Frontend displays results interactively
 🏆 Tier: High
 🧬 Career Stage: Peak Player
 🤖 Insight: Balanced profile with moderate growth potential
-🛠️ Tech Stack
-Category	Technologies
-Machine Learning	XGBoost, scikit-learn
-Deep Learning	TensorFlow, Keras (LSTM)
-Backend	Python, Flask
-Frontend	HTML, CSS, JavaScript, Chart.js
-Data Processing	Pandas, NumPy
-NLP	NLTK (VADER), TextBlob
+
+----
+## 🛠️ Tech Stack
+
+| Category | Technologies Used |
+| :--- | :--- |
+| **Machine Learning** | `XGBoost`, `scikit-learn`, `Pandas`, `NumPy` |
+| **Deep Learning** | `TensorFlow`, `Keras (LSTM)` |
+| **Backend API** | `Python`, `Flask`, `Flask-CORS` |
+| **Frontend / UI** | `HTML5`, `CSS3`, `Vanilla JavaScript`, `Chart.js` |
+| **NLP** | `NLTK (VADER)`, `TextBlob` |
+
+----
 📁 Project Structure
 TransferIQ/
 ├── Dataset/
