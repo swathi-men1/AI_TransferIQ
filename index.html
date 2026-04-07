@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TransferIQ Pro V2</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- 1. Global Variables & Theme --- */
+        :root {
+            --bg: #090b10;
+            --surface: rgba(20, 25, 35, 0.7);
+            --border: rgba(255, 255, 255, 0.1);
+            --accent: #00f2fe;
+            --accent-p2: #ff007a;
+            --accent-glow: rgba(0, 242, 254, 0.3);
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            background-image: radial-gradient(circle at 50% 0%, #151c28 0%, transparent 70%);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* --- 2. Hero Section Styles --- */
+        .hero {
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .hero h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--text);
+            text-shadow: 0 0 20px var(--accent-glow);
+            margin: 10px 0;
+            transition: 0.3s;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- 3. Button & Layout Styles --- */
+        .compare-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .compare-btn.active {
+            background: rgba(255, 0, 122, 0.2);
+            border-color: var(--accent-p2);
+            color: var(--accent-p2);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1.8fr;
+            gap: 30px;
+            padding: 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--surface);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(12px);
+        }
+
+        .card h3 {
+            margin-top: 0; 
+            margin-bottom: 20px; 
+            color: #fff; 
+            font-weight: 600;
+        }
+
+        /* --- 4. Input Controls Styles --- */
+        .player-section { margin-bottom: 25px; }
+        .player-section h4 { color: var(--accent); margin: 0 0 15px 0; border-bottom: 1px solid var(--border); padding-bottom: 5px;}
+        
+        #p2-section { display: none; }
+        #p2-section h4 { color: var(--accent-p2); }
+
+        .control { margin-bottom: 15px; }
+        .control-header { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted); }
+        .control-header span { color: var(--text); font-weight: bold; }
+
+        input[type=range] {
+            width: 100%; height: 6px; background: #1e293b; border-radius: 5px; outline: none; -webkit-appearance: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); cursor: pointer;
+        }
+
+        #p2-section input[type=range]::-webkit-slider-thumb { background: var(--accent-p2); }
+
+        select {
+            width: 100%; padding: 8px; background: #1e293b; color: var(--text); border: 1px solid var(--border); border-radius: 8px; outline: none;
+        }
+
+        /* --- 5. Output Widgets & Charts Styles --- */
+        .badges-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px;
+        }
+
+        .badge-card {
+            background: rgba(30, 41, 59, 0.5); padding: 15px; border-radius: 10px; text-align: center; border: 1px solid var(--border);
+        }
+
+        .badge-title { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 5px; }
+        .badge-value { font-weight: bold; font-size: 1.1rem; }
+
+        .insight {
+            padding: 15px; background: rgba(0, 242, 254, 0.05); border-left: 4px solid var(--accent); border-radius: 4px 8px 8px 4px; font-size: 0.95rem; margin-top: 20px;
+        }
+
+        .charts-wrapper {
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px;
+        }
+
+        button.export-btn {
+            width: 100%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border: none; padding: 12px; color: #000; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>⚽ TransferIQ Pro</h1>
+    <div class="price" id="price">€0</div>
+    <div class="hero-stats">
+        <span id="confidence">🎯 Confidence: 0%</span>
+        <span>•</span>
+        <span id="range">📊 Range: €0 - €0</span>
+        <span>•</span>
+        <span id="trend">📈 Trend: --</span>
+    </div>
+    <button class="compare-btn" id="compareBtn" onclick="toggleCompare()">Vs Compare Mode</button>
+</div>
+
+<div class="container">
+    
+    <div class="card">
+        <h3>🎛️ Attributes</h3>
+        
+        <div class="player-section" id="p1-section">
+            <h4>Player 1 (Cyan)</h4>
+            <div class="control">
+                <div class="control-header"><label>Position</label></div>
+                <select id="p1-pos" onchange="updateUI()">
+                    <option value="FWD">FWD</option>
+                    <option value="MID" selected>MID</option>
+                    <option value="DEF">DEF</option>
+                    <option value="GK">GK</option>
+                </select>
+            </div>
+            <div class="control">
+                <div class="control-header"><label>Age</label> <span id="p1-ageV">24</span></div>
+                <input type="range" id="p1-age" min="16" max="40" value="24" oninput="updateUI()">
+            </div>
+            <div class="control">
+                <div class="control-header"><label>Performance Rating</label> <span id="p1-perfV">8.0</span></div>
+                <input type="range" id="p1-perf" min="0" max="10" step="0.1" value="8" oninput="updateUI()">
+            </div>
+            <div class="control">
+                <div class="control-header"><label>Injury Risk</label> <span id="p1-injV">0.10</span></div>
+                <input type="range" id="p1-inj" min="0" max="1" step="0.01" value="0.1" oninput="updateUI()">
+            </div>
+            <div class="control">
+                <div class="control-header"><label>Contract (Yrs)</label> <span id="p1-conV">3</span></div>
+                <input type="range" id="p1-con" min="0" max="5" step="0.5" value="3" oninput="updateUI()">
+            </div>
+        </div>
+
+        <div class="player-section" id="p2-section">
+            <h4>Player 2 (Pink)</h4>
+            <div class="control">
+                <div class="control-header"><label>Position</label></div>
+                <select id="p2-pos" onchange="updateUI()">
+                    <option value="FWD">FWD</option>
+                    <option value="MID" selected>MID</option>
+                    <option value="DEF">DEF</option>
+                    <option value="GK">GK</option>
+                </select>
+            </div>
+            <div class="control">
+                <div class="control-header"><label>Age</label> <span id="p2-ageV">26</span></div>
+                <input type="range" id="p2-age" min="16" max="40" value="26" oninput="updateUI()">
+            </div>
+            <div class="control">
+                <div class="control-header"><label>Performance Rating</label> <span id="p2-perfV">7.0</span></div>
+                <input type="range" id="p2-perf" min="0" max="10" step="0.1" value="7" oninput="updateUI()">
+            </div>
+            <div class="control">
+                <div class="control-header"><label>Injury Risk</label> <span id="p2-injV">0.20</span></div>
+                <input type="range" id="p2-inj" min="0" max="1" step="0.01" value="0.2" oninput="updateUI()">
+            </div>
+            <div class="control">
+                <div class="control-header"><label>Contract (Yrs)</label> <span id="p2-conV">2</span></div>
+                <input type="range" id="p2-con" min="0" max="5" step="0.5" value="2" oninput="updateUI()">
+            </div>
+        </div>
+
+        <button class="export-btn" onclick="downloadReport()">⬇ Export AI Report</button>
+    </div>
+
+    <div class="card">
+        <h3>🤖 AI Analysis</h3>
+        
+        <div class="badges-grid" id="badges-grid">
+            <div class="badge-card"><div class="badge-title">Market Tier</div><div class="badge-value" id="tier">-</div></div>
+            <div class="badge-card"><div class="badge-title">Career Stage</div><div class="badge-value" id="stage">-</div></div>
+            <div class="badge-card"><div class="badge-title">Investment Risk</div><div class="badge-value" id="risk">-</div></div>
+        </div>
+
+        <div class="charts-wrapper">
+            <div><canvas id="lineChart"></canvas></div>
+            <div><canvas id="radarChart"></canvas></div>
+        </div>
+
+        <div class="insight" id="insight"></div>
+    </div>
+</div>
+
+<script>
+    let compareMode = false;
+    let lineChart, radarChart;
+
+    // --- Toggle Single vs Dual Comparison Mode ---
+    function toggleCompare() {
+        compareMode = !compareMode;
+        document.getElementById('p2-section').style.display = compareMode ? 'block' : 'none';
+        
+        const btn = document.getElementById('compareBtn');
+        if(compareMode) {
+            btn.classList.add('active');
+            btn.innerText = "❌ Close Comparison";
+            document.getElementById('badges-grid').style.display = 'none'; // Hide badges in compare mode
+        } else {
+            btn.classList.remove('active');
+            btn.innerText = "Vs Compare Mode";
+            document.getElementById('badges-grid').style.display = 'grid';
+        }
+        updateUI();
+    }
+
+    // --- Initialize Chart.js Graphs ---
+    function initCharts() {
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.font.family = "'Inter', sans-serif";
+
+        lineChart = new Chart(document.getElementById('lineChart'), {
+            type: 'line',
+            data: {
+                labels: ['Now', 'Y1', 'Y2', 'Y3'],
+                datasets: [
+                    { label: 'Player 1', data: [0,0,0,0], borderColor: '#00f2fe', backgroundColor: 'rgba(0, 242, 254, 0.1)', borderWidth: 2, tension: 0.4, fill: true },
+                    { label: 'Player 2', data: [0,0,0,0], borderColor: '#ff007a', backgroundColor: 'rgba(255, 0, 122, 0.1)', borderWidth: 2, tension: 0.4, fill: true, hidden: true }
+                ]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+
+        radarChart = new Chart(document.getElementById('radarChart'), {
+            type: 'radar',
+            data: {
+                labels: ['Attack', 'Fitness', 'Hype', 'Defense'],
+                datasets: [
+                    { label: 'Player 1', data: [0,0,0,0], borderColor: '#00f2fe', backgroundColor: 'rgba(0, 242, 254, 0.2)', borderWidth: 2 },
+                    { label: 'Player 2', data: [0,0,0,0], borderColor: '#ff007a', backgroundColor: 'rgba(255, 0, 122, 0.2)', borderWidth: 2, hidden: true }
+                ]
+            },
+            options: { responsive: true, scales: { r: { angleLines: { color: '#1e293b' }, grid: { color: '#1e293b' }, ticks: { display: false } } }, plugins: { legend: { display: false } } }
+        });
+    }
+
+    // --- Fetch Data from Flask API & Update UI ---
+    function updateUI() {
+        const p1 = {
+            age: +document.getElementById('p1-age').value,
+            performance: +document.getElementById('p1-perf').value,
+            injury: +document.getElementById('p1-inj').value,
+            contract_years: +document.getElementById('p1-con').value,
+            position: document.getElementById('p1-pos').value,
+            sentiment: 0.5 
+        };
+
+        // Update raw values text on UI
+        document.getElementById('p1-ageV').innerText = p1.age;
+        document.getElementById('p1-perfV').innerText = p1.performance.toFixed(1);
+        document.getElementById('p1-injV').innerText = p1.injury.toFixed(2);
+        document.getElementById('p1-conV').innerText = p1.contract_years;
+
+        let payload = p1;
+
+        if (compareMode) {
+            const p2 = {
+                age: +document.getElementById('p2-age').value,
+                performance: +document.getElementById('p2-perf').value,
+                injury: +document.getElementById('p2-inj').value,
+                contract_years: +document.getElementById('p2-con').value,
+                position: document.getElementById('p2-pos').value,
+                sentiment: 0.5
+            };
+            
+            document.getElementById('p2-ageV').innerText = p2.age;
+            document.getElementById('p2-perfV').innerText = p2.performance.toFixed(1);
+            document.getElementById('p2-injV').innerText = p2.injury.toFixed(2);
+            document.getElementById('p2-conV').innerText = p2.contract_years;
+
+            payload = { player1: p1, player2: p2 };
+        }
+
+        fetch("http://127.0.0.1:5000/predict", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(data => {
+            const formatM = (val) => "€" + (val / 1000000).toFixed(1) + "M";
+
+            if (!compareMode) {
+                // Populate Single Player Stats
+                document.getElementById('price').innerText = formatM(data.value);
+                document.getElementById('confidence').innerText = `🎯 Confidence: ${data.confidence.toFixed(0)}%`;
+                document.getElementById('range').innerText = `📊 Range: ${formatM(data.low)} - ${formatM(data.high)}`;
+                document.getElementById('trend').innerText = `📈 Trend: ${data.trend}`;
+
+                document.getElementById('tier').innerHTML = data.tier;
+                document.getElementById('stage').innerHTML = data.stage;
+                document.getElementById('risk').innerHTML = data.risk;
+
+                document.getElementById('insight').innerHTML = `<strong>💡 AI Insight:</strong> ${data.explanation} <br><em>Best: ${formatM(data.best_scenario)} | Worst: ${formatM(data.worst_scenario)}</em>`;
+
+                lineChart.data.datasets[0].data = data.forecast;
+                lineChart.data.datasets[1].hidden = true;
+
+                let def1 = p1.position === 'DEF' || p1.position === 'GK' ? p1.performance * 10 : (1 - p1.injury) * 60;
+                let att1 = p1.position === 'FWD' || p1.position === 'MID' ? p1.performance * 10 : p1.performance * 5;
+                radarChart.data.datasets[0].data = [att1, (1 - p1.injury) * 100, 75, def1];
+                radarChart.data.datasets[1].hidden = true;
+
+            } else {
+                // Populate Comparison Stats
+                document.getElementById('price').innerHTML = `<span style="color:#00f2fe">${formatM(data.player1.value)}</span> <span style="font-size:2rem; color:#fff">vs</span> <span style="color:#ff007a">${formatM(data.player2.value)}</span>`;
+                document.getElementById('confidence').innerText = `⚖️ Value Gap: ${formatM(Math.abs(data.difference))}`;
+                document.getElementById('range').innerText = data.difference > 0 ? `📊 Player 1 is higher` : `📊 Player 2 is higher`;
+                document.getElementById('trend').innerText = ``;
+
+                document.getElementById('insight').innerHTML = `<strong>⚔️ Comparison Mode Active</strong> <br>Analyzing difference in Market Value based on Age, Performance, and Contract.`;
+
+                lineChart.data.datasets[0].data = data.player1.forecast;
+                lineChart.data.datasets[1].data = data.player2.forecast;
+                lineChart.data.datasets[1].hidden = false;
+
+                // Radar P1 Setup
+                let def1 = payload.player1.position === 'DEF' || payload.player1.position === 'GK' ? payload.player1.performance * 10 : (1 - payload.player1.injury) * 60;
+                let att1 = payload.player1.position === 'FWD' || payload.player1.position === 'MID' ? payload.player1.performance * 10 : payload.player1.performance * 5;
+                radarChart.data.datasets[0].data = [att1, (1 - payload.player1.injury) * 100, 75, def1];
+
+                // Radar P2 Setup
+                let def2 = payload.player2.position === 'DEF' || payload.player2.position === 'GK' ? payload.player2.performance * 10 : (1 - payload.player2.injury) * 60;
+                let att2 = payload.player2.position === 'FWD' || payload.player2.position === 'MID' ? payload.player2.performance * 10 : payload.player2.performance * 5;
+                radarChart.data.datasets[1].data = [att2, (1 - payload.player2.injury) * 100, 75, def2];
+                radarChart.data.datasets[1].hidden = false;
+            }
+
+            lineChart.update();
+            radarChart.update();
+            window.latestData = data;
+        });
+    }
+
+    // --- Export JSON Report ---
+    function downloadReport() {
+        if(!window.latestData) return;
+        const blob = new Blob([JSON.stringify(window.latestData, null, 2)], { type: "application/json" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `TransferIQ_Report.json`;
+        a.click();
+    }
+
+    window.onload = () => { initCharts(); updateUI(); };
+</script>
+
+</body>
+</html>
