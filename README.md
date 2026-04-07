@@ -82,13 +82,17 @@ Explainable AI Module
       ↓
 Dashboard Visualization (Chart.js)
 ```
+----
 ⚙️ How It Works
+```
 User inputs player attributes (age, performance, injury, sentiment)
 XGBoost predicts current transfer value
 LSTM analyzes temporal patterns for future forecasting
 Business logic adjusts realism (position, contract, age)
 Backend generates insights and explanations
 Frontend displays results interactively
+```
+----
 📊 Example Output
 💰 Current Value: €20.2M
 📉 Trend: Declining
@@ -109,7 +113,9 @@ Frontend displays results interactively
 | **NLP** | `NLTK (VADER)`, `TextBlob` |
 
 ----
+
 📁 Project Structure
+````
 TransferIQ/
 ├── Dataset/
 ├── Model/
@@ -120,6 +126,8 @@ TransferIQ/
 ├── transferiq_lstm.keras
 ├── transferiq_model.json
 └── requirements.txt
+````
+----
 🧪 Installation & Setup
 git clone https://github.com/your-username/TransferIQ-Pro.git
 cd TransferIQ-Pro
@@ -129,14 +137,15 @@ pip install -r requirements.txt
 python app.py
 
 👉 Open browser:
-
 http://127.0.0.1:5000
+
 🚀 Future Improvements
 Real-time API integration (Transfermarkt / FIFA datasets)
 Match-level time-series data for accurate LSTM training
 Advanced deep learning architectures
 Cloud deployment (AWS / GCP)
 Mobile responsive UI
+
 🤝 Contribution
 
 Contributions are welcome! Feel free to fork and improve the system.
