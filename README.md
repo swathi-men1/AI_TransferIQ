@@ -114,7 +114,7 @@ Dashboard Visualization (Chart.js)
 
 ----
 ## 📁 Project Structure
-
+```
 TransferIQ/
 ├── Dataset/
 │   ├── Cleaned_dataset.csv
@@ -142,6 +142,7 @@ TransferIQ/
 ├── transferiq_lstm.keras
 ├── transferiq_model.json
 └── requirements.txt
+```
 ----
 
 🧪 Installation & Setup
