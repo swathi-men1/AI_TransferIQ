@@ -113,21 +113,37 @@ Dashboard Visualization (Chart.js)
 | **NLP** | `NLTK (VADER)`, `TextBlob` |
 
 ----
+## 📁 Project Structure
 
-📁 Project Structure
-````
 TransferIQ/
 ├── Dataset/
+│   ├── Cleaned_dataset.csv
+│   ├── Final_raw_dataset.csv
+│   ├── Processed_Dataset.csv
+│   ├── only_sentiment_data.csv
+│   ├── player_injuries.csv
+│   └── transfermarkt_player_values.csv
 ├── Model/
+│   ├── X_lstm_data.npy
+│   ├── y_lstm_target.npy
+│   ├── encoder_decoder_lstm.keras
+│   ├── ensemble_model.pkl
+│   ├── lstm_model.keras
+│   ├── univariate_lstm_model.keras
+│   ├── xgb_model.pkl
+│   ├── lstm_prep_py.py
+│   ├── train_lstm_py.py
+│   └── train_xgboost_py.py
 ├── src/
+│   └── sentiment_analysis.py
 ├── templates/
 │   └── index.html
 ├── app.py
 ├── transferiq_lstm.keras
 ├── transferiq_model.json
 └── requirements.txt
-````
 ----
+
 🧪 Installation & Setup
 git clone https://github.com/swathi-men1/AI_TransferIQ.git
 cd TransferIQ-Pro
