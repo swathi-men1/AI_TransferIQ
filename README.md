@@ -20,6 +20,8 @@ Going a step further, it utilizes a Deep Learning **LSTM** neural network to for
 
 ### 📸 Dashboard Sneak Peek
 > *(Add your dashboard screenshot here)*
+> <img width="1355" height="641" alt="image" src="https://github.com/user-attachments/assets/ed6cc667-39d9-4f6e-bbee-416317662802" />
+
 > ![TransferIQ Dashboard Placeholder](https://via.placeholder.com/800x400?text=Dashboard+Screenshot+Here)
 
 ---
