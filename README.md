@@ -93,13 +93,13 @@ Dashboard Visualization (Chart.js)
 6. Frontend displays results interactively
 ```
 ----
-📊 Example Output
-💰 Current Value: €20.2M
-📉 Trend: Declining
-⚠️ Risk: Medium
-🏆 Tier: High
-🧬 Career Stage: Peak Player
-🤖 Insight: Balanced profile with moderate growth potential
+* 📊 Example Output
+* 💰 Current Value: €20.2M
+* 📉 Trend: Declining
+* ⚠️ Risk: Medium
+* 🏆 Tier: High
+* 🧬 Career Stage: Peak Player
+* 🤖 Insight: Balanced profile with moderate growth potential
 
 ----
 ## 🛠️ Tech Stack
@@ -129,7 +129,7 @@ TransferIQ/
 ````
 ----
 🧪 Installation & Setup
-git clone https://github.com/your-username/TransferIQ-Pro.git
+git clone https://github.com//TransferIQ-Pro.git
 cd TransferIQ-Pro
 
 pip install -r requirements.txt
@@ -139,14 +139,13 @@ python app.py
 👉 Open browser:
 http://127.0.0.1:5000
 
-🚀 Future Improvements
-```
-Real-time API integration (Transfermarkt / FIFA datasets)
-Match-level time-series data for accurate LSTM training
-Advanced deep learning architectures
-Cloud deployment (AWS / GCP)
-Mobile responsive UI
-```
+## 🚀 Future Improvements
+
+* 🔗 **Real-time API Integration:** Fetching live data from Transfermarkt or FIFA datasets.
+* ⏱️ **Match-Level Time-Series:** Utilizing granular match-by-match data for even more accurate LSTM training.
+* 🧠 **Advanced Deep Learning:** Exploring Transformer-based architectures for better sequential forecasting.
+* ☁️ **Cloud Deployment:** Scaling the Flask backend and models using AWS or Google Cloud Platform.
+* 📱 **Mobile Responsive UI:** Optimizing the Chart.js dashboard for seamless mobile and tablet viewing.
 
 🤝 Contribution
 
