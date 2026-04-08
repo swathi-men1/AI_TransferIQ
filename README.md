@@ -4,6 +4,11 @@ TransferIQ is an AI-driven football transfer valuation project that predicts pla
 
 The project combines feature engineering, time-series learning, ensemble modeling, evaluation reporting, and an interactive Streamlit dashboard in one end-to-end workflow. It is structured to support both academic evaluation and practical demonstration.
 
+## Live Demo
+
+- Live app: [https://transferiq-production.up.railway.app]
+
+
 ## Project Objective
 
 The goal of TransferIQ is to estimate transfer values in a more dynamic and data-driven way than static market heuristics. The system is designed to:
