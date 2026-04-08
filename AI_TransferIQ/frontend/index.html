@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TransferIQ | Football Valuation Workspace</title>
+    <meta name="description" content="TransferIQ is a football player valuation workspace for exploring projected market movement from scouting and performance inputs.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="topbar">
+            <a class="brand" href="#home" aria-label="TransferIQ home">
+                <span class="brand-mark">TIQ</span>
+                <span class="brand-copy">
+                    <strong>TransferIQ</strong>
+                    <small>Football valuation workspace</small>
+                </span>
+            </a>
+            <nav class="topnav" aria-label="Primary">
+                <a href="#workspace">Workspace</a>
+                <a href="#signals">Signals</a>
+                <a href="#process">Process</a>
+            </nav>
+        </header>
+
+        <main id="home">
+            <section class="hero">
+                <div class="hero-copy">
+                    <p class="eyebrow">Scouting support for transfer planning</p>
+                    <h1>Estimate where a player's market value could move next.</h1>
+                    <p class="hero-text">
+                        TransferIQ turns a small set of football and contract inputs into a projected market value so analysts,
+                        clubs, and student teams can test scenarios before making decisions.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#workspace">Open workspace</a>
+                        <a class="button button-secondary" href="#process">See how it works</a>
+                    </div>
+                    <ul class="hero-points">
+                        <li>Fast scenario testing for players across positions</li>
+                        <li>Readable output instead of raw model jargon</li>
+                        <li>Designed to work with the existing Flask prediction API</li>
+                    </ul>
+                </div>
+
+                <aside class="hero-panel">
+                    <div class="panel-card-accent">
+                        <div class="panel-label">Live board</div>
+                        <div class="board-grid">
+                            <article><span class="board-value">22</span><span class="board-label">model inputs</span></article>
+                            <article><span class="board-value">4</span><span class="board-label">positions mapped</span></article>
+                            <article><span class="board-value">1</span><span class="board-label">REST endpoint</span></article>
+                            <article><span class="board-value">~2s</span><span class="board-label">response feel</span></article>
+                        </div>
+                    </div>
+
+                    <div class="pulse-card">
+                        <div class="pulse-track">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="pulse-copy">
+                            <strong>Signal summary</strong>
+                            <p>Blend performance, contract length, minutes, and sentiment into one forecasted value snapshot.</p>
+                        </div>
+                    </div>
+                </aside>
+            </section>
+
+            <section class="workspace" id="workspace">
+                <div class="section-heading">
+                    <p class="eyebrow">Workspace</p>
+                    <h2>Run a valuation scenario</h2>
+                    <p>Enter the player profile, send it to the prediction service, and review the projected movement with a clearer result view.</p>
+                </div>
+
+                <div class="workspace-grid">
+                    <section class="composer">
+                        <form id="prediction-form" class="form-card">
+                            <div class="field field-full">
+                                <label for="player-name">Player name</label>
+                                <input type="text" id="player-name" placeholder="Jude Bellingham" required>
+                            </div>
+                            <div class="field">
+                                <label for="market-value">Current value (EUR millions)</label>
+                                <input type="number" id="market-value" min="0.1" step="0.1" value="65.0" required>
+                            </div>
+                            <div class="field">
+                                <label for="position">Position</label>
+                                <select id="position">
+                                    <option value="FW">Forward</option>
+                                    <option value="MF" selected>Midfielder</option>
+                                    <option value="DF">Defender</option>
+                                    <option value="GK">Goalkeeper</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="goals-assists">Goals + assists</label>
+                                <input type="number" id="goals-assists" min="0" step="1" value="18" required>
+                            </div>
+                            <div class="field">
+                                <label for="minutes-played">Minutes played</label>
+                                <input type="number" id="minutes-played" min="1" step="1" value="2450" required>
+                            </div>
+                            <div class="field field-full">
+                                <div class="label-row">
+                                    <label for="performance-rating">Performance rating</label>
+                                    <output id="perf-val" for="performance-rating">7.8 / 10</output>
+                                </div>
+                                <input type="range" id="performance-rating" min="10" max="100" value="78">
+                            </div>
+                            <div class="field">
+                                <label for="contract">Contract remaining (months)</label>
+                                <input type="number" id="contract" min="1" step="1" value="30">
+                            </div>
+                            <div class="field field-full">
+                                <div class="label-row">
+                                    <label for="sentiment">Sentiment score</label>
+                                    <output id="sent-val" for="sentiment">64%</output>
+                                </div>
+                                <input type="range" id="sentiment" min="0" max="100" value="64">
+                            </div>
+                            <button type="submit" class="button button-primary button-submit" id="predict-btn">
+                                <span class="btn-text">Calculate valuation</span>
+                                <span class="btn-loader" aria-hidden="true"></span>
+                            </button>
+                        </form>
+                    </section>
+
+                    <section class="results" aria-live="polite">
+                        <div class="result-card" id="result-display">
+                            <div class="result-empty" id="result-empty">
+                                <p class="result-kicker">Waiting for input</p>
+                                <h3>Forecast will appear here</h3>
+                                <p>Submit the form to review projected value, expected swing, stability classification, and supporting context.</p>
+                            </div>
+                            <div class="result-content hidden" id="iq-result">
+                                <div class="result-head">
+                                    <div>
+                                        <p class="result-kicker">Projected output</p>
+                                        <h3 id="res-player-name">Player</h3>
+                                    </div>
+                                    <span class="chip" id="result-chip">Model forecast</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-currency">EUR</span>
+                                    <span class="price-value" id="predicted-value">0.0</span>
+                                    <span class="price-unit">M</span>
+                                </div>
+                                <div class="trend-band" id="market-trend-indicator">
+                                    <span class="trend-arrow" id="trend-arrow">+</span>
+                                    <span class="trend-number" id="trend-val">0.0%</span>
+                                    <span class="trend-text" id="trend-text">No movement yet</span>
+                                </div>
+                                <div class="insight-grid">
+                                    <article><span>Risk profile</span><strong id="risk-val">Balanced</strong></article>
+                                    <article><span>Confidence signal</span><strong id="confidence-val">Model-ready</strong></article>
+                                    <article><span>Form per 90</span><strong id="form-output">0.00</strong></article>
+                                    <article><span>Scenario note</span><strong id="scenario-note">Baseline scenario</strong></article>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <section class="signals" id="signals">
+                <div class="section-heading">
+                    <p class="eyebrow">Core signals</p>
+                    <h2>What the model is reacting to</h2>
+                </div>
+                <div class="signal-grid">
+                    <article class="signal-card">
+                        <h3>Match output</h3>
+                        <p>Goals, assists, rating, and minutes combine into a compact picture of on-pitch contribution.</p>
+                    </article>
+                    <article class="signal-card">
+                        <h3>Contract pressure</h3>
+                        <p>Remaining contract length affects leverage, timing, and perceived negotiating range.</p>
+                    </article>
+                    <article class="signal-card">
+                        <h3>Market mood</h3>
+                        <p>Sentiment gives the forecast a public narrative layer instead of relying on performance only.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="process" id="process">
+                <div class="section-heading">
+                    <p class="eyebrow">Process</p>
+                    <h2>Simple flow from input to estimate</h2>
+                </div>
+                <div class="timeline">
+                    <article>
+                        <span>01</span>
+                        <h3>Profile the player</h3>
+                        <p>Capture value, position, production, minutes, sentiment, and contract horizon.</p>
+                    </article>
+                    <article>
+                        <span>02</span>
+                        <h3>Submit to the API</h3>
+                        <p>The frontend posts a clean JSON payload to the Flask `/predict` endpoint.</p>
+                    </article>
+                    <article>
+                        <span>03</span>
+                        <h3>Interpret the movement</h3>
+                        <p>The result view translates the response into valuation shift, risk posture, and scenario guidance.</p>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

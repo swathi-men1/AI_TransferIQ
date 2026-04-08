@@ -1,0 +1,13 @@
+flask
+flask-cors
+xgboost
+pandas
+numpy
+joblib
+scikit-learn
+statsbombpy
+seaborn
+textblob
+transformers
+vaderSentiment
+nltk
