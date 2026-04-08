@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Transfer IQ Dashboard</title>
+    <!-- Google Fonts for Modern Styling -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+
+    <div class="dashboard-container">
+        <!-- Sidebar Input Panel -->
+        <aside class="glass-panel input-panel">
+            <header class="logo-area">
+                <i class="fa-solid fa-brain glow-icon"></i>
+                <h2>AI Transfer IQ</h2>
+            </header>
+            <p class="subtitle">Predict Market Values with Deep Learning</p>
+
+            <form id="prediction-form">
+                <!-- Core Player Details -->
+                <div class="form-group">
+                    <label for="player_name">Player Name</label>
+                    <input type="text" id="player_name" name="player_name" placeholder="E.g., Jude Bellingham" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="position">Position</label>
+                    <div class="select-wrapper">
+                        <select id="position" name="position" required>
+                            <option value="Forward" selected>Forward</option>
+                            <option value="Midfielder">Midfielder</option>
+                            <option value="Defender">Defender</option>
+                            <option value="Goalkeeper">Goalkeeper</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <!-- Primary Metrics -->
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label for="performance_rating">Performance (1-10)</label>
+                        <input type="number" id="performance_rating" name="performance_rating" min="1" max="10" step="0.1" value="8.5" required>
+                    </div>
+                    <div class="form-group half-width">
+                        <label for="goals_assists">Goals/Assists</label>
+                        <input type="number" id="goals_assists" name="goals_assists" min="0" value="15" required>
+                    </div>
+                </div>
+
+                <!-- Secondary Metrics -->
+                <div class="form-group">
+                    <label for="prev_market_value">Prev. Market Value (€)</label>
+                    <input type="number" id="prev_market_value" name="prev_market_value" min="0" value="50000000" step="1000000" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label for="days_injured">Days Injured (Season)</label>
+                        <input type="number" id="days_injured" name="days_injured" min="0" value="10" required>
+                    </div>
+                    <div class="form-group half-width">
+                        <label for="social_sentiment_score">Social Sentiment (1-100)</label>
+                        <input type="number" id="social_sentiment_score" name="social_sentiment_score" min="1" max="100" value="85" required>
+                    </div>
+                </div>
+
+                <!-- Hidden inputs for backend requirements -->
+                <!-- We inject calculated dummy defaults to satisfy the PCA pipeline -->
+                <input type="hidden" id="contract_duration_months" name="contract_duration_months" value="36">
+                <input type="hidden" id="minutes_played" name="minutes_played" value="2500">
+
+                <button type="submit" class="primary-btn" id="predict-btn">
+                    <span class="btn-text">Run ML Pipeline</span>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <div class="loader hidden"></div>
+                </button>
+                <p class="form-hint">Advanced stats are auto-imputed.</p>
+            </form>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Initial State empty container / loader -->
+            <div id="welcome-state" class="center-content">
+                <i class="fa-solid fa-chart-line giant-icon"></i>
+                <h2>Awaiting Input Pipeline</h2>
+                <p>Enter player metrics and run the prediction models to generate a robust valuation ensemble.</p>
+            </div>
+
+            <!-- Dashboard Results (Hidden initially) -->
+            <div id="results-dashboard" class="glass-panel hidden">
+                <div class="dashboard-header">
+                    <div>
+                        <h3 id="res-player-name">Player Name</h3>
+                        <p id="res-position" class="badge">Position</p>
+                    </div>
+                    <div class="score-card main-score">
+                        <span>Final Transfer IQ Score</span>
+                        <h1 id="res-final-score" class="gradient-text">€0</h1>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <!-- Ensemble Card -->
+                    <div class="metric-card">
+                        <div class="card-icon"><i class="fa-solid fa-network-wired"></i></div>
+                        <div class="card-info">
+                            <h4>XGBoost Ensemble</h4>
+                            <p id="res-ensemble">€0</p>
+                            <small>Base prediction</small>
+                        </div>
+                    </div>
+
+                    <!-- Performance Forecast Card -->
+                    <div class="metric-card">
+                        <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="card-info">
+                            <h4>Performance Forecast</h4>
+                            <p id="res-lstm">€0</p>
+                            <small>LSTM Time-Series</small>
+                        </div>
+                    </div>
+
+                    <!-- Sentiment Forecast Card -->
+                    <div class="metric-card">
+                        <div class="card-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                        <div class="card-info">
+                            <h4>Sentiment Impact</h4>
+                            <p id="res-sentiment">€0</p>
+                            <small>VADER NLP Shift</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-Step Forecast Chart -->
+                <div class="chart-container">
+                    <h4>Multi-Step Forecast (Next 3 Windows)</h4>
+                    <canvas id="forecastChart"></canvas>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Main JavaScript Logic -->
+    <script src="script.js"></script>
+</body>
+</html>
