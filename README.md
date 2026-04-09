@@ -27,7 +27,8 @@ The system not only predicts a player’s **current market value** but also fore
 ---
 
 ## 📸 Dashboard Preview
-<img width="1355" height="641" alt="image" src="https://github.com/user-attachments/assets/3c4926c9-cfb9-48a1-acb6-88bd6c6c1060" />
+<img width="1350" height="641" alt="image" src="https://github.com/user-attachments/assets/6988dcb7-da53-4d3f-85d4-6fd15b617586" />
+
 
 ![Dashboard](./assets/dashboard.png)
 
@@ -136,8 +137,7 @@ TransferIQ/
 │   └── train_xgboost_py.py
 ├── src/
 │   └── sentiment_analysis.py
-├── templates/
-│   └── index.html
+├── index.html
 ├── app.py
 ├── transferiq_lstm.keras
 ├── transferiq_model.json
@@ -146,7 +146,7 @@ TransferIQ/
 ----
 
 🧪 Installation & Setup
-git clone https://github.com/swathi-men1/AI_TransferIQ.git
+git clone https://github.com/Ankit-298/TransferIQ-Pro
 cd TransferIQ-Pro
 
 pip install -r requirements.txt
@@ -155,6 +155,8 @@ python app.py
 
 👉 Open browser:
 http://127.0.0.1:5000
+
+Deployment Link:https://transferiq-pro.onrender.com/
 
 ## 🚀 Future Improvements
 
