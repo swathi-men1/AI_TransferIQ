@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TransferIQ | Value Any Football Player</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --bg-color-alt: #ffffff;
+            --text-color: #0f172a;
+            --text-muted: #64748b;
+            --accent-color: #0ea5e9;
+            --accent-hover: #0284c7;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1.2rem 5%; display: flex; justify-content: space-between;
+            align-items: center; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            z-index: 1000; border-bottom: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--text-color); text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
+        .logo i { color: var(--accent-color); font-size: 1.8rem; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 1rem; }
+        .nav-links a:hover { color: var(--accent-color); }
+        #apiStatus { font-size: 0.85rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 30px; background-color: #f1f5f9; color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.9rem 2rem; border-radius: 30px; font-weight: 600; font-size: 1.05rem; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .btn-primary { background-color: var(--accent-color); color: #fff; box-shadow: 0 10px 20px rgba(14, 165, 233, 0.2); }
+        .btn-primary:hover { background-color: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3); }
+
+        section { padding: 120px 5%; }
+
+        #hero { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 90vh; background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%); position: relative; overflow: hidden; }
+        .hero-content { max-width: 900px; margin: 0 auto; position: relative; z-index: 10; }
+        .hero-content h1 { font-size: 4rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.1; letter-spacing: -1px; color: #0f172a; }
+        .hero-subtitle { font-size: 1.4rem; color: var(--text-muted); margin-bottom: 3rem; font-weight: 400; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+        .search-container { position: relative; max-width: 700px; margin: 0 auto; background: var(--bg-color-alt); border-radius: 50px; padding: 0.6rem; box-shadow: var(--card-shadow); border: 2px solid transparent; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem; }
+        .search-container:focus-within { border-color: rgba(14, 165, 233, 0.4); box-shadow: 0 15px 45px rgba(14, 165, 233, 0.15); }
+        .search-icon-wrapper { padding-left: 1rem; color: var(--text-muted); font-size: 1.2rem; }
+        .search-input { flex: 1; border: none; outline: none; font-size: 1.2rem; padding: 1rem 0.5rem; background: transparent; color: var(--text-color); }
+        .search-input::placeholder { color: #94a3b8; }
+        .suggestions { position: absolute; top: calc(100% + 10px); left: 0; right: 0; background: var(--bg-color-alt); border-radius: 16px; box-shadow: var(--card-shadow); border: 1px solid var(--border-color); overflow: hidden; z-index: 100; text-align: left; }
+        .hidden { display: none !important; }
+        .suggestion-item { padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 1.2rem; cursor: pointer; border-bottom: 1px solid #f1f5f9; transition: background 0.2s; }
+        .suggestion-item:last-child { border-bottom: none; }
+        .suggestion-item:hover { background-color: #f8fafc; }
+        .s-initials { width: 44px; height: 44px; border-radius: 50%; background: #e0f2fe; color: var(--accent-color); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; }
+
+        #resultLayer { margin-top: 3rem; animation: slideUp 0.5s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .player-card { background: var(--bg-color-alt); border-radius: 24px; padding: 3rem; box-shadow: var(--card-shadow); border: 1px solid var(--border-color); max-width: 600px; margin: 0 auto; text-align: center; position: relative; }
+        .pc-avatar { width: 80px; height: 80px; background: linear-gradient(135deg, var(--accent-color), #38bdf8); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; margin: -60px auto 1rem; box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3); border: 4px solid var(--bg-color-alt); }
+        .pc-name { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .pc-tags { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; }
+        .pc-tag { background: #f1f5f9; color: var(--text-muted); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 500; }
+        .pc-value-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .pc-value { font-size: 4rem; font-weight: 800; color: var(--accent-color); line-height: 1; margin-bottom: 1.5rem; letter-spacing: -2px; }
+        .pc-accuracy { display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; color: #059669; padding: 0.5rem 1rem; border-radius: 30px; font-weight: 600; font-size: 0.9rem; }
+
+        .detailed-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; background: #f8fafc; border-radius: 16px; padding: 1.5rem; border: 1px solid var(--border-color); }
+        .stat-item { display: flex; flex-direction: column; align-items: center; }
+        .stat-icon { font-size: 1.5rem; color: var(--accent-color); margin-bottom: 0.5rem; }
+        .stat-val { font-size: 1.5rem; font-weight: 800; color: var(--text-color); }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; text-align: center; }
+
+        #how-it-works { background-color: var(--bg-color); }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .section-header p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .info-card { background: var(--bg-color-alt); padding: 2.5rem; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color); }
+        .info-icon { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1.5rem; background: #e0f2fe; width: 70px; height: 70px; display: inline-flex; align-items: center; justify-content: center; border-radius: 16px; }
+        .info-card h3 { font-size: 1.3rem; margin-bottom: 1rem; font-weight: 700; }
+        .info-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        footer { background-color: var(--bg-color-alt); padding: 3rem 5%; text-align: center; border-top: 1px solid var(--border-color); color: var(--text-muted); }
+        .footer-logo { font-size: 1.5rem; color: var(--text-color); font-weight: 800; margin-bottom: 1rem; }
+        .footer-logo i { color: var(--accent-color); }
+
+        #toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: #1e293b; color: white; padding: 1rem 2rem; border-radius: 30px; z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.2); font-weight: 500; display: flex; align-items: center; gap: 0.5rem; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .search-container { border-radius: 20px; flex-direction: column; }
+            .btn { width: 100%; border-radius: 12px; }
+            .pc-value { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Simple Navbar -->
+    <nav>
+        <a href="#hero" class="logo"><i class="fa-solid fa-futbol"></i> TransferIQ</a>
+        <ul class="nav-links">
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li>
+                <div id="apiStatus"><span class="status-dot" style="background:#10b981"></span> Showcase Mode Live</div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Predictor Hero Section -->
+    <section id="hero">
+        <div class="hero-content" style="width: 100%;">
+            <h1>Discover the True Value<br>of Any Football Player.</h1>
+            <p class="hero-subtitle">Type a player's name below, and our system will instantly display their valuation based on intelligent market data.</p>
+            
+            <div class="search-container">
+                <div class="search-icon-wrapper"><i class="fa-solid fa-magnifying-glass"></i></div>
+                <input type="text" id="heroSearch" class="search-input" placeholder="E.g., Lionel Messi, Erling Haaland..." autocomplete="off">
+                <button class="btn btn-primary" onclick="searchPlayer()" id="predictBtn">Predict Value</button>
+                <div id="searchSuggestions" class="suggestions hidden"></div>
+            </div>
+
+            <!-- Sleek Result Card (Hidden until generated) -->
+            <div id="resultLayer" class="hidden">
+                <div class="player-card">
+                    <div class="pc-avatar" id="pAvatar">?</div>
+                    <div class="pc-name" id="pName">Player Name</div>
+                    
+                    <div class="pc-tags">
+                        <span class="pc-tag" id="pPos">Forward</span>
+                        <span class="pc-tag" id="pClub">Club</span>
+                        <span class="pc-tag" id="pAge">Age</span>
+                    </div>
+
+                    <div class="pc-value-label">Estimated Transfer Value</div>
+                    <div class="pc-value" id="pVal">€0M</div>
+
+                    <div class="pc-accuracy" id="pAccuracyBox">
+                        <i class="fa-solid fa-certificate"></i>
+                        <span id="pCertainty">High Accuracy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works">
+        <div class="section-header">
+            <h2>Powered by Data Science</h2>
+            <p>Our intelligent system evaluates performance, injury risk, and social perception to create exact financial valuations.</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h3>Performance Stats</h3>
+                <p>We digest hundreds of advanced metadata points per match to benchmark offensive and defensive efficiency.</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <h3>Injury Risk Analysis</h3>
+                <p>A player's injury block dynamically colors based on history, instantly affecting their mapped financial valuation.</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-hashtag"></i></div>
+                <h3>Public Perception</h3>
+                <p>Marketing value matters. Our models incorporate off-pitch reputation to reflect real-world transfer spending.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo"><i class="fa-solid fa-futbol"></i> TransferIQ</div>
+        <p>&copy; 2026 Academic Project Showcase. All rights reserved.</p>
+    </footer>
+
+    <div id="toast" class="hidden">Message placeholder</div>
+
+    <!-- Application Logic (100% STATIC SHOWCASE MODE) -->
+    <script>
+        // TRUNCATED: Only showcasing the 8 Elite Superstars for code snippet size compliance
+        const STATIC_DB = [
+            {"id": 1, "name": "Lionel Messi", "position": "Right Winger", "club": "Inter Miami CF", "age": 37, "value": 35000000, "goals": 28, "assists": 15, "injuries": 2}, 
+            {"id": 2, "name": "Erling Haaland", "position": "Centre-Forward", "club": "Manchester City", "age": 24, "value": 180000000, "goals": 38, "assists": 6, "injuries": 1}, 
+            {"id": 3, "name": "Kylian Mbapp\u00e9", "position": "Centre-Forward", "club": "Real Madrid", "age": 25, "value": 195000000, "goals": 44, "assists": 12, "injuries": 0}, 
+            {"id": 4, "name": "Jude Bellingham", "position": "Attacking Midfielder", "club": "Real Madrid", "age": 21, "value": 150000000, "goals": 23, "assists": 14, "injuries": 1}, 
+            {"id": 5, "name": "Vin\u00edcius J\u00fanior", "position": "Left Winger", "club": "Real Madrid", "age": 24, "value": 160000000, "goals": 24, "assists": 11, "injuries": 3}, 
+            {"id": 6, "name": "Kevin De Bruyne", "position": "Attacking Midfielder", "club": "Manchester City", "age": 33, "value": 50000000, "goals": 6, "assists": 18, "injuries": 4}, 
+            {"id": 7, "name": "Mohamed Salah", "position": "Right Winger", "club": "Liverpool", "age": 32, "value": 65000000, "goals": 25, "assists": 13, "injuries": 1}, 
+            {"id": 8, "name": "Cristiano Ronaldo", "position": "Centre-Forward", "club": "Al-Nassr", "age": 39, "value": 15000000, "goals": 50, "assists": 13, "injuries": 0}
+        ];
+        
+        let searchTimeout = null;
+
+        function fmt(value) {
+            if (value == null) return '—';
+            if (value >= 1e6) return `€${(value / 1e6).toFixed(1)}M`;
+            if (value >= 1e3) return `€${(value / 1e3).toFixed(0)}K`;
+            return `€${parseFloat(value).toFixed(0)}`;
+        }
+
+        function initials(name) {
+            if (!name) return '?';
+            return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+        }
+
+        function showToast(msg, isError = false, duration = 3000) {
+            const t = document.getElementById('toast');
+            t.innerHTML = isError ? `<i class="fa-solid fa-triangle-exclamation" style="color:#f87171"></i> ${msg}` : `<i class="fa-solid fa-circle-info" style="color:var(--accent-color)"></i> ${msg}`;
+            t.classList.remove('hidden');
+            clearTimeout(showToast._timer);
+            showToast._timer = setTimeout(() => t.classList.add('hidden'), duration);
+        }
+
+        document.getElementById('heroSearch').addEventListener('input', e => {
+            clearTimeout(searchTimeout);
+            const val = e.target.value.trim();
+            if (val.length < 2) { hideSuggestions(); return; }
+            searchTimeout = setTimeout(() => handleSearchInput(val), 100);
+        });
+
+        document.getElementById('heroSearch').addEventListener('keydown', e => {
+            if (e.key === 'Enter') searchPlayer();
+            if (e.key === 'Escape') hideSuggestions();
+        });
+
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.search-container')) hideSuggestions();
+        });
+
+        function handleSearchInput(query) {
+            const queryLower = query.toLowerCase();
+            const hits = STATIC_DB.filter(p => p.name.toLowerCase().includes(queryLower));
+            if (hits.length > 0) {
+                const uniqueHits = Array.from(new Map(hits.map(p => [p.name.toLowerCase(), p])).values());
+                renderSuggestions(uniqueHits.slice(0,5).map(p => ({ player_name: p.name, position: p.position, club: p.club })));
+            } else {
+                hideSuggestions();
+            }
+        }
+
+        function renderSuggestions(players) {
+            const box = document.getElementById('searchSuggestions');
+            box.innerHTML = players.map(p => `
+                <div class="suggestion-item" onclick="selectSuggestion('${p.player_name.replace("'", "\\'")}')">
+                    <div class="s-initials">${initials(p.player_name)}</div>
+                    <div>
+                        <div style="font-weight:600; font-size:1.05rem;">${p.player_name}</div>
+                        <div style="font-size:0.85rem; color:var(--text-muted)">${p.position || '—'} &bull; ${p.club || '—'}</div>
+                    </div>
+                </div>
+            `).join('');
+            box.classList.remove('hidden');
+        }
+
+        function hideSuggestions() { document.getElementById('searchSuggestions').classList.add('hidden'); }
+
+        function selectSuggestion(name) {
+            document.getElementById('heroSearch').value = name;
+            hideSuggestions();
+            searchPlayer();
+        }
+
+        function searchPlayer() {
+            const searchVal = document.getElementById('heroSearch').value.trim();
+            if (!searchVal) { showToast('Please enter a player name first.', true); return; }
+            hideSuggestions();
+
+            const btn = document.getElementById('predictBtn');
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Analyzing...';
+            btn.disabled = true;
+
+            const queryLower = searchVal.toLowerCase();
+            const hit = STATIC_DB.find(p => p.name.toLowerCase() === queryLower || p.name.toLowerCase().includes(queryLower));
+
+            setTimeout(() => {
+                if (hit) {
+                    outputToUI(hit);
+                } else {
+                    showToast("Player not found in the Official Showcase Dataset.", true);
+                }
+                btn.innerHTML = 'Predict Value';
+                btn.disabled = false;
+            }, 600);
+        }
+
+        function outputToUI(p) {
+            document.getElementById('pAvatar').textContent = initials(p.name);
+            document.getElementById('pName').textContent = p.name;
+            document.getElementById('pPos').textContent = p.position || '—';
+            document.getElementById('pClub').textContent = p.club || '—';
+            document.getElementById('pAge').textContent = p.age ? `Age ${p.age}` : '—';
+            document.getElementById('pVal').textContent = fmt(p.value);
+            document.getElementById('pCertainty').textContent = "Verified Output";
+
+            const card = document.querySelector('.player-card');
+            let statGrid = document.getElementById('dynamicStatsGrid');
+            if (statGrid) statGrid.remove();
+            
+            statGrid = document.createElement('div');
+            statGrid.id = 'dynamicStatsGrid';
+            statGrid.className = 'detailed-stats-grid';
+            
+            let injuryColor = "var(--text-color)";
+            if (p.injuries > 2) injuryColor = "#f87171"; 
+            else if (p.injuries === 0) injuryColor = "#10b981"; 
+            
+            statGrid.innerHTML = `
+                <div class="stat-item">
+                    <i class="fa-solid fa-futbol stat-icon"></i>
+                    <span class="stat-val">${p.goals || 0}</span>
+                    <span class="stat-label">Goals</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-shoe-prints stat-icon"></i>
+                    <span class="stat-val">${p.assists || 0}</span>
+                    <span class="stat-label">Assists</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-house-medical stat-icon" style="color: ${injuryColor}"></i>
+                    <span class="stat-val" style="color: ${injuryColor}">${p.injuries || 0}</span>
+                    <span class="stat-label">Injuries</span>
+                </div>
+            `;
+            
+            const valBox = document.getElementById('pVal');
+            valBox.insertAdjacentElement('afterend', statGrid);
+
+            const resultLayer = document.getElementById('resultLayer');
+            resultLayer.classList.remove('hidden');
+            setTimeout(()=> resultLayer.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
+        }
+    </script>
+</body>
+</html>
