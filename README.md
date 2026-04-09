@@ -2,6 +2,7 @@
 
 A complete data analytics and machine learning project to estimate IPL player auction values, inspect player performance, compare players, analyze value-for-money picks, and run cricket-specific sentiment analysis.
 
+
 ## 1. Project Overview
 
 The IPL auction process involves large financial decisions under uncertainty. Teams must evaluate players across batting, bowling, experience, and previous auction history while balancing budgets.
