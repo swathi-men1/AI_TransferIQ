@@ -71,7 +71,7 @@ Click any player card to open a detailed modal showing the AI-predicted transfer
 
 Configure a custom player profile using sliders and dropdowns. Ridge Regression model returns an instant prediction with statistics visualization.
 
-![Transfer Value Predictor](outputs/screenshots/screenshot_predictor.png)
+![Transfer Value Predictor](https://github.com/swathi-men1/AI_TransferIQ/blob/f5c73dfd12453a515a252b6c5ab45b01d01f7cca/outputs/screenshots/3.png)
 
 **Inputs used in example:**
 - Position: Midfielder · Career Stage: Prime (26–29)
