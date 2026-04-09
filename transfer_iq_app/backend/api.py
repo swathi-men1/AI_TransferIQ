@@ -72,6 +72,6 @@ def predict_endpoint(request: PredictRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    print("Starting Transfer IQ API server...")
+    print("Starting Transfer IQ API server....")
     print("Visit http://localhost:8000/docs for API documentation")
     uvicorn.run(app, host="0.0.0.0", port=8000)
