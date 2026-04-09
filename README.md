@@ -112,8 +112,8 @@ Configure a custom player profile using sliders and dropdowns. Ridge Regression 
 | Sentiment Score | Slider | -0.70 to +0.90 |
 
 **Output includes:**
-- Predicted Transfer Value in €M (Ridge Regression)
-- Top X% ranking among all 1,034 players
+- Predicted Transfer Value in €M 
+- Top X% ranking among all players
 - Statistics bars: OVA Rating, Performance, Potential, Availability, Sentiment, Contract Value
 - Key Insights: age factor label, injury impact, sentiment effect
 
