@@ -58,7 +58,7 @@ Browse all **1,034 players** with live search, multi-filter, and sort. Each card
 
 Click any player card to open a detailed modal showing the AI-predicted transfer value vs actual market value, plus full stat bars.
 
-![Player Modal](outputs/screenshots/screenshot_player_modal.png)
+![Player Modal](https://github.com/swathi-men1/AI_TransferIQ/blob/04941a0efce275d7a8c578bf8d617a599a03da98/outputs/screenshots/2.png)
 
 **Shown for Bruno Fernandes:**
 - AI Predicted: **€127.3M** vs Actual: **€90.0M** (+€37.3M over actual)
