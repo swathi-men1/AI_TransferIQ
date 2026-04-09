@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TransferIQ Pro - AI Football Valuation</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg: #060810;
+            --surface: #0c1120;
+            --surface-dark: #080c18;
+            --border: #1e2848;
+            --accent: #4d87ff;
+            --accent-alt: #f5a321;
+            --text: #edf2ff;
+            --text-muted: #8aa0cc;
+            --success: #3dba7a;
+            --warning: #fbbf24;
+            --danger: #f36969;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #060810;
+            background-image:
+                radial-gradient(ellipse 65% 55% at 8% 0%, rgba(77, 135, 255, 0.18) 0%, transparent 100%),
+                radial-gradient(ellipse 55% 65% at 92% 100%, rgba(245, 163, 33, 0.1) 0%, transparent 100%),
+                radial-gradient(ellipse 35% 40% at 75% 5%, rgba(110, 70, 255, 0.1) 0%, transparent 100%),
+                repeating-linear-gradient(rgba(255, 255, 255, 0.022) 0px, rgba(255, 255, 255, 0.022) 1px, transparent 1px, transparent 44px),
+                repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.022) 0px, rgba(255, 255, 255, 0.022) 1px, transparent 1px, transparent 44px);
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .navbar {
+            background: rgba(6, 8, 16, 0.85);
+            padding: 12px 32px;
+            border-bottom: 1px solid rgba(77, 135, 255, 0.12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #93b8ff, #4d87ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .ai-verdict {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .ai-verdict.buy {
+            background: rgba(61, 186, 122, 0.1);
+            border-color: rgba(61, 186, 122, 0.3);
+            box-shadow: 0 4px 20px rgba(61, 186, 122, 0.1);
+        }
+
+        .ai-verdict.buy .v-title { color: var(--success); }
+
+        .ai-verdict.hold {
+            background: rgba(245, 163, 33, 0.08);
+            border-color: rgba(245, 163, 33, 0.3);
+            box-shadow: 0 4px 20px rgba(245, 163, 33, 0.08);
+        }
+
+        .ai-verdict.hold .v-title { color: var(--warning); }
+
+        .ai-verdict.pass {
+            background: rgba(243, 105, 105, 0.08);
+            border-color: rgba(243, 105, 105, 0.3);
+            box-shadow: 0 4px 20px rgba(243, 105, 105, 0.08);
+        }
+
+        .ai-verdict.pass .v-title { color: var(--danger); }
+
+        .market-ticker {
+            background: var(--surface-dark);
+            border-bottom: 1px solid var(--border);
+            padding: 8px 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            z-index: 100;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            animation: ticker 40s linear infinite;
+        }
+
+        .ticker-content span { margin-right: 50px; }
+        .ticker-positive { color: var(--success); font-weight: 600; }
+        .ticker-negative { color: var(--danger); font-weight: 600; }
+        .ticker-neutral { color: var(--accent-alt); font-weight: 600; }
+
+        @keyframes ticker {
+            0% { transform: translateX(10%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .tabs { display: flex; gap: 6px; }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: #7a90b8;
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-bottom: 2px solid transparent;
+            transition: 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab-btn:hover { color: #c8d8ff; }
+
+        .tab-btn.active {
+            color: #ffffff;
+            border-bottom-color: var(--accent);
+            font-weight: 600;
+            text-shadow: 0 0 12px rgba(77, 135, 255, 0.4);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 24px;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.35s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1.8fr; gap: 20px; }
+        .grid-half { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-full { display: grid; grid-template-columns: 1fr; gap: 18px; }
+
+        .card {
+            background: rgba(10, 15, 28, 0.72);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(77, 135, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(77, 135, 255, 0.12);
+            background: rgba(12, 18, 34, 0.8);
+        }
+
+        h3 {
+            margin-top: 0;
+            color: #f0f5ff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            letter-spacing: 0.2px;
+        }
+
+        .control { margin-bottom: 14px; }
+        .control-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type=range] {
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--surface-dark), var(--border));
+            -webkit-appearance: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4d87ff, #2d67e8);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(77, 135, 255, 0.4);
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            background: var(--surface-dark);
+            color: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            transition: 0.3s ease;
+        }
+
+        select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(77, 135, 255, 0.15);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #4d87ff, #2d67e8);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(77, 135, 255, 0.4);
+        }
+
+        .price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 10px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .forecast-text { font-size: 0.85rem; color: var(--text-muted); margin: 10px 0; }
+        .forecast-values { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+        .forecast-item { background: var(--surface-dark); padding: 10px; border-radius: 6px; border: 1px solid var(--border); font-size: 0.85rem; }
+        .forecast-item strong { color: var(--accent); display: block; font-size: 1rem; }
+
+        .scenario-box { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+        .scenario { background: var(--surface-dark); padding: 12px; border-radius: 6px; border-left: 3px solid var(--accent); font-size: 0.8rem; }
+        .scenario.worst { border-left-color: var(--danger); }
+        .scenario-label { color: var(--text-muted); font-size: 0.75rem; }
+        .scenario-value { color: var(--text); font-weight: 600; font-size: 0.95rem; margin-top: 4px; }
+
+        .pct-change { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; margin-top: 8px; }
+        .pct-change.positive { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+        .pct-change.negative { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+
+        .ai-insight-box {
+            background: rgba(77, 135, 255, 0.07);
+            border-left: 3px solid var(--accent);
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            line-height: 1.6;
+        }
+
+        .badges { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        .badge { padding: 14px; background: var(--surface-dark); border-radius: 8px; border: 1px solid var(--border); text-align: center; transition: 0.3s ease; }
+        .badge:hover { border-color: var(--accent); }
+        .badge span { display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; }
+        .badge strong { font-size: 1.1rem; color: #fff; margin-top: 4px; display: block; }
+
+        .chart-container { position: relative; height: 240px; margin-top: 16px; }
+        .chart-container.tall { height: 280px; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.82rem; }
+        thead { background: var(--surface-dark); }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { color: var(--accent); font-weight: 600; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.3px; }
+        tbody tr { transition: 0.2s ease; }
+        tbody tr:hover { background: rgba(77, 135, 255, 0.06); }
+        .value-cell { color: var(--accent); font-weight: 600; }
+        .tier-cell { display: inline-block; padding: 4px 8px; border-radius: 4px; background: var(--surface-dark); font-size: 0.8rem; font-weight: 600; }
+
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-group .btn { flex: 1; }
+        .btn-secondary { background: var(--surface-dark); color: var(--accent); border: 1px solid var(--accent); }
+        .btn-secondary:hover { background: rgba(77, 135, 255, 0.12); }
+
+        .bulk-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+        .summary-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 14px; }
+        .summary-card span { display: block; color: var(--text-muted); font-size: 0.75rem; margin-bottom: 6px; }
+        .summary-card strong { font-size: 1.2rem; color: #fff; display: block; }
+
+        .bulk-spinner { display: inline-flex; align-items: center; gap: 10px; color: var(--accent); font-size: 0.95rem; margin-top: 14px; }
+        .bulk-spinner::before {
+            content: ''; width: 16px; height: 16px; border: 3px solid rgba(77, 135, 255, 0.2);
+            border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        tbody tr.top-player { background: rgba(16, 185, 129, 0.12); }
+        .comparison-winner { font-size: 1.2rem; font-weight: 700; margin: 14px 0; text-align: center; color: var(--accent); }
+
+        .compare-player-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+        .compare-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 700; flex-shrink: 0; }
+        .compare-avatar.a { background: linear-gradient(135deg, rgba(77, 135, 255, 0.22), rgba(77, 135, 255, 0.06)); border: 2px solid #4d87ff; color: #4d87ff; }
+        .compare-avatar.b { background: linear-gradient(135deg, rgba(245, 163, 33, 0.22), rgba(245, 163, 33, 0.06)); border: 2px solid #f5a321; color: #f5a321; }
+
+        .stat-duel { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+        .stat-duel-label { width: 90px; text-align: center; font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; flex-shrink: 0; }
+        .stat-bar-wrap { flex: 1; background: var(--surface-dark); border-radius: 6px; height: 8px; overflow: hidden; }
+        .stat-bar-a { height: 100%; border-radius: 6px; background: linear-gradient(90deg, #4d87ff, #1a5cd6); transition: width 0.8s ease; }
+        .stat-bar-b { height: 100%; border-radius: 6px 0 0 6px; background: linear-gradient(270deg, #f5a321, #d4800a); margin-left: auto; transition: width 0.8s ease; }
+        .stat-bar-wrap.b { transform: scaleX(-1); }
+
+        .stat-val-a { width: 50px; text-align: right; font-size: 0.8rem; font-weight: 600; color: #4d87ff; flex-shrink: 0; }
+        .stat-val-b { width: 50px; text-align: left; font-size: 0.8rem; font-weight: 600; color: #f5a321; flex-shrink: 0; }
+        .stat-duel-center { display: flex; flex-direction: column; align-items: center; min-width: 100px; flex-shrink: 0; }
+        .compare-vs-badge { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); padding: 8px 18px; border-radius: 20px; font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+
+        .winner-chip { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+        .winner-chip.a { background: rgba(77, 135, 255, 0.18); color: #4d87ff; border: 1px solid rgba(77, 135, 255, 0.4); }
+        .winner-chip.b { background: rgba(245, 163, 33, 0.18); color: #f5a321; border: 1px solid rgba(245, 163, 33, 0.4); }
+        .winner-chip.tie { background: rgba(251, 191, 36, 0.12); color: var(--warning); border: 1px solid rgba(251, 191, 36, 0.3); }
+
+        .file-upload-wrapper { position: relative; width: 100%; padding: 24px; border: 2px dashed var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; background: rgba(0, 0, 0, 0.2); text-align: center; }
+        .file-upload-wrapper:hover { border-color: var(--accent); background: rgba(0, 217, 255, 0.05); }
+        .file-upload-wrapper input[type=file] { position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; }
+        .file-upload-text { color: var(--text); font-size: 1rem; font-weight: 600; }
+        .file-upload-subtext { display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: normal; margin-top: 8px; }
+
+        .toast {
+            background: rgba(21, 29, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-left: 4px solid var(--accent);
+            color: #fff;
+            padding: 16px 20px;
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 280px;
+            opacity: 1;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .toast.hide { opacity: 0; transform: translateX(20px); }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .animated-row { animation: rowFadeIn 0.4s ease forwards; opacity: 0; transform: translateY(10px); }
+
+        @keyframes rowFadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1024px) {
+            .grid-2, .grid-half { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">⚽ TransferIQ Pro</div>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'lab')">🧪 Player Lab</button>
+            <button class="tab-btn" onclick="switchTab(event, 'compare')">⚔️ Compare Mode</button>
+            <button class="tab-btn" onclick="switchTab(event, 'bulk')">📦 Data Scan</button>
+            <button class="tab-btn" onclick="switchTab(event, 'insights')">📊 Model Insights</button>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div id="lab" class="tab-content active">
+            <div class="grid-2">
+                <div class="card">
+                    <h3>🎯 Target Profile</h3>
+                    <div class="control">
+                        <div class="control-header"><span>Age</span><span id="l-ageV">24</span></div>
+                        <input type="range" id="l-age" min="16" max="40" value="24" oninput="runLab()">
+                    </div>
+                    <div class="control">
+                        <div class="control-header"><span>Position</span><span id="l-posV">MID</span></div>
+                        <select id="l-pos" onchange="runLab()">
+                            <option value="FWD">⚽ Forward (FWD)</option>
+                            <option value="MID" selected>🔄 Midfielder (MID)</option>
+                            <option value="DEF">🛡️ Defender (DEF)</option>
+                            <option value="GK">🧤 Goalkeeper (GK)</option>
+                        </select>
+                    </div>
+                    <div class="control">
+                        <div class="control-header"><span>Goals</span><span id="l-goalsV">15</span></div>
+                        <input type="range" id="l-goals" min="0" max="60" step="1" value="15" oninput="updatePerfFromStats()">
+                    </div>
+                    <div class="control">
+                        <div class="control-header"><span>Assists</span><span id="l-assistsV">8</span></div>
+                        <input type="range" id="l-assists" min="0" max="30" step="1" value="8" oninput="updatePerfFromStats()">
+                    </div>
+                    <div class="control">
+                        <div class="control-header"><span>Performance</span><span id="l-perfV">8.0</span></div>
+                        <input type="range" id="l-perf" min="0" max="10" step="0.1" value="8" oninput="runLab()">
+                    </div>
+                    <div class="control">
+                        <div class="control-header"><span>Injury Risk</span><span id="l-injV">0.10</span></div>
+                        <input type="range" id="l-inj" min="0" max="1" step="0.01" value="0.1" oninput="runLab()">
+                    </div>
+                    <div class="control">
+                        <div class="control-header"><span>Public Sentiment</span><span id="l-senV">0.50</span></div>
+                        <input type="range" id="l-sen" min="-1" max="1" step="0.01" value="0.5" oninput="runLab()">
+                    </div>
+                    <div class="control">
+                        <div class="control-header"><span>Contract Years</span><span id="l-contV">3</span></div>
+                        <input type="range" id="l-cont" min="1" max="5" step="1" value="3" oninput="runLab()">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>💎 Valuation Result</h3>
+                    <div class="price" id="lab-price">€0</div>
+                    <div style="display:flex; align-items:center; gap:10px; margin: -4px 0 10px 0;">
+                        <span style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.6px;">≈</span>
+                        <span id="lab-price-inr" style="font-size:1.1rem; font-weight:600; color:var(--accent-alt); letter-spacing:-0.3px;">₹0 Cr</span>
+                        <span style="font-size:0.65rem; color:var(--text-muted); background:rgba(245,163,33,0.08); border:1px solid rgba(245,163,33,0.2); padding:2px 7px; border-radius:10px;">INR</span>
+                    </div>
+
+                    <div class="forecast-text">
+                        <strong>Career Stage:</strong> <span id="lab-stage">-</span> |
+                        <strong>Trend:</strong> <span id="lab-trend">-</span>
+                    </div>
+
+                    <div class="badges">
+                        <div class="badge"><span>Confidence</span><strong id="lab-conf">-</strong></div>
+                        <div class="badge"><span>Risk Level</span><strong id="lab-risk">-</strong></div>
+                        <div class="badge"><span>Market Tier</span><strong id="lab-tier">-</strong></div>
+                        <div class="badge"><span>3-Yr Change</span><strong id="lab-pct">-</strong></div>
+                    </div>
+
+                    <h3 style="margin-top: 25px; margin-bottom: 15px;">📈 3-Year Forecast</h3>
+                    <div class="forecast-values">
+                        <div class="forecast-item"><span>Year 1</span><strong id="lab-y1">€0</strong></div>
+                        <div class="forecast-item"><span>Year 2</span><strong id="lab-y2">€0</strong></div>
+                        <div class="forecast-item"><span>Year 3</span><strong id="lab-y3">€0</strong></div>
+                        <div class="forecast-item"><span>Year 4</span><strong id="lab-y4">€0</strong></div>
+                    </div>
+
+                    <h3 style="margin-top: 25px; margin-bottom: 15px;">🎯 Scenarios</h3>
+                    <div class="scenario-box">
+                        <div class="scenario"><div class="scenario-label">BEST CASE</div><div class="scenario-value" id="lab-best">€0</div></div>
+                        <div class="scenario worst"><div class="scenario-label">WORST CASE</div><div class="scenario-value" id="lab-worst">€0</div></div>
+                    </div>
+
+                    <div class="ai-insight-box">
+                        <strong>🤖 AI Insight:</strong> <span id="lab-insight">...</span>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="labForecast"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="labRadar"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="compare" class="tab-content">
+            <div class="grid-half">
+                <div class="card" style="border-top: 3px solid #4d87ff;">
+                    <h3>👤 <span id="ca-name-label">Player A</span></h3>
+                    <div class="control"><div class="control-header"><span>Age</span><span id="ca-ageV">22</span></div><input type="range" id="ca-age" min="16" max="40" value="22" oninput="runCompare()"></div>
+                    <div class="control">
+                        <div class="control-header"><span>Position</span><span id="ca-posV">FWD</span></div>
+                        <select id="ca-pos" onchange="runCompare()">
+                            <option value="FWD" selected>⚽ Forward</option>
+                            <option value="MID">🔄 Midfielder</option>
+                            <option value="DEF">🛡️ Defender</option>
+                            <option value="GK">🧤 Goalkeeper</option>
+                        </select>
+                    </div>
+                    <div class="control"><div class="control-header"><span>Performance</span><span id="ca-perfV">9.0</span></div><input type="range" id="ca-perf" min="0" max="10" step="0.1" value="9" oninput="runCompare()"></div>
+                    <div class="control"><div class="control-header"><span>Injury Risk</span><span id="ca-injV">0.10</span></div><input type="range" id="ca-inj" min="0" max="1" step="0.01" value="0.1" oninput="runCompare()"></div>
+                    <div class="control"><div class="control-header"><span>Contract Years</span><span id="ca-contV">4</span></div><input type="range" id="ca-cont" min="1" max="5" step="1" value="4" oninput="runCompare()"></div>
+                    <div style="background: linear-gradient(135deg, rgba(77,135,255,0.1), rgba(77,135,255,0.02)); border: 1px solid rgba(77,135,255,0.25); padding: 14px; border-radius: 10px; margin-top: 10px; text-align: center;">
+                        <div style="color: var(--text-muted); font-size: 0.72rem; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Market Value</div>
+                        <div class="price" id="ca-value" style="font-size: 1.8rem; color: #4d87ff;">€0</div>
+                    </div>
+                </div>
+
+                <div class="card" style="border-top: 3px solid #f5a321;">
+                    <h3>👤 <span id="cb-name-label">Player B</span></h3>
+                    <div class="control"><div class="control-header"><span>Age</span><span id="cb-ageV">28</span></div><input type="range" id="cb-age" min="16" max="40" value="28" oninput="runCompare()"></div>
+                    <div class="control">
+                        <div class="control-header"><span>Position</span><span id="cb-posV">MID</span></div>
+                        <select id="cb-pos" onchange="runCompare()">
+                            <option value="FWD">⚽ Forward</option>
+                            <option value="MID" selected>🔄 Midfielder</option>
+                            <option value="DEF">🛡️ Defender</option>
+                            <option value="GK">🧤 Goalkeeper</option>
+                        </select>
+                    </div>
+                    <div class="control"><div class="control-header"><span>Performance</span><span id="cb-perfV">8.5</span></div><input type="range" id="cb-perf" min="0" max="10" step="0.1" value="8.5" oninput="runCompare()"></div>
+                    <div class="control"><div class="control-header"><span>Injury Risk</span><span id="cb-injV">0.30</span></div><input type="range" id="cb-inj" min="0" max="1" step="0.01" value="0.3" oninput="runCompare()"></div>
+                    <div class="control"><div class="control-header"><span>Contract Years</span><span id="cb-contV">2</span></div><input type="range" id="cb-cont" min="1" max="5" step="1" value="2" oninput="runCompare()"></div>
+                    <div style="background: linear-gradient(135deg, rgba(245,163,33,0.1), rgba(245,163,33,0.02)); border: 1px solid rgba(245,163,33,0.25); padding: 14px; border-radius: 10px; margin-top: 10px; text-align: center;">
+                        <div style="color: var(--text-muted); font-size: 0.72rem; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Market Value</div>
+                        <div class="price" id="cb-value" style="font-size: 1.8rem; color: #f5a321;">€0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 18px;">
+                <h3>⚔️ Head-to-Head Analysis</h3>
+                <div style="display:flex; align-items:center; justify-content:center; gap:14px; background: linear-gradient(135deg, rgba(77,135,255,0.08), rgba(245,163,33,0.05)); border: 1px solid var(--border); border-radius: 10px; padding: 14px 20px; margin-bottom: 16px;">
+                    <div style="text-align:right; flex:1;">
+                        <div style="font-size:0.75rem; color:#4d87ff; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;" id="label-banner-a">Player A</div>
+                        <div class="price" id="ca-value-disp" style="font-size:1.4rem; color:#4d87ff; margin:4px 0;">€0</div>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                        <div class="comparison-winner" id="compare-winner" style="margin:0; font-size:1rem;">VS</div>
+                        <div id="compare-winner-chip" class="winner-chip a" style="display:none;"></div>
+                    </div>
+                    <div style="text-align:left; flex:1;">
+                        <div style="font-size:0.75rem; color:#f5a321; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;" id="label-banner-b">Player B</div>
+                        <div class="price" id="cb-value-disp" style="font-size:1.4rem; color:#f5a321; margin:4px 0;">€0</div>
+                    </div>
+                </div>
+
+                <div style="background: var(--surface-dark); padding: 10px 14px; border-radius: 8px; margin-bottom: 18px; border-left: 3px solid var(--accent); font-size:0.82rem; color: var(--text-muted);">
+                    <span id="compare-diff">Evaluate players to see gap analysis...</span>
+                </div>
+
+                <div style="margin-bottom: 18px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">
+                        <span style="color:#4d87ff; font-weight:700;" id="label-duel-a">◀ Player A</span>
+                        <span>Attribute Comparison</span>
+                        <span style="color:#f5a321; font-weight:700;" id="label-duel-b">Player B ▶</span>
+                    </div>
+
+                    <div class="stat-duel">
+                        <div class="stat-val-a" id="duel-perf-a">—</div>
+                        <div class="stat-bar-wrap"><div class="stat-bar-a" id="duel-bar-perf-a" style="width:50%"></div></div>
+                        <div class="stat-duel-center"><div class="compare-vs-badge">Performance</div><div id="duel-win-perf" class="winner-chip tie" style="display:none;"></div></div>
+                        <div class="stat-bar-wrap b"><div class="stat-bar-b" id="duel-bar-perf-b" style="width:50%"></div></div>
+                        <div class="stat-val-b" id="duel-perf-b">—</div>
+                    </div>
+
+                    <div class="stat-duel">
+                        <div class="stat-val-a" id="duel-dur-a">—</div>
+                        <div class="stat-bar-wrap"><div class="stat-bar-a" id="duel-bar-dur-a" style="width:50%"></div></div>
+                        <div class="stat-duel-center"><div class="compare-vs-badge">Durability</div><div id="duel-win-dur" class="winner-chip tie" style="display:none;"></div></div>
+                        <div class="stat-bar-wrap b"><div class="stat-bar-b" id="duel-bar-dur-b" style="width:50%"></div></div>
+                        <div class="stat-val-b" id="duel-dur-b">—</div>
+                    </div>
+
+                    <div class="stat-duel">
+                        <div class="stat-val-a" id="duel-exp-a">—</div>
+                        <div class="stat-bar-wrap"><div class="stat-bar-a" id="duel-bar-exp-a" style="width:50%"></div></div>
+                        <div class="stat-duel-center"><div class="compare-vs-badge">Experience</div><div id="duel-win-exp" class="winner-chip tie" style="display:none;"></div></div>
+                        <div class="stat-bar-wrap b"><div class="stat-bar-b" id="duel-bar-exp-b" style="width:50%"></div></div>
+                        <div class="stat-val-b" id="duel-exp-b">—</div>
+                    </div>
+
+                    <div class="stat-duel">
+                        <div class="stat-val-a" id="duel-cont-a">—</div>
+                        <div class="stat-bar-wrap"><div class="stat-bar-a" id="duel-bar-cont-a" style="width:50%"></div></div>
+                        <div class="stat-duel-center"><div class="compare-vs-badge">Contract</div><div id="duel-win-cont" class="winner-chip tie" style="display:none;"></div></div>
+                        <div class="stat-bar-wrap b"><div class="stat-bar-b" id="duel-bar-cont-b" style="width:50%"></div></div>
+                        <div class="stat-val-b" id="duel-cont-b">—</div>
+                    </div>
+                </div>
+
+                <div class="chart-container tall">
+                    <canvas id="compareRadar"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="bulk" class="tab-content">
+            <div class="grid-2">
+                <div class="card">
+                    <h3>📋 Data Scan Upload</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 12px 0;">Upload a CSV file or paste rows manually. Required columns: name, age, goals, assists, games_mi, days_miss, sentiment.</p>
+                    <div class="control">
+                        <div class="control-header"><span>CSV File</span></div>
+                        <div class="file-upload-wrapper" id="upload-wrapper">
+                            <input type="file" id="bulk-file" accept=".csv" onchange="document.getElementById('file-upload-name').innerText = this.files[0] ? this.files[0].name : '📁 Choose CSV File'" />
+                            <div class="file-upload-text">
+                                <span id="file-upload-name">📁 Choose CSV File</span>
+                                <span class="file-upload-subtext">Drag and drop or click to browse</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <div class="control-header"><span>Top Results</span></div>
+                        <select id="bulk-topn">
+                            <option value="10">Top 10</option>
+                            <option value="50">Top 50</option>
+                            <option value="100">Top 100</option>
+                        </select>
+                    </div>
+                    <div class="control">
+                        <div class="control-header"><span>Fallback CSV Text</span></div>
+                        <textarea id="csv-input" rows="8" style="font-family: 'Courier New', monospace; font-size: 0.85rem;" placeholder="Messi,35,30,12,40,5,Positive">Mbappé, 25, 30, 12, 38, 2, Positive
+Neymar, 32, 18, 9, 30, 12, Positive
+Pedri, 21, 8, 5, 27, 3, Positive
+Sergio Ramos, 38, 2, 1, 20, 40, Neutral
+Alisson, 31, 0, 1, 34, 7, Positive</textarea>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn" onclick="runBulk()">🚀 Run AI Scan</button>
+                        <button class="btn btn-secondary" onclick="clearBulk()">🗑️ Clear</button>
+                    </div>
+                    <div id="bulk-message"></div>
+                </div>
+
+                <div class="card" style="overflow: hidden; display: flex; flex-direction: column;">
+                    <h3>📊 Scan Results</h3>
+                    <div class="bulk-summary">
+                        <div class="summary-card">
+                            <span>Total Processed</span>
+                            <strong id="summary-total">0</strong>
+                        </div>
+                        <div class="summary-card">
+                            <span>Highest Value</span>
+                            <strong id="summary-highest">€0</strong>
+                            <span style="margin-top: 8px; color: var(--text-muted); font-size: 0.75rem;" id="summary-player">-</span>
+                        </div>
+                        <div class="summary-card">
+                            <span>Average Value</span>
+                            <strong id="summary-average">€0</strong>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 15px; margin: 18px 0 15px 0; align-items: center; flex-wrap: wrap;">
+                        <select id="sort-dropdown" onchange="sortResults(this.value)" style="flex: 1; margin: 0; min-width: 150px;">
+                            <option value="" disabled selected>🔄 Sort By...</option>
+                            <option value="value">💰 Sort by Value</option>
+                            <option value="risk">⚠️ Sort by Risk</option>
+                            <option value="name">🔤 Sort by Name</option>
+                        </select>
+                        <button class="btn btn-secondary" style="flex: 1; margin: 0; display: flex; justify-content: center; align-items: center; min-width: 150px; padding: 10px 12px; height: 38px;" onclick="downloadCSV()">⬇️ Download CSV</button>
+                    </div>
+
+                    <div style="overflow-y: auto; flex: 1; min-height: 400px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Player Name</th>
+                                    <th>Market Value</th>
+                                    <th>3-Yr Forecast</th>
+                                    <th>Range (C/F)</th>
+                                    <th>Risk & Trust</th>
+                                    <th>Tier</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bulk-tbody">
+                                <tr>
+                                    <td colspan="8" style="text-align: center; color: var(--text-muted);">Run scan to view results...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="insights" class="tab-content">
+            <div class="grid-half">
+                <div class="card" style="border-top: 3px solid var(--accent);">
+                    <h3>📡 Live Telemetry</h3>
+                    <div class="bulk-summary" style="margin-top: 20px; grid-template-columns: 1fr 1fr;">
+                        <div class="summary-card" style="background: rgba(0, 217, 255, 0.05); border: 1px solid rgba(0, 217, 255, 0.1);">
+                            <span>Total Queries</span>
+                            <strong id="insights-total" style="font-size: 1.8rem; color: #fff;">...</strong>
+                        </div>
+                        <div class="summary-card" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.1);">
+                            <span>Avg Inference Time</span>
+                            <strong id="insights-inf" style="font-size: 1.8rem; color: var(--success);">...</strong>
+                            <span style="margin-top: 4px; font-size: 0.75rem;">Milliseconds</span>
+                        </div>
+                        <div class="summary-card" style="grid-column: 1 / -1; background: rgba(255, 20, 147, 0.05); border: 1px solid rgba(255, 20, 147, 0.1);">
+                            <span>Highest Valuation Today</span>
+                            <strong id="insights-high" style="font-size: 2.5rem; color: var(--accent-alt); margin: 8px 0;">...</strong>
+                            <strong id="insights-high-p" style="color: #fff;">...</strong>
+                            <span style="display:inline; margin-left: 8px;">Peak Player Analysed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="border-top: 3px solid var(--accent-alt);">
+                    <h3>🧠 AI Architecture</h3>
+                    <div class="badges" style="grid-template-columns: 1fr; margin-top: 20px;">
+                        <div class="badge" style="display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--accent);">
+                            <span style="text-align: left; font-size: 0.85rem;">Live Accuracy (R²)</span>
+                            <strong id="insights-acc" style="margin: 0; font-size: 1.3rem;">...</strong>
+                        </div>
+                        <div class="badge" style="display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--warning);">
+                            <span style="text-align: left; font-size: 0.85rem;">Evaluation Model</span>
+                            <strong id="insights-comp" style="margin: 0; font-size: 1.1rem;">...</strong>
+                        </div>
+                        <div class="badge" style="display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--success);">
+                            <span style="text-align: left; font-size: 0.85rem;">Sequence Forecasting</span>
+                            <strong id="insights-lstm" style="margin: 0; font-size: 1.1rem;">...</strong>
+                        </div>
+                    </div>
+                    <div class="ai-insight-box" style="margin-top: 25px; font-size: 0.85rem;">
+                        <strong>Core System:</strong> XGBoost calculates base intrinsic value relying on 1,989+ verified transfers. LSTM recurrent algorithms predict time-series depreciation and growth trajectories.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 25px;">
+                <h3 style="border-bottom: none;">📊 Global Feature Importance Matrix</h3>
+                <div class="chart-container tall">
+                    <canvas id="insightsBar"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let cLabForecast, cLabRadar, cCompRadar, cBar;
+        let lastBulkResults = [];
+        let compareSelection = [];
+
+        function addToCompare(index) {
+            const p = lastBulkResults[index];
+            if (!p) return;
+
+            if (compareSelection.length >= 2) compareSelection = [];
+            compareSelection.push(p);
+
+            const slot = compareSelection.length === 1 ? 'ca' : 'cb';
+            
+            document.getElementById(`${slot}-age`).value = p.age;
+            document.getElementById(`${slot}-perf`).value = p.performance;
+            document.getElementById(`${slot}-inj`).value = p.injury;
+            document.getElementById(`${slot}-cont`).value = p.contract_years;
+            document.getElementById(`${slot}-pos`).value = p.position;
+            
+            document.getElementById(`${slot}-name-label`).innerText = p.name;
+            
+            document.getElementById(`${slot}-ageV`).innerText = p.age;
+            document.getElementById(`${slot}-perfV`).innerText = p.performance.toFixed(1);
+            document.getElementById(`${slot}-injV`).innerText = p.injury.toFixed(2);
+            document.getElementById(`${slot}-contV`).innerText = p.contract_years;
+            document.getElementById(`${slot}-posV`).innerText = p.position;
+
+            showToast(`Player ${compareSelection.length === 1 ? 'A' : 'B'} Set`, `${p.name} added to comparison slot.`);
+
+            if (compareSelection.length === 2) {
+                setTimeout(() => {
+                    document.querySelectorAll('.tab-btn').forEach(b => {
+                        if (b.innerText.includes('Compare')) b.click();
+                    });
+                    runCompare();
+                    showToast('Analysis Ready', 'Head-to-head comparison generated.', false);
+                }, 800);
+            }
+        }
+
+        let labLastValue = 0, compALast = 0, compBLast = 0;
+
+        const formatM = v => "€" + (Math.abs(v) / 1000000).toFixed(2) + "M";
+        const formatK = v => "€" + (Math.abs(v) / 1000).toFixed(0) + "K";
+
+        function formatMoney(v) {
+            let sign = v < 0 ? "-" : "";
+            if (Math.abs(v) >= 1000000) return sign + formatM(v);
+            return sign + formatK(v);
+        }
+
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 5);
+                const current = Math.floor(easeOut * (end - start) + start);
+                obj.innerText = formatMoney(current);
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function showToast(title, message, isError = false) {
+            let container = document.getElementById('toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'toast-container';
+                container.style = 'position: fixed; top: 90px; right: 30px; z-index: 1000; display: flex; flex-direction: column; gap: 12px; pointer-events: none;';
+                document.body.appendChild(container);
+            }
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.style.borderLeftColor = isError ? 'var(--danger)' : 'var(--accent)';
+            toast.innerHTML = `<div style="font-size: 1.4rem;">${isError ? '❌' : '✅'}</div>
+                               <div style="pointer-events: auto;"><strong style="display: block; font-size: 0.95rem;">${title}</strong>
+                               <span style="font-size: 0.8rem; color: var(--text-muted);">${message}</span></div>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('hide');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function switchTab(e, tabId) {
+            e.preventDefault();
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            e.currentTarget.classList.add('active');
+
+            if (tabId === 'lab') setTimeout(runLab, 100);
+            if (tabId === 'compare') setTimeout(runCompare, 100);
+            if (tabId === 'insights') {
+                fetchInsights();
+                setTimeout(() => cBar.resize(), 100);
+            }
+        }
+
+        function fetchInsights() {
+            fetch('/model-insights-data')
+                .then(r => r.json())
+                .then(d => {
+                    document.getElementById('insights-comp').innerText = d.model_composition;
+                    document.getElementById('insights-lstm').innerText = d.lstm_integration;
+                    document.getElementById('insights-acc').innerText = d.model_accuracy;
+                    document.getElementById('insights-total').innerText = d.total_players_analyzed;
+                    document.getElementById('insights-high').innerText = d.highest_valuation_today > 0 ? formatMoney(d.highest_valuation_today) : '€0';
+                    document.getElementById('insights-high-p').innerText = d.highest_player;
+                    document.getElementById('insights-inf').innerText = d.live_inference_ms;
+                })
+                .catch(err => console.error('Error fetching insights:', err));
+        }
+
+        function initCharts() {
+            Chart.defaults.color = '#8b95a8';
+            Chart.defaults.font.family = "'Segoe UI', sans-serif";
+            Chart.defaults.borderColor = '#2d3e52';
+
+            cLabForecast = new Chart(document.getElementById('labForecast'), {
+                type: 'line',
+                data: {
+                    labels: ['Current', '1 Year', '2 Years', '3 Years'],
+                    datasets: [{
+                        label: 'Market Value Forecast',
+                        data: [0, 0, 0, 0],
+                        borderColor: '#4d87ff',
+                        backgroundColor: 'rgba(77, 135, 255, 0.1)',
+                        borderWidth: 2.5,
+                        fill: true,
+                        pointBackgroundColor: '#4d87ff',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: false, grid: { color: '#222840' }, ticks: { color: '#7a8699' } },
+                        x: { grid: { color: '#222840' } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            cLabRadar = new Chart(document.getElementById('labRadar'), {
+                type: 'radar',
+                data: {
+                    labels: ['Performance', 'Durability', 'Public Hype', 'Experience'],
+                    datasets: [{
+                        label: 'Player Profile',
+                        data: [0, 0, 0, 0],
+                        borderColor: '#4d87ff',
+                        backgroundColor: 'rgba(77, 135, 255, 0.15)',
+                        pointBackgroundColor: '#4d87ff',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: true, labels: { color: '#7a8699' } } },
+                    scales: { r: { ticks: { display: false }, grid: { color: '#222840' } } }
+                }
+            });
+
+            cCompRadar = new Chart(document.getElementById('compareRadar'), {
+                type: 'radar',
+                data: {
+                    labels: ['Performance', 'Durability', 'Public Hype', 'Experience'],
+                    datasets: [
+                        { label: 'Player A', data: [], borderColor: '#4d87ff', backgroundColor: 'rgba(77, 135, 255, 0.15)', pointBackgroundColor: '#4d87ff', pointBorderColor: '#fff', pointBorderWidth: 2 },
+                        { label: 'Player B', data: [], borderColor: '#f5a321', backgroundColor: 'rgba(245, 163, 33, 0.15)', pointBackgroundColor: '#f5a321', pointBorderColor: '#fff', pointBorderWidth: 2 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: true, labels: { color: '#7a8699' } } },
+                    scales: { r: { ticks: { display: false }, grid: { color: '#222840' } } }
+                }
+            });
+
+            const insightsCtx = document.getElementById('insightsBar').getContext('2d');
+            const grad1 = insightsCtx.createLinearGradient(0, 0, 0, 300); grad1.addColorStop(0, 'rgba(77, 135, 255, 0.9)'); grad1.addColorStop(1, 'rgba(77, 135, 255, 0.15)');
+            const grad2 = insightsCtx.createLinearGradient(0, 0, 0, 300); grad2.addColorStop(0, 'rgba(245, 163, 33, 0.9)'); grad2.addColorStop(1, 'rgba(245, 163, 33, 0.15)');
+            const grad3 = insightsCtx.createLinearGradient(0, 0, 0, 300); grad3.addColorStop(0, 'rgba(74, 222, 128, 0.9)'); grad3.addColorStop(1, 'rgba(74, 222, 128, 0.15)');
+            const grad4 = insightsCtx.createLinearGradient(0, 0, 0, 300); grad4.addColorStop(0, 'rgba(251, 191, 36, 0.9)'); grad4.addColorStop(1, 'rgba(251, 191, 36, 0.15)');
+
+            cBar = new Chart(insightsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Performance', 'Age Factor', 'Injury Risk', 'Public Sentiment'],
+                    datasets: [{
+                        label: 'Feature Weight %',
+                        data: [35, 25, 25, 15],
+                        backgroundColor: [grad1, grad2, grad3, grad4],
+                        borderColor: ['#4d87ff', '#f5a321', '#3dba7a', '#fbbf24'],
+                        borderWidth: 2, borderRadius: 10, borderSkipped: false,
+                        hoverBackgroundColor: ['rgba(77,135,255,1)', 'rgba(245,163,33,1)', 'rgba(61,186,122,1)', 'rgba(251,191,36,1)'],
+                        barPercentage: 0.6, categoryPercentage: 0.7
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    animation: { duration: 1000, easing: 'easeOutQuart' },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { backgroundColor: 'rgba(13, 22, 38, 0.95)', borderColor: 'rgba(77,135,255,0.4)', borderWidth: 1, titleColor: '#fff', bodyColor: '#8b95a8', padding: 12, callbacks: { label: ctx => ` Weight: ${ctx.raw}%` } }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, max: 50, ticks: { callback: v => v + '%', color: '#8b95a8', font: { size: 12 } }, grid: { color: 'rgba(45, 62, 82, 0.6)', drawBorder: false } },
+                        x: { ticks: { color: '#c9d1dc', font: { size: 13, weight: '600' } }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function syncVal(id) {
+            const val = document.getElementById(id).value;
+            document.getElementById(id + 'V').innerText = val;
+            return parseFloat(val);
+        }
+
+        function updatePerfFromStats() {
+            const goals = syncVal('l-goals');
+            const assists = syncVal('l-assists');
+            let perf = ((goals + assists) / 38.0) * 2.2 + 2.0;
+            perf = Math.max(0, Math.min(10, perf));
+            document.getElementById('l-perf').value = perf.toFixed(1);
+            document.getElementById('l-perfV').innerText = perf.toFixed(1);
+            runLab();
+        }
+
+        function runLab() {
+            const payload = {
+                age: syncVal('l-age'),
+                performance: syncVal('l-perf'),
+                injury: syncVal('l-inj'),
+                sentiment: syncVal('l-sen'),
+                contract_years: syncVal('l-cont'),
+                position: document.getElementById('l-pos').value || 'MID',
+                name: 'Lab Player'
+            };
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(r => r.json())
+            .then(d => {
+                animateValue(document.getElementById('lab-price'), labLastValue, d.value, 800);
+                labLastValue = d.value;
+
+                const inrCr = (d.value * 91) / 10000000;
+                document.getElementById('lab-price-inr').innerText = '₹' + (inrCr >= 100 ? (inrCr / 100).toFixed(2) + ' Thousand Cr' : inrCr.toFixed(2) + ' Cr');
+
+                document.getElementById('lab-stage').innerText = d.stage;
+                document.getElementById('lab-trend').innerText = d.trend;
+                document.getElementById('lab-conf').innerText = Math.round(d.confidence) + '%';
+                document.getElementById('lab-risk').innerText = d.risk;
+                document.getElementById('lab-tier').innerText = d.tier;
+                document.getElementById('lab-insight').innerText = d.ai_insight;
+
+                document.getElementById('lab-y1').innerText = formatM(d.forecast[0]);
+                document.getElementById('lab-y2').innerText = formatM(d.forecast[1]);
+                document.getElementById('lab-y3').innerText = formatM(d.forecast[2]);
+                document.getElementById('lab-y4').innerText = formatM(d.forecast[3]);
+
+                document.getElementById('lab-best').innerText = formatM(d.best_case);
+                document.getElementById('lab-worst').innerText = formatM(d.worst_case);
+
+                const pctEl = document.getElementById('lab-pct');
+                pctEl.innerHTML = `${d.pct_change_3yr > 0 ? '📈' : '📉'} ${d.pct_change_3yr.toFixed(1)}%`;
+
+                const vBox = document.getElementById('lab-verdict');
+                if (vBox) {
+                    const vTitle = document.getElementById('verdict-title');
+                    const vDesc = document.getElementById('verdict-desc');
+                    const rScore = d.risk === "High 🔴" ? 3 : (d.risk === "Medium 🟡" ? 2 : 1);
+
+                    if (d.pct_change_3yr > 15 && rScore <= 2) {
+                        vBox.className = 'ai-verdict buy'; vTitle.innerText = 'STRONG BUY'; vDesc.innerText = `High capital appreciation (${d.pct_change_3yr.toFixed(1)}% expected ROI).`;
+                    } else if (d.pct_change_3yr >= 0 && rScore === 1) {
+                        vBox.className = 'ai-verdict buy'; vTitle.innerText = 'SAFE ACQUISITION'; vDesc.innerText = `Value retention is excellent.`;
+                    } else if (d.pct_change_3yr < -20 || rScore === 3) {
+                        vBox.className = 'ai-verdict pass'; vTitle.innerText = 'PASS / AVOID'; vDesc.innerText = `Major red flags. Poor investment terms.`;
+                    } else {
+                        vBox.className = 'ai-verdict hold'; vTitle.innerText = 'HOLD / CAUTION'; vDesc.innerText = `Balanced risk/reward. Expected to stagnate.`;
+                    }
+                }
+
+                try {
+                    if (cLabForecast) {
+                        const data = d.forecast.map(v => Number(v));
+                        cLabForecast.data.datasets[0].data = data;
+                        const minVal = Math.min(...data), maxVal = Math.max(...data);
+                        const padding = (maxVal - minVal) * 0.2 || maxVal * 0.1;
+                        cLabForecast.options.scales.y.min = Math.max(0, minVal - padding);
+                        cLabForecast.options.scales.y.max = maxVal + padding;
+                        cLabForecast.update('none');
+                    }
+                    if (cLabRadar) {
+                        cLabRadar.data.datasets[0].data = [payload.performance * 10, (1 - payload.injury) * 100, ((payload.sentiment + 1) / 2) * 100, (payload.age / 40) * 100];
+                        cLabRadar.update('none');
+                    }
+                    if (cBar) {
+                        cBar.data.datasets[0].data = [d.feature_weights.Performance, d.feature_weights.Age, d.feature_weights.Injury, d.feature_weights.Sentiment];
+                        cBar.update('none');
+                    }
+                } catch(chartError) { console.warn("Chart update skipped:", chartError); }
+            }).catch(err => console.error('Lab prediction error:', err));
+        }
+
+        function runCompare() {
+            const p1 = { age: syncVal('ca-age'), performance: syncVal('ca-perf'), injury: syncVal('ca-inj'), sentiment: 0.5, contract_years: syncVal('ca-cont'), position: document.getElementById('ca-pos').value || 'FWD', name: 'Player A' };
+            const p2 = { age: syncVal('cb-age'), performance: syncVal('cb-perf'), injury: syncVal('cb-inj'), sentiment: 0.5, contract_years: syncVal('cb-cont'), position: document.getElementById('cb-pos').value || 'MID', name: 'Player B' };
+
+            fetch('/predict', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ player1: p1, player2: p2 })
+            }).then(r => r.json()).then(d => {
+                const nameA = document.getElementById('ca-name-label').innerText || 'Player A';
+                const nameB = document.getElementById('cb-name-label').innerText || 'Player B';
+                const p1Data = d.player1, p2Data = d.player2;
+
+                animateValue(document.getElementById('ca-value'), compALast, p1Data.value, 800);
+                animateValue(document.getElementById('cb-value'), compBLast, p2Data.value, 800);
+                animateValue(document.getElementById('ca-value-disp'), compALast, p1Data.value, 800);
+                animateValue(document.getElementById('cb-value-disp'), compBLast, p2Data.value, 800);
+                compALast = p1Data.value; compBLast = p2Data.value;
+
+                const isP1Winner = d.better_player === 'Player 1';
+                const winnerName = isP1Winner ? nameA : nameB;
+                const winnerColor = isP1Winner ? '#4d87ff' : '#f5a321';
+                const chip = document.getElementById('compare-winner-chip');
+                document.getElementById('compare-winner').innerHTML = `<span style="color:${winnerColor}; font-weight:800;">⚡ ${winnerName}</span><br><span style="font-size:0.75rem; font-weight:400; color:var(--text-muted);">is more valuable</span>`;
+                chip.style.display = 'inline-block'; chip.className = `winner-chip ${isP1Winner ? 'a' : 'b'}`; chip.textContent = isP1Winner ? '◀ Leads' : 'Leads ▶';
+
+                document.getElementById('compare-diff').innerHTML = `<strong>Value Gap:</strong> ${formatM(d.difference)} &nbsp;|&nbsp; <strong>Premium:</strong> ${d.diff_percent.toFixed(1)}%`;
+
+                function setDuel(id, valA, valB, maxVal, fmtA, fmtB) {
+                    const pctA = Math.min(100, (valA / maxVal) * 100), pctB = Math.min(100, (valB / maxVal) * 100);
+                    document.getElementById(`duel-${id}-a`).textContent = fmtA(valA);
+                    document.getElementById(`duel-${id}-b`).textContent = fmtB(valB);
+                    document.getElementById(`duel-bar-${id}-a`).style.width = pctA + '%';
+                    document.getElementById(`duel-bar-${id}-b`).style.width = pctB + '%';
+                    const winEl = document.getElementById(`duel-win-${id}`);
+                    winEl.style.display = 'inline-block';
+                    if (Math.abs(valA - valB) < 0.01) { winEl.className = 'winner-chip tie'; winEl.textContent = 'Tie'; }
+                    else if (valA > valB) { winEl.className = 'winner-chip a'; winEl.textContent = '◀ ' + nameA.split(' ')[0]; }
+                    else { winEl.className = 'winner-chip b'; winEl.textContent = nameB.split(' ')[0] + ' ▶'; }
+                }
+
+                document.getElementById('label-duel-a').innerText = '◀ ' + nameA;
+                document.getElementById('label-duel-b').innerText = nameB + ' ▶';
+                document.getElementById('label-banner-a').innerText = nameA;
+                document.getElementById('label-banner-b').innerText = nameB;
+
+                setDuel('perf', p1.performance, p2.performance, 10, v => v.toFixed(1), v => v.toFixed(1));
+                setDuel('dur', (1 - p1.injury) * 100, (1 - p2.injury) * 100, 100, v => v.toFixed(0) + '%', v => v.toFixed(0) + '%');
+                setDuel('exp', p1.age, p2.age, 40, v => `${v}yr`, v => `${v}yr`);
+                setDuel('cont', p1.contract_years, p2.contract_years, 5, v => `${v}yr`, v => `${v}yr`);
+
+                cCompRadar.data.datasets[0].data = [p1.performance * 10, (1 - p1.injury) * 100, 60, (p1.age / 40) * 100];
+                cCompRadar.data.datasets[1].data = [p2.performance * 10, (1 - p2.injury) * 100, 60, (p2.age / 40) * 100];
+                cCompRadar.update();
+            }).catch(err => console.error('Compare error:', err));
+        }
+
+        function showBulkMessage(message, isError = false, loading = false) {
+            const element = document.getElementById('bulk-message');
+            element.innerHTML = loading ? `<span class="bulk-spinner">Processing upload...</span>` : `<span style="color: ${isError ? '#ef4444' : '#8b95a8'};">${message}</span>`;
+        }
+
+        function runBulk() {
+            const fileInput = document.getElementById('bulk-file');
+            const topN = document.getElementById('bulk-topn').value;
+            const formData = new FormData();
+            const file = fileInput.files[0];
+
+            showBulkMessage('', false, true);
+            document.getElementById('bulk-tbody').innerHTML = '<tr><td colspan="8" style="text-align: center;">🛡️ Initializing Deep Neural Calibration & Inference...</td></tr>';
+
+            if (file) {
+                formData.append('file', file);
+                formData.append('top_n', topN);
+                fetch('/bulk-predict', { method: 'POST', body: formData })
+                .then(r => r.json())
+                .then(data => {
+                    const states = ["Initializing Model Weights...", "Running XGBoost Ensemble cycles...", "Generating LSTM Sequence Forecasts...", "Calibrating Position Multipliers...", "Finalizing Investment Logic..."];
+                    let i = 0;
+                    const interval = setInterval(() => {
+                        if (i < states.length) { document.getElementById('bulk-tbody').innerHTML = `<tr><td colspan="8" style="text-align: center;">⚡ ${states[i]}</td></tr>`; i++; }
+                        else { clearInterval(interval); handleBulkResponse(data); }
+                    }, 2000);
+                }).catch(() => showBulkMessage('Upload failed. Check the CSV file and try again.', true));
+                return;
+            }
+
+            const lines = document.getElementById('csv-input').value.trim().split('\n').filter(l => l.trim());
+            if (!lines.length) {
+                showBulkMessage('Please upload a CSV file or paste data into the text area.', true);
+                document.getElementById('bulk-tbody').innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--text-muted);">Run scan to view results...</td></tr>';
+                return;
+            }
+
+            const players = lines.map(line => {
+                const parts = line.split(',').map(s => s.trim());
+                return { name: parts[0] || 'Unknown', age: parseFloat(parts[1]) || 25, goals: parseFloat(parts[2]) || 0, assists: parseFloat(parts[3]) || 0, games_mi: parseFloat(parts[4]) || 1, days_miss: parseFloat(parts[5]) || 0, sentiment: parts[6] || 'Neutral' };
+            });
+
+            fetch('/bulk-predict', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ players, top_n: topN }) })
+            .then(r => r.json())
+            .then(data => {
+                const states = ["Initializing Deep Scans...", "Ensemble Calibration...", "Temporal Sequence Mapping...", "Refining Market Multipliers...", "Syncing AI Decisions..."];
+                let i = 0;
+                const interval = setInterval(() => {
+                    if (i < states.length) { document.getElementById('bulk-tbody').innerHTML = `<tr><td colspan="8" style="text-align: center;">🛡️ ${states[i]}</td></tr>`; i++; }
+                    else { clearInterval(interval); handleBulkResponse(data); }
+                }, 2000);
+            }).catch(() => showBulkMessage('Processing failed. Please refresh and try again.', true));
+        }
+
+        function handleBulkResponse(data) {
+            if (data.error) {
+                showBulkMessage(data.error, true);
+                document.getElementById('bulk-tbody').innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--text-muted);">No results available.</td></tr>';
+                return;
+            }
+            lastBulkResults = data.results || [];
+            renderBulkTable(lastBulkResults);
+            updateBulkSummary(data.summary || {});
+            showBulkMessage(`Scan complete. Analyzed ${lastBulkResults.length} players.`, false);
+            showToast('Scan Successful', `Processed ${lastBulkResults.length} player profiles accurately.`);
+        }
+
+        function renderBulkTable(data) {
+            const tbody = document.getElementById('bulk-tbody');
+            if (!data.length) { tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--text-muted);">No players matched the upload.</td></tr>'; return; }
+
+            tbody.innerHTML = data.map((p, index) => {
+                const inrCr = (p.value * 91) / 10000000;
+                const inrStr = inrCr.toLocaleString('en-IN', { maximumFractionDigits: 1 }) + ' Cr';
+                const fcst = (p.forecast && p.forecast.length === 4) ? p.forecast[3] : p.value;
+                const trendIcon = fcst > p.value ? '📈' : '📉';
+                const pctColor = p.pct_change_3yr >= 0 ? 'var(--success)' : 'var(--danger)';
+                return `
+                <tr class="animated-row ${index === 0 ? 'top-player' : ''}" style="animation-delay: ${Math.min(index * 0.05, 1)}s" title="${p.ai_insight || 'AI analysis complete.'}">
+                    <td style="color:var(--text-muted);">${index + 1}</td>
+                    <td><strong style="color:#fff; font-size:1rem;">${p.name}</strong><div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Stage: ${p.stage || '-'}</div></td>
+                    <td class="value-cell" style="line-height:1.2;">${formatMoney(p.value)}<div style="font-size:0.75rem; color:var(--accent-alt);">${inrStr ? '₹' + inrStr : ''}</div></td>
+                    <td style="line-height:1.2;"><span style="font-weight:600;">${trendIcon} ${formatMoney(fcst)}</span><div style="font-size:0.75rem; color:${pctColor}; font-weight:600;">${p.pct_change_3yr > 0 ? '+' : ''}${p.pct_change_3yr ? p.pct_change_3yr.toFixed(1) : 0}% / 3yr</div></td>
+                    <td style="line-height:1.3;"><div style="font-size:0.72rem; color:var(--success);">Ceiling: ${formatMoney(p.best_case)}</div><div style="font-size:0.72rem; color:var(--danger);">Floor: ${formatMoney(p.worst_case)}</div></td>
+                    <td style="line-height:1.2;">${p.risk}<div style="font-size:0.75rem; color:var(--text-muted);">Conf: <span style="color:#fff;">${p.confidence ? Math.round(p.confidence) : 0}%</span></div></td>
+                    <td><span class="tier-cell">${p.tier}</span></td>
+                    <td><button class="btn btn-secondary" style="padding: 6px 10px; font-size: 0.75rem; width: auto;" onclick="addToCompare(${index})">⚔️ Compare</button></td>
+                </tr>`;
+            }).join('');
+        }
+
+        function updateBulkSummary(summary) {
+            document.getElementById('summary-total').innerText = summary.total_players || 0;
+            document.getElementById('summary-highest').innerText = summary.highest_value ? formatM(summary.highest_value) : '€0';
+            document.getElementById('summary-player').innerText = summary.highest_name ? `Top player: ${summary.highest_name}` : '-';
+            document.getElementById('summary-average').innerText = summary.average_value ? formatM(summary.average_value) : '€0';
+        }
+
+        function sortResults(by) {
+            if (!lastBulkResults.length) return;
+            let sorted = [...lastBulkResults];
+            if (by === 'value') sorted.sort((a, b) => b.value - a.value);
+            else if (by === 'name') sorted.sort((a, b) => a.name.localeCompare(b.name));
+            else if (by === 'risk') {
+                const riskOrder = { 'Low 🟢': 0, 'Medium 🟡': 1, 'High 🔴': 2 };
+                sorted.sort((a, b) => riskOrder[a.risk] - riskOrder[b.risk]);
+            }
+            renderBulkTable(sorted);
+        }
+
+        function downloadCSV() {
+            if (!lastBulkResults.length) { showToast('Export Failed', 'No valid results to download. Run a scan first.', true); return; }
+            const header = ['Rank', 'Name', 'Value (€)', 'Risk', 'Tier'];
+            const rows = lastBulkResults.map((player, index) => [index + 1, player.name, formatM(player.value), player.risk, player.tier]);
+            const csv = [header, ...rows].map(row => row.join(',')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url; link.download = `transferiq_bulk_${Date.now()}.csv`;
+            document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(url);
+            showToast('Download Started', 'Your CSV dataset has been securely downloaded.');
+        }
+
+        function clearBulk() {
+            document.getElementById('csv-input').value = '';
+            document.getElementById('bulk-file').value = '';
+            const nameEl = document.getElementById('file-upload-name');
+            if (nameEl) nameEl.innerText = '📁 Choose CSV File';
+            document.getElementById('bulk-message').innerHTML = '';
+            document.getElementById('bulk-tbody').innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--text-muted);">Run scan to view results...</td></tr>';
+            document.getElementById('summary-total').innerText = '0';
+            document.getElementById('summary-highest').innerText = '€0';
+            document.getElementById('summary-player').innerText = '-';
+            document.getElementById('summary-average').innerText = '€0';
+            lastBulkResults = [];
+            showToast('Data Cleared', 'Workspace has been reset successfully.');
+        }
+
+        window.onload = () => {
+            initCharts();
+            setTimeout(runLab, 500); 
+        };
+    </script>
+</body>
+</html>
