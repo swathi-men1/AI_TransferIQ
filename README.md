@@ -43,7 +43,8 @@ The web application uses **Ridge Regression** to serve real-time predictions wit
 
 Browse all **1,034 players** with live search, multi-filter, and sort. Each card shows the AI-predicted transfer value, OVA rating, position, career stage, injury risk, and sentiment badge.
 
-![Player Explorer](outputs/screenshots/screenshot_player_explorer.png)
+![Player Explorer](https://github.com/swathi-men1/AI_TransferIQ/blob/a3578318fbc7e1a8f7a0747c430cd7a5926fea20/outputs/screenshots/1.png)
+
 
 **Features:**
 - Search by player name, club, or nationality
