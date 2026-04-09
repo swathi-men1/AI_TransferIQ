@@ -144,29 +144,29 @@ TransferIQ/
 │   ├── main.py                       ← Full pipeline runner (5 steps)
 │   ├── data_cleaning.py              ← Week 2: Cleaning & merging 4 sources
 │   ├── feature_engineering.py        ← Week 3-4: 69 features engineered
-│   ├── lstm_model.py                 ← Week 5: LSTM from scratch (NumPy BPTT)
+│   ├── lstm_model.py                 ← Week 5: LSTM from scratch
 │   ├── ensemble_model.py             ← Week 6-7: Ensemble + hyperparameter tuning
 │   ├── best_model.py                 ← Best model v2 — train + CLI predict
 │   └── predict.py                    ← Inference: predict by player name
 │
 ├── webapp/                           ← Flask Web Application
-│   ├── app.py                        ← Backend: loads pkl, serves API + Ridge prediction
+│   ├── app.py                        ← Backend: loads pkl, serves API + prediction
 │   ├── requirements.txt              ← Web app dependencies
 │   └── templates/
 │       └── index.html                ← Full frontend (HTML/CSS/JS — single file)
 │
 ├── data/                             ← All datasets
-│   ├── player.csv                    ← Raw: 1,034 players, 23 FIFA attributes
-│   ├── injury.csv                    ← Raw: 9,553 injury records
-│   ├── market_value.csv              ← Raw: 6,043 market values (2009–2021)
-│   ├── sentiment.csv                 ← Raw: 1,069 NLP sentiment scores
+│   ├── player.csv                    ← Raw: players, 23 FIFA attributes
+│   ├── injury.csv                    ← Raw: injury records
+│   ├── market_value.csv              ← Raw: market values (2009–2021)
+│   ├── sentiment.csv                 ← Raw: NLP sentiment scores
 │   ├── cleaned_dataset_final.csv     ← Cleaned + merged (Week 2 output)
 │   ├── featured_dataset_final.csv    ← 59 engineered features (Week 3-4 output)
-│   └── lstm_timeseries_dataset.csv   ← 975 time-series sequences (Week 5 input)
+│   └── lstm_timeseries_dataset.csv   ← time-series sequences (Week 5 input)
 │
 ├── models/                           ← Trained & saved ML models
-│   ├── best_model_v2.pkl             ← BEST MODEL — Stacking Ensemble (R²=0.761)
-│   ├── weighted_ensemble.pkl         ← v1 Weighted Ensemble (R²=0.495)
+│   ├── best_model_v2.pkl             ← BEST MODEL — Stacking Ensemble 
+│   ├── weighted_ensemble.pkl         ← v1 Weighted Ensemble
 │   ├── gradient_boosting.pkl         ← Individual Gradient Boosting
 │   ├── random_forest.pkl             ← Individual Random Forest
 │   ├── ridge_regression.pkl          ← Individual Ridge Regression
@@ -187,9 +187,6 @@ TransferIQ/
 │   ├── full_model_comparison.csv     ← All models R² / RMSE / MAE
 │   └── ensemble_results_final.csv    ← Ensemble model results
 │
-├── TransferIQ_Presentation.pptx      ← 10-slide project presentation deck
-├── TransferIQ_Report.docx            ← Full 20-page project report
-├── TransferIQ_website.html           ← Standalone HTML website (no server needed)
 ├── requirements.txt                  ← Python dependencies
 └── README.md                         ← This file
 ```
@@ -232,7 +229,7 @@ python app.py
 
 Open your browser at: **http://localhost:5000**
 
-The app loads `best_model_v2.pkl` at startup, pre-computes predictions for all 1,034 players, and serves the full Player Explorer + Transfer Value Predictor.
+The app loads `best_model_v2.pkl` at startup, pre-computes predictions for all players, and serves the full Player Explorer + Transfer Value Predictor.
 
 ---
 
@@ -336,7 +333,6 @@ Transfer value is **40-50% determined by factors unavailable in public datasets:
 - Private medical reports
 - Player's personal contract demands
 
-Even professional analytics firms (CIES, FIFA Analytics, Opta) achieve **65-70% accuracy with private data**. Our **76.1% from public data only** is state-of-the-art for open-source football analytics.
 
 ---
 
@@ -344,12 +340,12 @@ Even professional analytics firms (CIES, FIFA Analytics, Opta) achieve **65-70% 
 
 | Source | Records | Description |
 |---|---|---|
-| FIFA Player Stats | 1,034 players | OVA, position, physical, technical attributes |
+| FIFA Player Stats | players | OVA, position, physical, technical attributes |
 | Transfermarkt | 6,043 records | Market values across 13 seasons (2009–2021) |
 | Social Media NLP | 1,069 records | VADER sentiment scores for 407 players |
 | Injury History | 9,553 records | Injury type, duration in days, games missed |
 
-**After cleaning and merging:** 1,034 players × 31 columns → feature engineered to **59 model features**, zero missing values.
+**After cleaning and merging:** players × 31 columns → feature engineered to **59 model features**, zero missing values.
 
 **Fuzzy name matching** was used to join sentiment data to the player dataset (358 out of 407 players matched, up from 303 with exact matching).
 
@@ -361,8 +357,8 @@ Even professional analytics firms (CIES, FIFA Analytics, Opta) achieve **65-70% 
 
 | Model | Week | R² Score | RMSE | Within 10% | Within 25% |
 |---|---|---|---|---|---|
-| Univariate LSTM (NumPy) | 5 | 0.160 | 1.308 | — | — |
-| Multivariate LSTM (NumPy) | 5 | -0.179 | 1.550 | — | — |
+| Univariate LSTM | 5 | 0.160 | 1.308 | — | — |
+| Multivariate LSTM | 5 | -0.179 | 1.550 | — | — |
 | Gradient Boosting v1 | 5 | 0.484 | 1.065 | 9.2% | 22.7% |
 | Weighted Ensemble v1 | 6 | 0.495 | 1.053 | 9.2% | 22.7% |
 | **Stacking Ensemble v2** | **7** | **0.761** | **0.309** | **60.9%** | **77.8%** |
@@ -461,7 +457,7 @@ GET /api/players?position=midfielder&stage=prime&risk=low&sort=predicted_value&p
 | Week | Milestone | Deliverable |
 |---|---|---|
 | Week 1 | Data Collection | 4 raw CSV files (player, injury, market, sentiment) |
-| Week 2 | Data Cleaning & Merging | `cleaned_dataset_final.csv` — 1,034 players, zero missing values |
+| Week 2 | Data Cleaning & Merging | `cleaned_dataset_final.csv` — players, zero missing values |
 | Week 3–4 | Feature Engineering | 69 features → `featured_dataset_final.csv` |
 | Week 5 | LSTM from Scratch | NumPy BPTT implementation, R²=0.16 (univariate) |
 | Week 6 | Ensemble Models | Stacking ensemble, R²=0.495 |
