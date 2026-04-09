@@ -5,7 +5,6 @@
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python)
 ![Flask](https://img.shields.io/badge/Flask-Backend-black?style=for-the-badge&logo=flask)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-LSTM-orange?style=for-the-badge&logo=tensorflow)
 ![XGBoost](https://img.shields.io/badge/XGBoost-Regressor-green?style=for-the-badge)
 
 </div>
@@ -127,11 +126,6 @@ TransferIQ/
 ├── Model/
 │   ├── X_lstm_data.npy
 │   ├── y_lstm_target.npy
-│   ├── encoder_decoder_lstm.keras
-│   ├── ensemble_model.pkl
-│   ├── lstm_model.keras
-│   ├── univariate_lstm_model.keras
-│   ├── xgb_model.pkl
 │   ├── lstm_prep_py.py
 │   ├── train_lstm_py.py
 │   └── train_xgboost_py.py
