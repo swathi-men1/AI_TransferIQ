@@ -1,4 +1,4 @@
-# IPL Auction Intelligence System
+AI_TransferIQ -- IPL Auction Intelligence System
 
 A complete data analytics and machine learning project to estimate IPL player auction values, inspect player performance, compare players, analyze value-for-money picks, and run cricket-specific sentiment analysis.
 
