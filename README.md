@@ -229,6 +229,7 @@ python app.py
 ```
 
 Open your browser at: **http://localhost:5000**
+Deploy link: **https://ai-transferiq-football-player.onrender.com**
 
 The app loads `best_model_v2.pkl` at startup, pre-computes predictions for all players, and serves the full Player Explorer + Transfer Value Predictor.
 
