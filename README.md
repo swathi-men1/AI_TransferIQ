@@ -26,10 +26,8 @@ The system not only predicts a player’s **current market value** but also fore
 ---
 
 ## 📸 Dashboard Preview
-<img width="1350" height="641" alt="image" src="https://github.com/user-attachments/assets/6988dcb7-da53-4d3f-85d4-6fd15b617586" />
 
-
-![Dashboard](./assets/dashboard.png)
+![Dashboard]("https://github.com/user-attachments/assets/6988dcb7-da53-4d3f-85d4-6fd15b617586")
 
 ## 🚀 Core Modules & Features
 
@@ -76,25 +74,9 @@ LSTM / Sequence Models → Future Trend Forecast
       ↓
 Explainable AI Module → Generates Verdicts & Insights
       ↓
-Dashboard Visualization (Chart.js / Plotly)
----
-
-## 🧠 System Architecture
-
-```text
-User Input (UI)
-      ↓
-XGBoost Model → Current Value Prediction
-      ↓
-LSTM Model → Future Trend Forecast
-      ↓
-Domain Logic Layer (Position, Contract, Age)
-      ↓
-Explainable AI Module
-      ↓
-Dashboard Visualization (Chart.js)
-```
+Dashboard Visualization (Chart)
 ----
+```
 ⚙️ How It Works
 ```
 1. User inputs player attributes (age, performance, injury, sentiment)
