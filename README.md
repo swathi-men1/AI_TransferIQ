@@ -264,9 +264,9 @@ python src/main.py
 Runs all 5 pipeline stages:
 1. Data Cleaning & Merging
 2. Feature Engineering (59 features)
-3. LSTM Model Training (NumPy)
+3. LSTM Model Training
 4. Ensemble Model Training
-5. Best Model v2 Training (Stacking Ensemble)
+5. Best Model v2 Training
 
 ---
 
@@ -296,7 +296,7 @@ Feature Engineering (59 features)
 Predicted Transfer Value (log scale → €)
 ```
 
-**Web app uses Ridge Regression directly** for instant, explainable predictions.
+**Web app uses best model directly** for instant, explainable predictions.
 
 ### Feature Engineering Highlights
 
@@ -465,11 +465,6 @@ GET /api/players?position=midfielder&stage=prime&risk=low&sort=predicted_value&p
 | Week 7 | Hyperparameter Tuning | Best model v2, R²=0.761 |
 | Week 8 | Web App + Visualization + Report | Full project delivery |
 
----
-
-## License
-
-This project was developed as an internship project for educational and research purposes.
 
 ---
 
