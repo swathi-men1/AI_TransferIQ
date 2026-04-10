@@ -31,42 +31,6 @@ The system not only predicts a player’s **current market value** but also fore
 
 ![Dashboard](./assets/dashboard.png)
 
----
-
-<div align="center">
-
-# ⚽ TransferIQ Pro  
-### AI-Powered Football Valuation & Future Trend Forecasting System
-
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python)
-![Flask](https://img.shields.io/badge/Flask-Backend-black?style=for-the-badge&logo=flask)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-LSTM-orange?style=for-the-badge&logo=tensorflow)
-![XGBoost](https://img.shields.io/badge/XGBoost-Regressor-green?style=for-the-badge)
-
-</div>
-
----
-
-## 📖 About The Project
-
-**TransferIQ Pro** is an AI-powered football analytics platform designed to predict player transfer values using data-driven techniques.
-
-In real-world football markets, player valuations are often influenced by hype, media narratives, and agent negotiations. This system eliminates subjectivity by combining:
-
-- 📊 Performance Metrics  
-- 🩹 Injury Risk Analysis  
-- 🌍 Public Sentiment (NLP)
-
-The system not only predicts a player’s **current market value** but also forecasts their **future valuation trend for the next 3 years** using advanced AI/ML architectures.
-
----
-
-## 📸 Dashboard Preview
-
-<img width="1350" height="641" alt="image" src="https://github.com/user-attachments/assets/6988dcb7-da53-4d3f-85d4-6fd15b617586" />
-
----
-
 ## 🚀 Core Modules & Features
 
 TransferIQ Pro is divided into four highly interactive modules to serve different scouting and analytical needs:
