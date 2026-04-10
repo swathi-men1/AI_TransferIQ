@@ -10,6 +10,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+import streamlit.components.v1 as components
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -84,15 +85,16 @@ st.markdown(
     .hero-shell {
         overflow: hidden;
         padding: 0;
-        margin-bottom: 1rem;
+        margin-bottom: 4.5rem;
+        position: relative;
     }
     .landing-grid {
         display: grid;
         grid-template-columns: 1.15fr 0.85fr;
-        min-height: 68vh;
+        min-height: clamp(460px, 60vh, 680px);
     }
     .landing-copy {
-        padding: 2.6rem 3rem 2rem;
+        padding: 2.35rem 3rem 4.6rem;
         position: relative;
     }
     .eyebrow {
@@ -124,13 +126,53 @@ st.markdown(
         line-height: 1.7;
     }
     .landing-go {
-        width: min(200px, 100%);
-        margin-top: 0.15rem;
-        margin-left: 0;
-        margin-right: 0;
-        margin-bottom: 0;
+        width: clamp(88px, 7vw, 108px);
+        margin: -8.4rem clamp(3.8rem, 7vw, 7rem) 0 auto;
         position: relative;
-        z-index: 12;
+        z-index: 14;
+        filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.28));
+    }
+    .landing-go div[data-testid="stButton"] {
+        margin: 0;
+    }
+    .landing-go button {
+        width: 100%;
+        aspect-ratio: 1;
+        min-height: auto;
+        padding: 0;
+        border-radius: 50%;
+        border: 2px solid rgba(16, 28, 36, 0.92);
+        color: #0d1820;
+        font-size: 1rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background:
+            radial-gradient(circle at 50% 50%, rgba(255,255,255,0.98) 0 58%, rgba(232,238,245,0.98) 59% 100%),
+            radial-gradient(circle at 50% 26%, #16232d 0 8%, transparent 9%),
+            radial-gradient(circle at 23% 56%, #16232d 0 8%, transparent 9%),
+            radial-gradient(circle at 77% 56%, #16232d 0 8%, transparent 9%),
+            radial-gradient(circle at 36% 81%, #16232d 0 6.5%, transparent 7.5%),
+            radial-gradient(circle at 64% 81%, #16232d 0 6.5%, transparent 7.5%);
+        box-shadow:
+            inset 0 -8px 12px rgba(0, 0, 0, 0.14),
+            inset 0 8px 10px rgba(255, 255, 255, 0.55),
+            0 10px 22px rgba(0, 0, 0, 0.22);
+        transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+    }
+    .landing-go button:hover {
+        transform: translateY(-4px) scale(1.04);
+        box-shadow:
+            inset 0 -8px 12px rgba(0, 0, 0, 0.16),
+            inset 0 8px 10px rgba(255, 255, 255, 0.58),
+            0 16px 28px rgba(0, 0, 0, 0.26);
+    }
+    .landing-go button:active {
+        transform: translateY(-1px) scale(0.98);
+    }
+    .landing-go button:focus-visible {
+        outline: 3px solid rgba(141, 245, 163, 0.75);
+        outline-offset: 3px;
     }
     .landing-go-launching {
         visibility: hidden;
@@ -664,6 +706,11 @@ st.markdown(
         box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
         text-shadow: 0 1px 1px rgba(0,0,0,0.18);
     }
+    .stButton > button *,
+    .stDownloadButton > button * {
+        color: #ffffff !important;
+        fill: #ffffff !important;
+    }
     .stButton > button:hover {
         border-color: rgba(207, 255, 247, 0.75);
         background: linear-gradient(135deg, #26757a, #38919a 52%, #5ca7af);
@@ -698,8 +745,21 @@ st.markdown(
         margin-top: 0.75rem;
     }
     details[data-testid="stExpander"] summary {
+        background: rgba(15, 36, 46, 0.96) !important;
+        border-radius: 14px !important;
+        padding: 0.8rem 0.95rem !important;
         color: #f4fffb !important;
         font-weight: 700 !important;
+    }
+    details[data-testid="stExpander"] summary:hover {
+        background: rgba(22, 51, 63, 0.98) !important;
+    }
+    details[data-testid="stExpander"] summary *,
+    details[data-testid="stExpander"] summary p,
+    details[data-testid="stExpander"] summary span,
+    details[data-testid="stExpander"] summary svg {
+        color: #f4fffb !important;
+        fill: #8df5a3 !important;
     }
     @keyframes kick {
         0% { transform: rotate(-47deg); }
@@ -748,8 +808,9 @@ st.markdown(
         .block-container { padding: 0.35rem 1rem 1.8rem; }
         .landing-grid { grid-template-columns: 1fr; }
         .kick-stage { min-height: 360px; }
-        .landing-copy { padding: 2rem 1.2rem; }
-        .landing-go { width: min(200px, 100%); margin-top: 0.2rem; }
+        .landing-copy { padding: 2rem 1.2rem 4.2rem; }
+        .hero-shell { margin-bottom: 4rem; }
+        .landing-go { width: clamp(82px, 12vw, 98px); margin: -7.2rem 5.4rem 0 auto; }
         .player-wrap { right: 50%; transform: translateX(40%); bottom: 10%; }
         .ai-orbit { width: 160px; height: 160px; top: 8%; right: 8%; }
     }
@@ -762,7 +823,10 @@ st.markdown(
         .landing-title { font-size: 2.5rem; }
         .landing-text { font-size: 0.96rem; }
         .kick-stage { min-height: 310px; }
-        .landing-go { width: min(180px, 100%); margin-top: 0.25rem; }
+        .landing-copy { padding-bottom: 3.9rem; }
+        .hero-shell { margin-bottom: 3.6rem; }
+        .landing-go { width: 78px; margin: -6.1rem 4.15rem 0 auto; }
+        .landing-go button { font-size: 0.86rem; }
         .player-wrap { transform: translateX(32%) scale(0.82); }
         .dashboard-head { font-size: 2rem; }
         .metric-card, .spotlight-card, .insight-card { padding: 1rem; }
@@ -924,6 +988,30 @@ def driver_cards(metrics: dict) -> list[tuple[str, str, str]]:
     ]
 
 
+def _clip(value: float, low: float, high: float) -> float:
+    return float(min(max(value, low), high))
+
+
+def harmonize_interactive_inputs(base_row: pd.DataFrame, input_row: pd.DataFrame, injuries: int, sentiment: float) -> pd.DataFrame:
+    adjusted = input_row.copy()
+    base = base_row.iloc[0]
+
+    base_injuries = float(base["total_injuries"])
+    base_days = float(base["total_days_missed"])
+    base_days_per_injury = base_days / max(base_injuries, 1.0) if base_days > 0 else 18.0
+    adjusted["total_days_missed"] = 0.0 if injuries <= 0 else round(injuries * base_days_per_injury, 1)
+
+    base_sentiment = float(base["avg_sentiment_3m"])
+    sentiment_delta = sentiment - base_sentiment
+    adjusted["positive_sentiment_ratio"] = _clip(float(base["positive_sentiment_ratio"]) + sentiment_delta * 0.40, 0.05, 0.95)
+    adjusted["negative_sentiment_ratio"] = _clip(float(base["negative_sentiment_ratio"]) - sentiment_delta * 0.30, 0.01, 0.90)
+    adjusted["peak_sentiment"] = _clip(max(sentiment, float(base["peak_sentiment"]) + sentiment_delta * 0.55), 0.0, 1.0)
+    adjusted["lowest_sentiment"] = _clip(min(sentiment, float(base["lowest_sentiment"]) + sentiment_delta * 0.45), 0.0, 1.0)
+    adjusted["sentiment_trend"] = _clip(float(base["sentiment_trend"]) + sentiment_delta * 0.12, -1.0, 1.0)
+    adjusted["sentiment_volatility"] = _clip(float(base["sentiment_volatility"]) - abs(sentiment_delta) * 0.04, 0.0, 1.0)
+    return adjusted
+
+
 def apply_interactive_performance_guard(
     prediction: pd.Series,
     baseline_prediction: pd.Series,
@@ -936,6 +1024,9 @@ def apply_interactive_performance_guard(
     base_assists = int(base_row.at[0, "total_assists"])
     goal_delta = goals - base_goals
     assist_delta = assists - base_assists
+    base_contributions = base_goals + base_assists
+    current_contributions = goals + assists
+    contribution_delta = current_contributions - base_contributions
 
     if goal_delta == 0 and assist_delta == 0:
         adjusted["ensemble_prediction"] = max(float(adjusted["ensemble_prediction"]), 0.0)
@@ -945,6 +1036,7 @@ def apply_interactive_performance_guard(
     market_anchor = max(float(base_row.at[0, "current_market_value"]), 1_000_000.0)
     goal_unit = max(market_anchor * 0.0015, 20_000.0)
     assist_unit = max(market_anchor * 0.0010, 15_000.0)
+    contribution_unit = max(market_anchor * 0.0013, 18_000.0)
     directional_target = max(
         0.0,
         float(baseline_prediction["ensemble_prediction"])
@@ -963,9 +1055,595 @@ def apply_interactive_performance_guard(
         else:
             adjusted["ensemble_prediction"] = min(raw_model_value, directional_target * 0.65 + raw_model_value * 0.35)
 
+    if contribution_delta > 0:
+        contribution_floor = max(
+            0.0,
+            float(baseline_prediction["ensemble_prediction"]) + contribution_delta * contribution_unit,
+        )
+        adjusted["ensemble_prediction"] = max(float(adjusted["ensemble_prediction"]), contribution_floor)
+
     adjusted["ensemble_prediction"] = max(float(adjusted["ensemble_prediction"]), 0.0)
     adjusted["prediction_delta_vs_current_value"] = adjusted["ensemble_prediction"] - adjusted["current_market_value"]
     return adjusted
+
+
+def render_filterable_table(
+    dataframe: pd.DataFrame,
+    key_prefix: str,
+    default_visible_columns: list[str] | None = None,
+    height: int = 420,
+) -> None:
+    if dataframe.empty:
+        st.info("No rows are available for this table.")
+        return
+
+    all_columns = dataframe.columns.tolist()
+    visible_columns = [column for column in (default_visible_columns or all_columns) if column in all_columns]
+    if not visible_columns:
+        visible_columns = all_columns[: min(len(all_columns), 7)]
+    display_df = dataframe[visible_columns].copy().where(pd.notna(dataframe[visible_columns]), None)
+
+    column_meta: list[dict[str, object]] = []
+    for column in visible_columns:
+        series = display_df[column]
+        options: list[str] = []
+        if not pd.api.types.is_numeric_dtype(series):
+            unique_values = sorted(
+                {
+                    str(value).strip()
+                    for value in series.dropna().astype(str)
+                    if str(value).strip() and str(value).strip().lower() != "nan"
+                }
+            )
+            if 0 < len(unique_values) <= 18:
+                options = unique_values
+        column_meta.append(
+            {
+                "name": column,
+                "label": column,
+                "numeric": bool(pd.api.types.is_numeric_dtype(series)),
+                "options": options,
+                "market_mode": column == "current_market_value_eur",
+            }
+        )
+
+    rows_json = json.dumps(display_df.to_dict(orient="records"))
+    meta_json = json.dumps(column_meta)
+    table_id = f"{key_prefix}_interactive_table"
+    component_height = max(height + 170, 560)
+
+    html_block = """
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8" />
+      <style>
+        :root {
+          color-scheme: dark;
+          --bg: #091821;
+          --panel: #0c1d27;
+          --panel-2: #112632;
+          --line: rgba(255, 255, 255, 0.10);
+          --line-strong: rgba(141, 245, 163, 0.24);
+          --text: #eefcf8;
+          --muted: #9fc0b7;
+          --accent: #6ef1dc;
+          --accent-2: #8dc8ff;
+          --header: #173543;
+          --row: #0d2430;
+          --row-alt: #112b38;
+        }
+        * {
+          box-sizing: border-box;
+        }
+        body {
+          margin: 0;
+          font-family: "Segoe UI", Arial, sans-serif;
+          background: transparent;
+          color: var(--text);
+        }
+        .table-shell {
+          border: 1px solid var(--line);
+          border-radius: 20px;
+          background: linear-gradient(180deg, rgba(10, 25, 33, 0.98), rgba(8, 22, 30, 0.98));
+          padding: 14px;
+        }
+        .toolbar {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 12px;
+        }
+        .search-input {
+          width: 100%;
+          border-radius: 14px;
+          border: 1px solid rgba(173, 231, 220, 0.20);
+          background: rgba(255, 255, 255, 0.05);
+          color: var(--text);
+          padding: 12px 14px;
+          font-size: 14px;
+          font-weight: 600;
+          outline: none;
+        }
+        .search-input::placeholder {
+          color: #bdd7cf;
+        }
+        .clear-button {
+          border: 1px solid rgba(173, 231, 220, 0.22);
+          background: linear-gradient(135deg, #1f6469, #2f7880 48%, #4d8f97);
+          color: #ffffff;
+          border-radius: 14px;
+          padding: 12px 14px;
+          font-size: 13px;
+          font-weight: 700;
+          cursor: pointer;
+          white-space: nowrap;
+        }
+        .count-line {
+          color: var(--muted);
+          font-size: 13px;
+          margin-bottom: 10px;
+        }
+        .table-wrap {
+          border: 1px solid var(--line);
+          border-radius: 18px;
+          overflow: auto;
+          max-height: __TABLE_HEIGHT__px;
+          background: rgba(6, 18, 25, 0.84);
+        }
+        table {
+          width: 100%;
+          min-width: 100%;
+          border-collapse: separate;
+          border-spacing: 0;
+        }
+        thead th {
+          position: sticky;
+          top: 0;
+          z-index: 4;
+          background: var(--header);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+          border-right: 1px solid rgba(255, 255, 255, 0.08);
+          padding: 0;
+          text-align: left;
+          min-width: 160px;
+        }
+        thead th:last-child,
+        tbody td:last-child {
+          border-right: none;
+        }
+        .head-bar {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 8px;
+          padding: 11px 12px;
+        }
+        .head-label {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 13px;
+          font-weight: 700;
+          color: #f2fffb;
+          line-height: 1.35;
+          word-break: break-word;
+        }
+        .sort-flag {
+          color: var(--accent);
+          font-size: 11px;
+          letter-spacing: 0.04em;
+        }
+        .head-button {
+          width: 28px;
+          min-width: 28px;
+          height: 28px;
+          border: 1px solid rgba(255, 255, 255, 0.10);
+          border-radius: 9px;
+          background: rgba(255, 255, 255, 0.06);
+          color: #ffffff;
+          font-size: 13px;
+          cursor: pointer;
+        }
+        .head-button:hover {
+          background: rgba(110, 241, 220, 0.16);
+          border-color: rgba(110, 241, 220, 0.26);
+        }
+        .column-menu {
+          position: absolute;
+          top: calc(100% - 2px);
+          right: 10px;
+          width: 240px;
+          display: none;
+          padding: 12px;
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          background: rgba(7, 20, 28, 0.98);
+          box-shadow: 0 20px 36px rgba(0, 0, 0, 0.36);
+        }
+        .column-menu.open {
+          display: block;
+        }
+        .menu-title {
+          color: var(--text);
+          font-size: 13px;
+          font-weight: 700;
+          margin-bottom: 10px;
+        }
+        .menu-label {
+          display: block;
+          color: var(--muted);
+          font-size: 11px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          margin: 10px 0 6px;
+        }
+        .menu-group {
+          display: grid;
+          gap: 8px;
+        }
+        .menu-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+        }
+        .menu-button,
+        .menu-input,
+        .menu-select {
+          width: 100%;
+          border-radius: 12px;
+          border: 1px solid rgba(255, 255, 255, 0.10);
+          background: rgba(255, 255, 255, 0.05);
+          color: #f2fffb;
+          padding: 10px 12px;
+          font-size: 12px;
+          font-weight: 600;
+          outline: none;
+        }
+        .menu-button {
+          cursor: pointer;
+        }
+        .menu-button:hover {
+          background: rgba(110, 241, 220, 0.16);
+          border-color: rgba(110, 241, 220, 0.24);
+        }
+        tbody td {
+          padding: 11px 12px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-right: 1px solid rgba(255, 255, 255, 0.05);
+          background: var(--row);
+          color: #eefcf8;
+          font-size: 13px;
+          vertical-align: top;
+        }
+        tbody tr:nth-child(even) td {
+          background: var(--row-alt);
+        }
+        tbody tr:hover td {
+          background: rgba(26, 66, 82, 0.96);
+        }
+        .numeric-cell {
+          text-align: right;
+          font-variant-numeric: tabular-nums;
+        }
+        .empty-row {
+          text-align: center;
+          color: var(--muted);
+          padding: 16px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="table-shell" id="__TABLE_ID__">
+        <div class="toolbar">
+          <input id="__TABLE_ID___search" class="search-input" type="text" placeholder="Search player name, club, career stage, or any table value" />
+          <button id="__TABLE_ID___clear" class="clear-button" type="button">Clear</button>
+        </div>
+        <div class="count-line" id="__TABLE_ID___count"></div>
+        <div class="table-wrap">
+          <table>
+            <thead id="__TABLE_ID___thead"></thead>
+            <tbody id="__TABLE_ID___tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <script>
+        const rows = __ROWS_JSON__;
+        const columns = __META_JSON__;
+        const root = document.getElementById("__TABLE_ID__");
+        const searchInput = document.getElementById("__TABLE_ID___search");
+        const clearButton = document.getElementById("__TABLE_ID___clear");
+        const countLine = document.getElementById("__TABLE_ID___count");
+        const head = document.getElementById("__TABLE_ID___thead");
+        const body = document.getElementById("__TABLE_ID___tbody");
+
+        const state = {
+          search: "",
+          sortColumn: "",
+          sortDirection: "asc",
+          filters: {}
+        };
+
+        columns.forEach((column) => {
+          state.filters[column.name] = {
+            exact: "",
+            contains: "",
+            min: "",
+            max: "",
+            marketMode: "All rows"
+          };
+        });
+
+        function escapeHtml(value) {
+          return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+        }
+
+        function formatValue(value) {
+          if (value === null || value === undefined || value === "") {
+            return "";
+          }
+          if (typeof value === "number") {
+            if (Number.isInteger(value)) {
+              return new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(value);
+            }
+            return new Intl.NumberFormat("en-US", {
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 4
+            }).format(value);
+          }
+          return escapeHtml(String(value));
+        }
+
+        function closeMenus() {
+          root.querySelectorAll(".column-menu.open").forEach((menu) => menu.classList.remove("open"));
+        }
+
+        function compareValues(left, right, numeric) {
+          if (left === null || left === undefined || left === "") return 1;
+          if (right === null || right === undefined || right === "") return -1;
+          if (numeric) {
+            return Number(left) - Number(right);
+          }
+          return String(left).localeCompare(String(right), undefined, { sensitivity: "base" });
+        }
+
+        function filteredRows() {
+          let active = rows.filter((row) => {
+            if (state.search) {
+              const matchesSearch = columns.some((column) => {
+                const raw = row[column.name];
+                return String(raw ?? "").toLowerCase().includes(state.search);
+              });
+              if (!matchesSearch) {
+                return false;
+              }
+            }
+
+            for (const column of columns) {
+              const filter = state.filters[column.name];
+              const raw = row[column.name];
+
+              if (column.numeric) {
+                const numericValue = Number(raw ?? 0);
+                if (column.market_mode) {
+                  if (filter.marketMode === "Known values only" && numericValue <= 0) {
+                    return false;
+                  }
+                  if (filter.marketMode === "Zero values only" && numericValue > 0) {
+                    return false;
+                  }
+                }
+                if (filter.min !== "" && numericValue < Number(filter.min)) {
+                  return false;
+                }
+                if (filter.max !== "" && numericValue > Number(filter.max)) {
+                  return false;
+                }
+                continue;
+              }
+
+              const textValue = String(raw ?? "");
+              if (filter.exact && textValue !== filter.exact) {
+                return false;
+              }
+              if (filter.contains && !textValue.toLowerCase().includes(filter.contains.toLowerCase())) {
+                return false;
+              }
+            }
+
+            return true;
+          });
+
+          if (state.sortColumn) {
+            const columnMeta = columns.find((column) => column.name === state.sortColumn);
+            active = active.slice().sort((left, right) => {
+              const comparison = compareValues(left[state.sortColumn], right[state.sortColumn], Boolean(columnMeta && columnMeta.numeric));
+              return state.sortDirection === "asc" ? comparison : -comparison;
+            });
+          }
+
+          return active;
+        }
+
+        function renderRows() {
+          const active = filteredRows();
+          countLine.textContent = "Showing " + active.length.toLocaleString("en-US") + " of " + rows.length.toLocaleString("en-US") + " rows.";
+
+          if (!active.length) {
+            body.innerHTML = '<tr><td class="empty-row" colspan="' + columns.length + '">No rows match the current search or filters.</td></tr>';
+            return;
+          }
+
+          body.innerHTML = active.map((row) => {
+            return "<tr>" + columns.map((column) => {
+              const className = column.numeric ? "numeric-cell" : "";
+              return '<td class="' + className + '">' + formatValue(row[column.name]) + "</td>";
+            }).join("") + "</tr>";
+          }).join("");
+        }
+
+        function renderHeader() {
+          const headerHtml = columns.map((column) => {
+            const filter = state.filters[column.name];
+            const sortFlag = state.sortColumn === column.name ? (state.sortDirection === "asc" ? "ASC" : "DESC") : "";
+            const exactOptions = Array.isArray(column.options)
+              ? column.options.map((option) => '<option value="' + escapeHtml(option) + '"' + (filter.exact === option ? " selected" : "") + ">" + escapeHtml(option) + "</option>").join("")
+              : "";
+            const menuBody = column.numeric
+              ? `
+                  <label class="menu-label">Sort</label>
+                  <div class="menu-row">
+                    <button class="menu-button" type="button" data-action="sort-asc">Ascending</button>
+                    <button class="menu-button" type="button" data-action="sort-desc">Descending</button>
+                  </div>
+                  <button class="menu-button" type="button" data-action="sort-clear">Clear sort</button>
+                  ${column.market_mode ? `
+                    <label class="menu-label">Value mode</label>
+                    <select class="menu-select" data-action="market-mode">
+                      <option${filter.marketMode === "All rows" ? " selected" : ""}>All rows</option>
+                      <option${filter.marketMode === "Known values only" ? " selected" : ""}>Known values only</option>
+                      <option${filter.marketMode === "Zero values only" ? " selected" : ""}>Zero values only</option>
+                    </select>
+                  ` : ""}
+                  <label class="menu-label">Range</label>
+                  <div class="menu-row">
+                    <input class="menu-input" type="number" step="any" data-action="min" placeholder="Min" value="${escapeHtml(filter.min)}" />
+                    <input class="menu-input" type="number" step="any" data-action="max" placeholder="Max" value="${escapeHtml(filter.max)}" />
+                  </div>
+                  <button class="menu-button" type="button" data-action="clear-filter">Clear filter</button>
+                `
+              : `
+                  <label class="menu-label">Sort</label>
+                  <div class="menu-row">
+                    <button class="menu-button" type="button" data-action="sort-asc">Ascending</button>
+                    <button class="menu-button" type="button" data-action="sort-desc">Descending</button>
+                  </div>
+                  <button class="menu-button" type="button" data-action="sort-clear">Clear sort</button>
+                  ${column.options && column.options.length ? `
+                    <label class="menu-label">Exact value</label>
+                    <select class="menu-select" data-action="exact">
+                      <option value="">All values</option>
+                      ${exactOptions}
+                    </select>
+                  ` : `
+                    <label class="menu-label">Contains</label>
+                    <input class="menu-input" type="text" data-action="contains" placeholder="Type to filter" value="${escapeHtml(filter.contains)}" />
+                  `}
+                  <button class="menu-button" type="button" data-action="clear-filter">Clear filter</button>
+                `;
+
+            return `
+              <th>
+                <div class="head-bar">
+                  <span class="head-label">${escapeHtml(column.label)}${sortFlag ? `<span class="sort-flag">${sortFlag}</span>` : ""}</span>
+                  <button class="head-button" type="button" data-column="${escapeHtml(column.name)}">&#9662;</button>
+                  <div class="column-menu" data-menu="${escapeHtml(column.name)}">
+                    <div class="menu-title">${escapeHtml(column.label)}</div>
+                    <div class="menu-group">${menuBody}</div>
+                  </div>
+                </div>
+              </th>
+            `;
+          }).join("");
+
+          head.innerHTML = "<tr>" + headerHtml + "</tr>";
+
+          root.querySelectorAll(".head-button").forEach((button) => {
+            button.addEventListener("click", (event) => {
+              event.stopPropagation();
+              const menu = button.parentElement.querySelector(".column-menu");
+              const alreadyOpen = menu.classList.contains("open");
+              closeMenus();
+              if (!alreadyOpen) {
+                menu.classList.add("open");
+              }
+            });
+          });
+
+          root.querySelectorAll(".column-menu").forEach((menu) => {
+            menu.addEventListener("click", (event) => event.stopPropagation());
+            const columnName = menu.getAttribute("data-menu");
+            menu.querySelectorAll("[data-action]").forEach((control) => {
+              const action = control.getAttribute("data-action");
+              const apply = () => {
+                if (action === "sort-asc") {
+                  state.sortColumn = columnName;
+                  state.sortDirection = "asc";
+                } else if (action === "sort-desc") {
+                  state.sortColumn = columnName;
+                  state.sortDirection = "desc";
+                } else if (action === "sort-clear") {
+                  if (state.sortColumn === columnName) {
+                    state.sortColumn = "";
+                  }
+                } else if (action === "min") {
+                  state.filters[columnName].min = control.value;
+                } else if (action === "max") {
+                  state.filters[columnName].max = control.value;
+                } else if (action === "contains") {
+                  state.filters[columnName].contains = control.value;
+                } else if (action === "exact") {
+                  state.filters[columnName].exact = control.value;
+                } else if (action === "market-mode") {
+                  state.filters[columnName].marketMode = control.value;
+                } else if (action === "clear-filter") {
+                  state.filters[columnName] = { exact: "", contains: "", min: "", max: "", marketMode: "All rows" };
+                }
+                renderHeader();
+                renderRows();
+              };
+
+              if (control.tagName === "BUTTON") {
+                control.addEventListener("click", apply);
+              } else if (control.tagName === "SELECT") {
+                control.addEventListener("change", apply);
+              } else {
+                control.addEventListener("input", apply);
+              }
+            });
+          });
+        }
+
+        searchInput.addEventListener("input", (event) => {
+          state.search = event.target.value.trim().toLowerCase();
+          renderRows();
+        });
+
+        clearButton.addEventListener("click", () => {
+          state.search = "";
+          state.sortColumn = "";
+          state.sortDirection = "asc";
+          columns.forEach((column) => {
+            state.filters[column.name] = { exact: "", contains: "", min: "", max: "", marketMode: "All rows" };
+          });
+          searchInput.value = "";
+          renderHeader();
+          renderRows();
+        });
+
+        document.addEventListener("click", () => closeMenus());
+        renderHeader();
+        renderRows();
+      </script>
+    </body>
+    </html>
+    """
+
+    html_block = (
+        html_block.replace("__ROWS_JSON__", rows_json)
+        .replace("__META_JSON__", meta_json)
+        .replace("__TABLE_HEIGHT__", str(height))
+        .replace("__TABLE_ID__", table_id)
+    )
+    components.html(html_block, height=component_height, scrolling=False)
 
 
 def render_landing() -> None:
@@ -1011,11 +1689,9 @@ def render_landing() -> None:
     )
     go_class = "landing-go"
     st.markdown(f'<div class="{go_class}">', unsafe_allow_html=True)
-    left, go_col, spacer = st.columns([0.38, 0.16, 0.46])
-    with go_col:
-        if st.button("Go", use_container_width=True):
-            st.session_state["entered"] = True
-            st.rerun()
+    if st.button("Go", width="stretch"):
+        st.session_state["entered"] = True
+        st.rerun()
     st.markdown("</div>", unsafe_allow_html=True)
 
 
@@ -1108,10 +1784,10 @@ def render_prediction_workspace(predictor: TransferValuePredictor, library: pd.D
         input_row["total_assists"] = assists
         input_row["current_market_value"] = market_value
         input_row["total_injuries"] = injuries
-        input_row["total_days_missed"] = injuries * 18.0
         input_row["avg_sentiment_3m"] = sentiment
         input_row["avg_monthly_mentions"] = mentions
         input_row["engagement_rate"] = engagement
+        input_row = harmonize_interactive_inputs(base_row, input_row, injuries, sentiment)
 
         prediction = predictor.predict(input_row).iloc[0]
         prediction = apply_interactive_performance_guard(
@@ -1143,7 +1819,7 @@ def render_prediction_workspace(predictor: TransferValuePredictor, library: pd.D
             color_discrete_sequence=["#5876ff", "#53d6c7", "#ffd16d", "#8df5a3"],
         )
         waterfall.update_layout(height=330, margin=dict(l=12, r=12, t=10, b=12), paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
-        st.plotly_chart(waterfall, use_container_width=True)
+        st.plotly_chart(waterfall, width="stretch")
 
     with right:
         st.markdown('<div class="insight-card">', unsafe_allow_html=True)
@@ -1213,7 +1889,7 @@ def render_prediction_workspace(predictor: TransferValuePredictor, library: pd.D
             ),
             showlegend=False,
         )
-        st.plotly_chart(radar, use_container_width=True)
+        st.plotly_chart(radar, width="stretch")
 
 
 def render_bulk_lab(predictor: TransferValuePredictor) -> None:
@@ -1227,45 +1903,61 @@ def render_bulk_lab(predictor: TransferValuePredictor) -> None:
         bulk_df = pd.read_csv(RAW_DATA_PATH).head(20)
 
     st.caption(f"Loaded rows: {len(bulk_df):,} | Preview shown below: {min(len(bulk_df), 8):,}")
-    st.dataframe(bulk_df.head(8), use_container_width=True)
-    if st.button("Run AI Bulk Scan", use_container_width=True):
+    st.dataframe(bulk_df.head(8), width="stretch")
+    if st.button("Run AI Bulk Scan", width="stretch"):
         bulk_results = predictor.predict(bulk_df)
         ranked_results = bulk_results.sort_values("ensemble_prediction", ascending=False).reset_index(drop=True)
         leader = ranked_results.head(15).copy()
-        display_columns = [
+        top_display_columns = [
             "player_name",
             "current_market_value",
             "ensemble_prediction",
             "prediction_confidence",
             "prediction_delta_vs_current_value",
         ]
-        available_display_columns = [col for col in display_columns if col in ranked_results.columns]
-        top15_display = leader[available_display_columns].copy()
-        full_display = ranked_results[available_display_columns].copy()
+        table_columns = [
+            "player_name",
+            "current_club_name",
+            "current_market_value",
+            "ensemble_prediction",
+            "prediction_confidence",
+            "prediction_delta_vs_current_value",
+            "total_goals",
+            "total_assists",
+            "total_injuries",
+            "avg_sentiment_3m",
+            "career_stage",
+            "sentiment_band",
+            "injury_risk_category",
+            "transfer_window",
+            "competition_score",
+            "age_proxy",
+        ]
+        available_top_columns = [col for col in top_display_columns if col in ranked_results.columns]
+        available_table_columns = [col for col in table_columns if col in ranked_results.columns]
+        top15_display = leader[available_top_columns].copy()
+        full_display = ranked_results[available_table_columns].copy()
         top15_display.insert(0, "rank", range(1, len(top15_display) + 1))
         full_display.insert(0, "rank", range(1, len(full_display) + 1))
-        top15_display = top15_display.rename(
-            columns={
-                "current_market_value": "current_market_value_eur",
-                "ensemble_prediction": "predicted_transfer_fee_eur",
-                "prediction_confidence": "prediction_confidence_pct",
-                "prediction_delta_vs_current_value": "delta_vs_current_value_eur",
-            }
-        )
-        full_display = full_display.rename(
-            columns={
-                "current_market_value": "current_market_value_eur",
-                "ensemble_prediction": "predicted_transfer_fee_eur",
-                "prediction_confidence": "prediction_confidence_pct",
-                "prediction_delta_vs_current_value": "delta_vs_current_value_eur",
-            }
-        )
+        rename_map = {
+            "current_market_value": "current_market_value_eur",
+            "ensemble_prediction": "predicted_transfer_fee_eur",
+            "prediction_confidence": "prediction_confidence_pct",
+            "prediction_delta_vs_current_value": "delta_vs_current_value_eur",
+        }
+        top15_display = top15_display.rename(columns=rename_map)
+        full_display = full_display.rename(columns=rename_map)
         st.caption(f"Predictions completed for {len(ranked_results):,} players.")
+        zero_market_rows = int(pd.to_numeric(ranked_results["current_market_value"], errors="coerce").fillna(0.0).eq(0).sum())
+        if zero_market_rows:
+            st.caption(
+                f"{zero_market_rows:,} rows show `current_market_value = 0` because the source dataset has missing or unavailable market values stored as zero."
+            )
         st.markdown("**Top 15 Predicted Players By Transfer Fee**")
         st.caption("Players are ranked in descending order by predicted transfer fee, not by original dataset index.")
         st.dataframe(
             top15_display,
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
         chart = px.bar(
@@ -1276,17 +1968,30 @@ def render_bulk_lab(predictor: TransferValuePredictor) -> None:
             color_continuous_scale="Tealgrn",
         )
         chart.update_layout(height=360, margin=dict(l=10, r=10, t=10, b=10), paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
-        st.plotly_chart(chart, use_container_width=True)
+        st.plotly_chart(chart, width="stretch")
         csv_payload = ranked_results.to_csv(index=False).encode("utf-8")
         st.download_button(
             "Download Full Predictions CSV",
             data=csv_payload,
             file_name="bulk_transfer_predictions.csv",
             mime="text/csv",
-            use_container_width=True,
+            width="stretch",
         )
         with st.expander("Show all predicted players"):
-            st.dataframe(full_display, use_container_width=True, height=420, hide_index=True)
+            render_filterable_table(
+                full_display,
+                key_prefix="bulk_predictions",
+                default_visible_columns=[
+                    "rank",
+                    "player_name",
+                    "current_club_name",
+                    "current_market_value_eur",
+                    "predicted_transfer_fee_eur",
+                    "prediction_confidence_pct",
+                    "delta_vs_current_value_eur",
+                ],
+                height=420,
+            )
     st.markdown("</div>", unsafe_allow_html=True)
 
 
@@ -1309,7 +2014,7 @@ def render_ai_insights(metrics: dict, test_predictions: pd.DataFrame) -> None:
             plot_bgcolor="rgba(0,0,0,0)",
             yaxis={"categoryorder": "total ascending"},
         )
-        st.plotly_chart(feature_chart, use_container_width=True)
+        st.plotly_chart(feature_chart, width="stretch")
     with right:
         eval_df = test_predictions.dropna(subset=["ensemble_prediction"]).copy()
         eval_df["absolute_error"] = (eval_df["target_value"] - eval_df["ensemble_prediction"]).abs()
@@ -1323,7 +2028,7 @@ def render_ai_insights(metrics: dict, test_predictions: pd.DataFrame) -> None:
             color_continuous_scale="Turbo",
         )
         scatter.update_layout(height=430, margin=dict(l=10, r=10, t=10, b=10), paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
-        st.plotly_chart(scatter, use_container_width=True)
+        st.plotly_chart(scatter, width="stretch")
 
     cards = st.columns(3)
     for col, (title, value, text) in zip(cards, driver_cards(metrics)):
@@ -1341,15 +2046,15 @@ def render_ai_insights(metrics: dict, test_predictions: pd.DataFrame) -> None:
 
 
 init_state()
-predictor = load_predictor()
-library = load_library()
-raw_profiles = load_raw_profiles()
-metrics = load_metrics()
-test_predictions = load_test_predictions()
 
 if not st.session_state["entered"]:
     render_landing()
 else:
+    predictor = load_predictor()
+    library = load_library()
+    raw_profiles = load_raw_profiles()
+    metrics = load_metrics()
+    test_predictions = load_test_predictions()
     top_left, top_right = st.columns([0.8, 0.2])
     with top_left:
         st.markdown(
@@ -1364,7 +2069,7 @@ else:
         )
     with top_right:
         st.markdown("<div style='height: 1.35rem;'></div>", unsafe_allow_html=True)
-        if st.button("Entrance", use_container_width=True):
+        if st.button("Entrance", width="stretch"):
             st.session_state["entered"] = False
             st.rerun()
 

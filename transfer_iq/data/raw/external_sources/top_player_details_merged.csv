@@ -1,0 +1,16 @@
+player_name,current_club_name,country,position,age,matches_played,goals,assists,player_id,citizenship,main_position,date_of_birth,total_injuries,total_days_missed,injury_type,value,source_market_value_date,source_dataset,source_detail_level,external_player_id
+Lionel Messi,Inter Miami,Argentina,Forward,36,27.0,25.0,12.0,1453452,Argentina,Right Winger,1987-06-24,1.0,62.0,Knee,186000000.0,2026-04-10,desktop_top_players_pack,full,1.0
+Cristiano Ronaldo,Al Nassr,Portugal,Forward,39,37.0,13.0,11.0,1453453,Portugal,Centre-Forward,1985-02-05,1.0,47.0,Hamstring,56000000.0,2026-04-10,desktop_top_players_pack,full,2.0
+Kylian Mbappe,PSG,France,Forward,25,33.0,35.0,6.0,1453454,France,Centre-Forward,1998-12-20,1.0,28.0,Ankle,127000000.0,2026-04-10,desktop_top_players_pack,full,3.0
+Neymar Jr,Al Hilal,Brazil,Forward,32,33.0,29.0,15.0,1453455,Brazil,Left Winger,1992-02-05,1.0,64.0,Knee,117000000.0,2026-04-10,desktop_top_players_pack,full,4.0
+Erling Haaland,Manchester City,Norway,Forward,23,33.0,29.0,6.0,1453456,Norway,Striker,2000-07-21,1.0,54.0,Hamstring,81000000.0,2026-04-10,desktop_top_players_pack,full,5.0
+Kevin De Bruyne,Manchester City,Belgium,Midfielder,32,25.0,24.0,14.0,1453457,Belgium,Attacking Midfield,1991-06-28,1.0,120.0,Knee,134000000.0,2026-04-10,desktop_top_players_pack,full,6.0
+Jude Bellingham,Real Madrid,England,Midfielder,21,37.0,24.0,20.0,1453458,England,Central Midfield,2003-06-29,1.0,61.0,None,150000000.0,2026-04-10,desktop_top_players_pack,full,7.0
+Vinicius Jr,Real Madrid,Brazil,Forward,24,26.0,25.0,17.0,1453459,Brazil,Left Winger,2000-07-12,1.0,40.0,Hamstring,162000000.0,2026-04-10,desktop_top_players_pack,full,8.0
+Mohamed Salah,Liverpool,Egypt,Forward,31,36.0,23.0,10.0,1453460,Egypt,Right Winger,1992-06-15,1.0,116.0,Knee,115000000.0,2026-04-10,desktop_top_players_pack,full,9.0
+Harry Kane,Bayern Munich,England,Forward,30,37.0,32.0,7.0,1453461,England,Striker,1993-07-28,1.0,78.0,Knee,82000000.0,2026-04-10,desktop_top_players_pack,full,10.0
+Rodri,Manchester City,Spain,Midfielder,28,33.0,7.0,10.0,1453462,Spain,Midfielder,,,,,,,desktop_top_players_pack,summary,
+Bukayo Saka,Arsenal,England,Forward,23,34.0,15.0,11.0,1453463,England,Forward,,,,,,,desktop_top_players_pack,summary,
+Luka Modric,Real Madrid,Croatia,Midfielder,38,22.0,3.0,8.0,1453464,Croatia,Midfielder,,,,,,,desktop_top_players_pack,summary,
+Pedri,Barcelona,Spain,Midfielder,21,25.0,6.0,7.0,1453465,Spain,Midfielder,,,,,,,desktop_top_players_pack,summary,
+Robert Lewandowski,Barcelona,Poland,Forward,35,28.0,23.0,4.0,1453466,Poland,Forward,,,,,,,desktop_top_players_pack,summary,
