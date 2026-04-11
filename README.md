@@ -33,20 +33,20 @@ The system not only predicts a player’s **current market value** but also fore
   <tr>
     <td align="center">
       <b>Image 1</b><br>
-     <a href="https://private-user-images.githubusercontent.com/183088946/576606683-e9dd7e0f-318a-46b6-80a4-624a77d2b7a2.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU4Mjk4NzUsIm5iZiI6MTc3NTgyOTU3NSwicGF0aCI6Ii8xODMwODg5NDYvNTc2NjA2NjgzLWU5ZGQ3ZTBmLTMxOGEtNDZiNi04MGE0LTYyNGE3N2QyYjdhMi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDEwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQxMFQxMzU5MzVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iYzA2NjhmY2JjMDdkM2M2ODZiODI4NGNkNGZiYjQ3ZDBkZGZjMDg0NTEzZTQ3MDZhMTMyMmNmODJlZDNmYmJiJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.o4tuz9phnKpWeXzmmxhnSFFw3uup-qi-r-qpaqML31c"></a>
-        <img src=""  alt="Image 1">
+     <a href="https://github.com/user-attachments/assets/c515c0ca-fad5-44c0-aa53-da9c211e259c">click 
+      <img width="0" height="0" alt="image1" src="https://github.com/user-attachments/assets/c515c0ca-fad5-44c0-aa53-da9c211e259c">
       </a>
     </td>
     <td align="center">
       <b>Image 2</b><br>
-      <a href="https://private-user-images.githubusercontent.com/183088946/576589223-37f802e7-699d-49b6-8ffc-5143ba229a50.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU4Mjg4ODMsIm5iZiI6MTc3NTgyODU4MywicGF0aCI6Ii8xODMwODg5NDYvNTc2NTg5MjIzLTM3ZjgwMmU3LTY5OWQtNDliNi04ZmZjLTUxNDNiYTIyOWE1MC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDEwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQxMFQxMzQzMDNaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04ODI2YzkwNzhkYjFlMWM0ZWZmZjk0NjQwMTIxOTM3ODYxZGYxMzk4ZjY4YmE5ZDUyNjhkYjBhZWU2MWQ5NThlJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.GQhGXMwG2qo9zQjucrEEZq0baJdEbzOKXBBprYzK1HE">
-        <img src="IMAGE_URL_2.jpg" width="250" alt="Image 2">
+      <a href="https://github.com/user-attachments/assets/44b41868-56e3-4173-aada-a0e96e6ddda1">click 
+      <img width="0" height="0" alt="image" src="https://github.com/user-attachments/assets/44b41868-56e3-4173-aada-a0e96e6ddda1" >
       </a>
     </td>
     <td align="center">
       <b>Image 3</b><br>
-      <a href="https://private-user-images.githubusercontent.com/183088946/576589857-1169f81d-cc09-4678-9abd-89c70251efb3.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU4Mjk4NzUsIm5iZiI6MTc3NTgyOTU3NSwicGF0aCI6Ii8xODMwODg5NDYvNTc2NTg5ODU3LTExNjlmODFkLWNjMDktNDY3OC05YWJkLTg5YzcwMjUxZWZiMy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDEwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQxMFQxMzU5MzVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1hZWEwYzNhMTExN2E2NzVjY2E0Yjc4NGRlNGU3NzVhZTFmMzk0M2UzNDljNTcwNzYxMTY3YmQ2YjZhZGZjMjYyJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.8eEKZdOw1HyQcxp1dhicfZh8kwAS9MWa3QD-JYo3yg8">
-        <img src="IMAGE_URL_3.jpg" width="250" alt="Image 3">
+      <a href="https://github.com/user-attachments/assets/d687154c-e004-4512-b37d-979fe508d35b">click
+       <img width="0" height="0" alt="image" src="https://github.com/user-attachments/assets/d687154c-e004-4512-b37d-979fe508d35b" />
       </a>
     </td>
   </tr>
@@ -54,20 +54,20 @@ The system not only predicts a player’s **current market value** but also fore
   <tr>
     <td align="center">
       <b>Image 4</b><br>
-      <a href="https://private-user-images.githubusercontent.com/183088946/576590129-3fcc5df5-7268-485e-a5b5-1b418ec8363f.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU4Mjk4NzUsIm5iZiI6MTc3NTgyOTU3NSwicGF0aCI6Ii8xODMwODg5NDYvNTc2NTkwMTI5LTNmY2M1ZGY1LTcyNjgtNDg1ZS1hNWI1LTFiNDE4ZWM4MzYzZi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDEwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQxMFQxMzU5MzVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0yYzQ0MDNiMjY3N2Y2MTliNTIyODUxNjg5MzczOTAyMzgxNjM5YTA3ZTY4MDI4OGEzZDE5MjBjN2U3NDk2ODAyJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.46JNFx4lX6UV8uffAmSEwMoZkG0_dOeGepB6wqZGm-8">
-        <img src="IMAGE_URL_4.jpg" width="250" alt="Image 4">
+      <a href="https://github.com/user-attachments/assets/57b79433-c28d-484a-bc6b-0a3b7fcf565a">click
+        <img width="0" height="0" alt="image" src="https://github.com/user-attachments/assets/57b79433-c28d-484a-bc6b-0a3b7fcf565a" />
       </a>
     </td>
     <td align="center">
       <b>Image 5</b><br>
-      <a href="https://private-user-images.githubusercontent.com/183088946/576593305-070cfd7b-a531-46b7-842d-98a95358c608.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU4Mjk4NzUsIm5iZiI6MTc3NTgyOTU3NSwicGF0aCI6Ii8xODMwODg5NDYvNTc2NTkzMzA1LTA3MGNmZDdiLWE1MzEtNDZiNy04NDJkLTk4YTk1MzU4YzYwOC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDEwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQxMFQxMzU5MzVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT05ODZhMDgwMThlOWIyNDE5ZThmYzVkOGMzMDljMmZiMWE4ZmY4NmI5OWYxMDMyZjI4MjhkZDQ0ZWMwMDY5ZmQyJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.Ot_zwchNcyi7Uhl6P3Hk7UMAx7EyWpmUnvP7ydaup8g">
-        <img src="IMAGE_URL_5.jpg" width="250" alt="Image 5">
+      <a href="https://github.com/user-attachments/assets/042cf746-0bb7-4ed4-90ca-8f33c0bfee17">click
+        <img width="0" height="0" alt="image" src="https://github.com/user-attachments/assets/042cf746-0bb7-4ed4-90ca-8f33c0bfee17" >
       </a>
     </td>
     <td align="center">
       <b>Image 6</b><br>
-      <a href="https://private-user-images.githubusercontent.com/183088946/576592147-d5d90438-a519-43f9-8eb5-e58db28abcaa.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU4Mjk4NzUsIm5iZiI6MTc3NTgyOTU3NSwicGF0aCI6Ii8xODMwODg5NDYvNTc2NTkyMTQ3LWQ1ZDkwNDM4LWE1MTktNDNmOS04ZWI1LWU1OGRiMjhhYmNhYS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDEwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQxMFQxMzU5MzVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT05ODVlMjhmZmI1YWVhYzk1OTVhMmYyNTllNGQ4ZDE3Zjc4NDExNjE0MTJhYzVmN2ZhOTM4MjFiMTYyN2JiMWVjJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.HZMbVDyxowuhZcqdNoCLMgWnYl-VMeQYwnwoQpSAcs8">
-        <img src="IMAGE_URL_6.jpg" width="250" alt="Image 6">
+      <a href="https://github.com/user-attachments/assets/b1300c9e-78ee-423a-b0c6-bf29fd1ec313">click
+        <img width="0" height="0" alt="image" src="https://github.com/user-attachments/assets/b1300c9e-78ee-423a-b0c6-bf29fd1ec313" >
       </a>
     </td>
   </tr>
@@ -75,8 +75,8 @@ The system not only predicts a player’s **current market value** but also fore
   <tr>
     <td></td> <td align="center">
     <b>Image 7</b><br>
-      <a href="https://private-user-images.githubusercontent.com/183088946/576592276-e2c90b99-3f15-4b95-9afc-8a67bbbb4a13.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU4Mjk4NzUsIm5iZiI6MTc3NTgyOTU3NSwicGF0aCI6Ii8xODMwODg5NDYvNTc2NTkyMjc2LWUyYzkwYjk5LTNmMTUtNGI5NS05YWZjLThhNjdiYmJiNGExMy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDEwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQxMFQxMzU5MzVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0xZjQxNGVhNmRmYTViM2U0NzhiOTEwNzc5MTJmMTEyYWRmNTExMjcyMzIxODczMWE3MmY1MmM0ZWIwZDNkZmRhJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.vy2Jtxjkmb8AQGUv0XY3DSVTEg2vf8HANrQ8njyqmQQ">
-        <img src="IMAGE_URL_7.jpg" width="250" alt="Image 7">
+      <a href="https://github.com/user-attachments/assets/ceadbb29-68fa-46b1-8864-7194073d946f">click
+        <img width="0" height="0" alt="image" src="https://github.com/user-attachments/assets/ceadbb29-68fa-46b1-8864-7194073d946f" >
       </a>
     </td>
     <td></td> </tr>
