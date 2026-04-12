@@ -172,9 +172,11 @@ The main objective of this project is to:
 ---
 
 ## 📁 Project Structure
----
 
+```text
 Dynamic_Player_Transfer_Value_Prediction/
+│
+├── app.py
 │
 ├── notebooks/
 │   └── Milestones.ipynb
@@ -187,8 +189,11 @@ Dynamic_Player_Transfer_Value_Prediction/
 │   └── report.pdf
 │
 ├── screenshots/
+│   ├── execution.png
+│   └── output.png
 │
 └── README.md
+```
 
 ---
 
@@ -200,4 +205,4 @@ Dynamic_Player_Transfer_Value_Prediction/
 ---
 
 ## 📚 Conclusion
-This project demonstrates how machine learning can be used to predict football player transfer values. It helps in understanding the key factors influencing player pricing.
+This project demonstrates how machine learning can be used to predict football player transfer values. It helps in understanding the key factors influencing player pricing
