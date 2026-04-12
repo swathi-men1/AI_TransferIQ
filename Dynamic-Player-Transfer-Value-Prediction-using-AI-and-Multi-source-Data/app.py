@@ -14,4 +14,9 @@ predict = st.button("Predict Transfer Value")
 if predict:
     value = (goals * 5) + (assists * 3) + (matches * 1.5) - (age * 2)
 
-    st.success(f"💰 Estimated Value: € {round(value,2)} Million")
+    st.success("🎯 Prediction Completed!")
+
+    st.markdown("### 💰 Estimated Transfer Value")
+    st.markdown(f"## € {round(value,2)} Million")
+
+    st.info("This is a demo ML model using rule-based calculation.")
