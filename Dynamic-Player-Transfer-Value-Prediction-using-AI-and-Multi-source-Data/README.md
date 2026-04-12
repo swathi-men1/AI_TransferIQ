@@ -1,5 +1,13 @@
 # ⚽ Dynamic Player Transfer Value Prediction
 
+## 🚀 Deployment
+
+🌐 Live Demo: https://dynamicplayertransfervalueprediction-qxthgcdvx3e85fx6ul8yee.streamlit.app
+
+Click the link above to access the deployed application
+
+---
+
 ## 📌 Introduction
 This project aims to predict the transfer value of football players using machine learning techniques. The model analyzes various player attributes such as performance, age, and statistics to estimate their market value.
 Instead of manually entering player details, the system allows the user to select a player and then predicts their transfer value based on historical performance data.
@@ -164,6 +172,8 @@ The main objective of this project is to:
 ---
 
 ## 📁 Project Structure
+---
+
 Dynamic_Player_Transfer_Value_Prediction/
 │
 ├── notebooks/
